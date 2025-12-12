@@ -12,10 +12,12 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
             font-family: 'Open Sans', Arial, sans-serif;
             background: #f5f5f5;
             overflow: hidden;
+            height: 100%;
+            width: 100%;
         }
 
         .lms-container {
@@ -36,6 +38,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             z-index: 1000;
             border-bottom: 3px solid #10B981;
+            flex-shrink: 0;
         }
 
         .header-left {
@@ -67,26 +70,37 @@
         .slide-content {
             flex: 1;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: auto;
+            justify-content: flex-start;
+            align-items: stretch;
+            overflow: hidden;
             background: #e5e7eb;
-            padding: 20px;
+            padding: 0;
+            position: relative;
+            min-height: 0;
+            min-width: 0;
         }
 
         .slide-frame {
-            width: 1280px;
-            height: 720px;
-            background: white;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            border-radius: 8px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
             overflow: hidden;
-            border: 2px solid #10B981;
+            border: none;
         }
 
         .slide-frame iframe {
             width: 100%;
             height: 100%;
+            flex: 1;
+            display: block;
             border: none;
         }
 
@@ -100,6 +114,7 @@
             box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
             z-index: 1000;
             border-top: 3px solid #10B981;
+            flex-shrink: 0;
         }
 
         .nav-button {
@@ -209,24 +224,15 @@
 
         /* Responsive */
         @media (max-width: 1400px) {
-            .slide-frame {
-                transform: scale(0.9);
-            }
         }
 
         @media (max-width: 1200px) {
-            .slide-frame {
-                transform: scale(0.8);
-            }
             .lms-title {
                 font-size: 16px;
             }
         }
 
         @media (max-width: 768px) {
-            .slide-frame {
-                transform: scale(0.6);
-            }
             .progress-container {
                 margin: 0 20px;
             }
