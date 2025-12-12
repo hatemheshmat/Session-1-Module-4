@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .visual-column {
+            flex: 1;
+            background: #F3F4F6;
+            padding: 30px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .concept-block {
+            margin-bottom: 20px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .concept-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .highlight-box {
+            background: #EFF6FF;
+            border-left: 6px solid #1C4ED8;
+            padding: 20px;
+        }
+
+        .highlight-text {
+            color: #1E40AF;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        /* Visual Diagram */
+        .diagram-title {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #374151;
+            font-size: 20px;
+        }
+
+        .memory-container {
+            display: flex;
+            gap: 40px;
+            align-items: flex-end;
+            height: 300px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #9CA3AF;
+        }
+
+        .memory-bar-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .memory-bar {
+            width: 100px;
+            background: #DC2626;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            padding-bottom: 10px;
+        }
+
+        .bar-streaming {
+            background: #059669;
+        }
+
+        .limit-line {
+            position: absolute;
+            top: 50px; /* Represents the limit */
+            left: -20px;
+            right: -20px;
+            border-top: 2px dashed #DC2626;
+            z-index: 10;
+        }
+
+        .limit-label {
+            position: absolute;
+            top: -25px;
+            right: 0;
+            color: #DC2626;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .bar-label {
+            margin-top: 15px;
+            font-weight: 700;
+            color: #374151;
+            text-align: center;
+        }
+
+        .texture-stack {
+            width: 100%;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .tex-chunk {
+            width: 100%;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+        }
+
+        .settings-panel {
+            margin-top: 30px;
+            background: #1F2937;
+            color: #E5E7EB;
+            padding: 20px;
+            font-family: 'Roboto', monospace;
+            font-size: 14px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 4px;
+        }
+
+        .setting-val {
+            color: #60A5FA;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Texture Streaming</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-block">
+                    <div class="concept-title">
+                        <i class="fas fa-exclamation-circle" style="color: #DC2626;"></i> The Problem
+                    </div>
+                    <div class="concept-desc">
+                        Without streaming, Unity loads <strong>all</strong> referenced textures into VRAM at full resolution, even if the object is a tiny dot on the horizon. This leads to Out of Memory (OOM) crashes.
+                    </div>
+                </div>
+
+                <div class="concept-block">
+                    <div class="concept-title">
+                        <i class="fas fa-check-circle" style="color: #059669;"></i> The Solution
+                    </div>
+                    <div class="concept-desc">
+                        The Mipmap Streaming system analyzes the scene and only loads the specific mip level needed for the current screen size.
+                        <br><br>
+                        <ul>
+                            <li><strong>Close Object:</strong> Loads Mip 0 (Full Res)</li>
+                            <li><strong>Far Object:</strong> Loads Mip 4 (Low Res)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="highlight-text">
+                        Result: You define a fixed "Memory Budget" (e.g., 512MB), and Unity ensures textures never exceed it.
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="diagram-title">VRAM Usage Comparison</div>
+                
+                <div class="memory-container">
+                    <!-- Without Streaming -->
+                    <div class="memory-bar-group">
+                        <div class="memory-bar" style="height: 280px;">
+                            <div class="limit-line">
+                                <div class="limit-label">Device Limit</div>
+                            </div>
+                            <div class="texture-stack">
+                                <div class="tex-chunk" style="height: 40px; background: #991B1B;">Tex A (4K)</div>
+                                <div class="tex-chunk" style="height: 40px; background: #991B1B;">Tex B (4K)</div>
+                                <div class="tex-chunk" style="height: 40px; background: #991B1B;">Tex C (4K)</div>
+                                <div class="tex-chunk" style="height: 40px; background: #991B1B;">Tex D (4K)</div>
+                                <div class="tex-chunk" style="height: 40px; background: #991B1B;">Tex E (4K)</div>
+                                <div class="tex-chunk" style="height: 40px; background: #991B1B;">Tex F (4K)</div>
+                                <div class="tex-chunk" style="height: 40px; background: #991B1B;">Tex G (4K)</div>
+                            </div>
+                            <span style="position: absolute; top: 10px; color: white;">CRASH</span>
+                        </div>
+                        <div class="bar-label">Standard Loading</div>
+                    </div>
+
+                    <!-- With Streaming -->
+                    <div class="memory-bar-group">
+                        <div class="memory-bar bar-streaming" style="height: 120px;">
+                            <div class="limit-line" style="border-color: #059669;"></div>
+                            <div class="texture-stack">
+                                <div class="tex-chunk" style="height: 40px; background: #047857;">Tex A (4K)</div>
+                                <div class="tex-chunk" style="height: 10px; background: #34D399;">Tex B (Low)</div>
+                                <div class="tex-chunk" style="height: 10px; background: #34D399;">Tex C (Low)</div>
+                                <div class="tex-chunk" style="height: 10px; background: #34D399;">Tex D (Low)</div>
+                                <div class="tex-chunk" style="height: 10px; background: #34D399;">Tex E (Low)</div>
+                                <div class="tex-chunk" style="height: 10px; background: #34D399;">Tex F (Low)</div>
+                                <div class="tex-chunk" style="height: 10px; background: #34D399;">Tex G (Low)</div>
+                            </div>
+                            <span style="position: absolute; top: -25px; color: #059669; font-size: 12px;">Safe</span>
+                        </div>
+                        <div class="bar-label">Texture Streaming</div>
+                    </div>
+                </div>
+
+                <div class="settings-panel">
+                    <div style="margin-bottom: 10px; font-weight: 700; color: #9CA3AF;">Project Settings > Quality</div>
+                    <div class="setting-row">
+                        <span>Texture Streaming</span>
+                        <span class="setting-val">Enabled</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Memory Budget</span>
+                        <span class="setting-val">512 MB</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Max Level Reduction</span>
+                        <span class="setting-val">2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

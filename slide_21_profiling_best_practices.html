@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .practices-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            padding: 0 80px;
+            margin-bottom: 40px;
+        }
+
+        .practice-card {
+            background: #F9FAFB;
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            border-left: 6px solid #1C4ED8;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .practice-card.warning {
+            border-left-color: #F59E0B;
+            background: #FFFBEB;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .icon-box i {
+            font-size: 28px;
+            color: #1C4ED8;
+        }
+
+        .warning .icon-box i {
+            color: #F59E0B;
+        }
+
+        .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 8px;
+        }
+
+        .content p {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .golden-rule {
+            margin: 0 80px;
+            background: #1F2937;
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            color: white;
+        }
+
+        .golden-icon {
+            font-size: 40px;
+            color: #F59E0B;
+        }
+
+        .golden-text h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #F59E0B;
+            margin-bottom: 5px;
+        }
+
+        .golden-text p {
+            font-size: 18px;
+            color: #D1D5DB;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Profiling Best Practices</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="practices-grid">
+            <!-- Practice 1 -->
+            <div class="practice-card">
+                <div class="icon-box">
+                    <i class="fas fa-vr-cardboard"></i>
+                </div>
+                <div class="content">
+                    <h3>Profile on Target Hardware</h3>
+                    <p>
+                        Never trust Editor FPS. Your PC is 10x-50x faster than a mobile chipset. Always build to the Quest to get accurate data.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Practice 2 -->
+            <div class="practice-card warning">
+                <div class="icon-box">
+                    <i class="fas fa-ban"></i>
+                </div>
+                <div class="content">
+                    <h3>Avoid "Deep Profile"</h3>
+                    <p>
+                        Deep Profile instruments every C# method, adding massive overhead. Only use it for specific script debugging, never for general performance checks.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Practice 3 -->
+            <div class="practice-card">
+                <div class="icon-box">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="content">
+                    <h3>Use Development Builds</h3>
+                    <p>
+                        Check "Development Build" and "Autoconnect Profiler" in Build Settings. This allows the Unity Profiler to attach to the running app over Wi-Fi or USB.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Practice 4 -->
+            <div class="practice-card warning">
+                <div class="icon-box">
+                    <i class="fas fa-thermometer-half"></i>
+                </div>
+                <div class="content">
+                    <h3>Monitor Thermal State</h3>
+                    <p>
+                        If the device gets too hot, it will throttle (slow down) the CPU/GPU. Ensure the device is cool before starting a performance capture.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="golden-rule">
+            <i class="fas fa-lightbulb golden-icon"></i>
+            <div class="golden-text">
+                <h4>The Golden Rule</h4>
+                <p>If it runs fast in the Editor, it means nothing. If it runs slow in the Editor, it will be unplayable on Quest.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

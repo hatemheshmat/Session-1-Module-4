@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .concept-block {
+            border-left: 6px solid #1C4ED8;
+            padding-left: 25px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .concept-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Inspector Simulation */
+        .inspector-panel {
+            background: #383838;
+            color: #BDBDBD;
+            font-family: 'Roboto', sans-serif;
+            border: 1px solid #222;
+            font-size: 13px;
+            padding: 15px;
+        }
+
+        .panel-header {
+            font-weight: 700;
+            color: #E0E0E0;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .setting-label { color: #BDBDBD; }
+        
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            background: #282828;
+            border: 1px solid #555;
+            position: relative;
+        }
+
+        .checkbox.checked {
+            background: #1C4ED8;
+            border-color: #1C4ED8;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: -4px;
+            left: 2px;
+            color: white;
+            font-size: 12px;
+        }
+
+        .setting-dropdown {
+            background: #282828;
+            border: 1px solid #222;
+            padding: 2px 5px;
+            width: 120px;
+            color: #E0E0E0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .highlight-box {
+            border: 1px solid #F59E0B;
+            padding: 5px;
+            margin: -5px;
+        }
+
+        /* Weights Visual */
+        .weights-container {
+            margin-top: 30px;
+            background: #F3F4F6;
+            padding: 20px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .weights-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .weights-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .weight-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vertex-node {
+            width: 20px;
+            height: 20px;
+            background: #1F2937;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bone-connection {
+            width: 2px;
+            height: 40px;
+            background: #9CA3AF;
+            margin-top: -10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .bone-group {
+            display: flex;
+            gap: 5px;
+        }
+
+        .bone {
+            width: 10px;
+            height: 30px;
+            background: #D1D5DB;
+            border-radius: 2px;
+        }
+
+        .status-badge {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 2px 8px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .bad { color: #DC2626; background: #FEF2F2; border: 1px solid #DC2626; }
+        .good { color: #059669; background: #ECFDF5; border: 1px solid #059669; }
+
+        .tip-box {
+            margin-top: 20px;
+            background: #FFFBEB;
+            border-left: 4px solid #F59E0B;
+            padding: 15px;
+            font-size: 14px;
+            color: #92400E;
+            line-height: 1.4;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Skinned Mesh Optimization</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-block">
+                    <div class="concept-title">The Cost of Animation</div>
+                    <div class="concept-desc">
+                        Skinned Meshes are expensive. Every frame, the CPU must calculate bone positions, and the GPU must deform the mesh vertices based on those bones.
+                    </div>
+                </div>
+
+                <div class="concept-block" style="border-color: #059669;">
+                    <div class="concept-title">Combine Meshes</div>
+                    <div class="concept-desc">
+                        Don't use separate meshes for Head, Body, and Clothes. Combine them into a <strong>single Skinned Mesh</strong>. This reduces Draw Calls and simplifies the rig.
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong><i class="fas fa-lightbulb"></i> Pro Tip:</strong>
+                    If a character is just a statue and doesn't move, change the component from <em>SkinnedMeshRenderer</em> to a standard <em>MeshRenderer</em>. It's much cheaper.
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <!-- Inspector 1: Import Settings -->
+                <div class="inspector-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-file-import"></i> Model Import Settings
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Animation Type</span>
+                        <span class="setting-dropdown">Humanoid <i class="fas fa-caret-down"></i></span>
+                    </div>
+                    <div class="highlight-box">
+                        <div class="setting-row">
+                            <span class="setting-label" style="color: #F59E0B; font-weight: 700;">Optimize Game Objects</span>
+                            <div class="checkbox checked"></div>
+                        </div>
+                    </div>
+                    <div style="font-size: 11px; color: #9CA3AF; margin-top: 5px;">
+                        *Removes empty bone transforms from hierarchy to save CPU.
+                    </div>
+                </div>
+
+                <!-- Inspector 2: Quality Settings -->
+                <div class="inspector-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-cog"></i> Project Settings > Quality
+                    </div>
+                    <div class="highlight-box">
+                        <div class="setting-row">
+                            <span class="setting-label" style="color: #F59E0B; font-weight: 700;">Skin Weights</span>
+                            <span class="setting-dropdown" style="color: #F59E0B;">2 Bones <i class="fas fa-caret-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weights Visual -->
+                <div class="weights-container">
+                    <div class="weights-title">Skin Weights Impact</div>
+                    <div class="weights-diagram">
+                        <div class="weight-option">
+                            <div class="vertex-node"></div>
+                            <div class="bone-group">
+                                <div class="bone" style="background: #DC2626;"></div>
+                                <div class="bone" style="background: #DC2626;"></div>
+                                <div class="bone" style="background: #DC2626;"></div>
+                                <div class="bone" style="background: #DC2626;"></div>
+                            </div>
+                            <div class="status-badge bad">4 Bones (PC)</div>
+                        </div>
+                        <div class="weight-option">
+                            <div class="vertex-node"></div>
+                            <div class="bone-group">
+                                <div class="bone" style="background: #059669;"></div>
+                                <div class="bone" style="background: #059669;"></div>
+                            </div>
+                            <div class="status-badge good">2 Bones (Quest)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .concept-block {
+            border-left: 6px solid #1C4ED8;
+            padding-left: 25px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .concept-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        /* Inspector Simulation */
+        .inspector-panel {
+            background: #383838;
+            color: #BDBDBD;
+            font-family: 'Roboto', sans-serif;
+            border: 1px solid #222;
+            font-size: 14px;
+            padding: 15px;
+        }
+
+        .panel-header {
+            font-weight: 700;
+            color: #E0E0E0;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .setting-label { color: #BDBDBD; }
+        
+        .setting-value {
+            background: #282828;
+            border: 1px solid #222;
+            padding: 4px 8px;
+            color: #E0E0E0;
+            min-width: 100px;
+            text-align: left;
+        }
+
+        .setting-value.highlight {
+            border-color: #F59E0B;
+            color: #F59E0B;
+            font-weight: 700;
+        }
+
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            background: #282828;
+            border: 1px solid #555;
+            position: relative;
+        }
+
+        .checkbox.checked {
+            background: #1C4ED8;
+            border-color: #1C4ED8;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: -4px;
+            left: 2px;
+            color: white;
+            font-size: 12px;
+        }
+
+        .warning-box {
+            background: #FEF2F2;
+            border: 2px solid #DC2626;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .warning-icon {
+            font-size: 30px;
+            color: #DC2626;
+        }
+
+        .warning-text {
+            font-size: 16px;
+            color: #991B1B;
+            line-height: 1.4;
+        }
+
+        .box-projection-visual {
+            background: #F3F4F6;
+            padding: 20px;
+            border: 1px solid #E5E7EB;
+            margin-top: 20px;
+        }
+
+        .bp-title {
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bp-diagram {
+            display: flex;
+            gap: 20px;
+        }
+
+        .bp-state {
+            flex: 1;
+            background: #E5E7EB;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            color: #6B7280;
+            border: 1px solid #D1D5DB;
+        }
+
+        .bp-state.good {
+            border-color: #059669;
+            background: #ECFDF5;
+            color: #065F46;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Reflection Probes</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-block">
+                    <div class="concept-title">The "Fake" Reflection</div>
+                    <div class="concept-desc">
+                        Reflection Probes capture a 360° snapshot of the surroundings into a texture (Cubemap). Shiny objects sample this texture to look like they are reflecting the world.
+                    </div>
+                </div>
+
+                <div class="inspector-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-globe"></i> Reflection Probe
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Type</span>
+                        <span class="setting-value highlight">Baked</span>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Resolution</span>
+                        <span class="setting-value highlight">128</span>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Box Projection</span>
+                        <div class="checkbox checked"></div>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">HDR</span>
+                        <div class="checkbox"></div> <!-- Unchecked for mobile usually -->
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Culling Mask</span>
+                        <span class="setting-value">Everything</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="warning-box">
+                    <i class="fas fa-ban warning-icon"></i>
+                    <div class="warning-text">
+                        <strong>NEVER use Realtime Probes:</strong> A Realtime Reflection Probe renders the scene <strong>6 times</strong> (once for each face of the cube) every frame. This will instantly kill performance on mobile VR.
+                    </div>
+                </div>
+
+                <div class="box-projection-visual">
+                    <div class="bp-title">
+                        Box Projection
+                        <span style="color: #059669; font-size: 14px;">Essential for Indoors</span>
+                    </div>
+                    <div class="bp-diagram">
+                        <div class="bp-state">
+                            <i class="fas fa-times" style="font-size: 24px; margin-bottom: 5px;"></i>
+                            <div>Off</div>
+                            <div style="font-size: 10px;">Reflections look infinite</div>
+                        </div>
+                        <div class="bp-state good">
+                            <i class="fas fa-check" style="font-size: 24px; margin-bottom: 5px;"></i>
+                            <div>On</div>
+                            <div style="font-size: 10px;">Reflections match room size</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; font-size: 14px; color: #4B5563; line-height: 1.4;">
+                        Without Box Projection, reflections in a small room look like they are miles away (like a skybox). Box Projection corrects this parallax.
+                    </div>
+                </div>
+
+                <div class="concept-block" style="border-color: #F59E0B; margin-top: 10px;">
+                    <div class="concept-title" style="font-size: 20px;">Resolution Tip</div>
+                    <div class="concept-desc" style="font-size: 16px;">
+                        Use <strong>128px</strong> or <strong>256px</strong>. Rough materials blur the reflection anyway, so high resolution is wasted memory.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

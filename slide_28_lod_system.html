@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            padding: 0 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .concept-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 40px;
+            position: relative;
+        }
+
+        /* The Camera */
+        .camera-icon {
+            font-size: 40px;
+            color: #1F2937;
+            margin-right: 20px;
+        }
+
+        /* Distance Line */
+        .distance-line {
+            position: absolute;
+            bottom: -20px;
+            left: 100px;
+            right: 40px;
+            height: 4px;
+            background: linear-gradient(to right, #1C4ED8, #93C5FD);
+        }
+
+        .distance-line::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: -6px;
+            border-left: 10px solid #93C5FD;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        .lod-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 200px;
+        }
+
+        .visual-box {
+            width: 160px;
+            height: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .visual-box i {
+            color: #4B5563;
+        }
+
+        .lod-0 i { font-size: 120px; text-shadow: 2px 2px 0 #E5E7EB; }
+        .lod-1 i { font-size: 80px; opacity: 0.8; }
+        .lod-2 i { font-size: 40px; opacity: 0.6; }
+        .cull i { font-size: 20px; opacity: 0.3; color: #DC2626; }
+
+        .stage-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1C4ED8;
+            margin-bottom: 5px;
+        }
+
+        .stage-stats {
+            font-family: 'Roboto', monospace;
+            font-size: 14px;
+            color: #6B7280;
+            background: #F3F4F6;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .info-box {
+            background: #EFF6FF;
+            border-left: 6px solid #1C4ED8;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .info-icon {
+            font-size: 40px;
+            color: #1C4ED8;
+        }
+
+        .info-text h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .info-text p {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .inspector-hint {
+            position: absolute;
+            top: 120px;
+            right: 60px;
+            width: 250px;
+            background: #383838;
+            border-radius: 6px;
+            padding: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            color: #BDBDBD;
+            border: 1px solid #555;
+        }
+
+        .hint-header {
+            font-weight: 700;
+            border-bottom: 1px solid #555;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .lod-bar {
+            height: 30px;
+            display: flex;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .lb-0 { width: 40%; background: #4CAF50; color: white; display: flex; align-items: center; justify-content: center; }
+        .lb-1 { width: 30%; background: #2196F3; color: white; display: flex; align-items: center; justify-content: center; }
+        .lb-2 { width: 20%; background: #FFC107; color: black; display: flex; align-items: center; justify-content: center; }
+        .lb-c { width: 10%; background: #F44336; color: white; display: flex; align-items: center; justify-content: center; }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Level of Detail (LOD)</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            
+            <div class="concept-row">
+                <i class="fas fa-video camera-icon"></i>
+                
+                <!-- LOD 0 -->
+                <div class="lod-stage">
+                    <div class="visual-box lod-0">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="stage-label">LOD 0</div>
+                    <div class="stage-stats">5,000 Tris</div>
+                </div>
+
+                <!-- LOD 1 -->
+                <div class="lod-stage">
+                    <div class="visual-box lod-1">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="stage-label">LOD 1</div>
+                    <div class="stage-stats">1,500 Tris</div>
+                </div>
+
+                <!-- LOD 2 -->
+                <div class="lod-stage">
+                    <div class="visual-box lod-2">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="stage-label">LOD 2</div>
+                    <div class="stage-stats">200 Tris</div>
+                </div>
+
+                <!-- Cull -->
+                <div class="lod-stage">
+                    <div class="visual-box cull">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="stage-label">Culled</div>
+                    <div class="stage-stats">0 Tris</div>
+                </div>
+
+                <div class="distance-line"></div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="info-text">
+                    <h3>Distance = Quality</h3>
+                    <p>
+                        Why render 5,000 triangles for a rock that is 100 meters away and only occupies 10 pixels on screen? LOD systems automatically swap high-quality meshes for simpler ones as the camera moves away.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Simulated Inspector Hint -->
+            <div class="inspector-hint">
+                <div class="hint-header">
+                    <i class="fas fa-cubes"></i> LOD Group
+                </div>
+                <div class="lod-bar">
+                    <div class="lb-0">LOD 0</div>
+                    <div class="lb-1">LOD 1</div>
+                    <div class="lb-2">LOD 2</div>
+                    <div class="lb-c">Cull</div>
+                </div>
+                <div style="text-align: center; color: #9CA3AF;">Camera Distance</div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

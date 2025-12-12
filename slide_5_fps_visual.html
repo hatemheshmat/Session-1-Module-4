@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .comparison-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .fps-row {
+            display: flex;
+            align-items: center;
+            background: #F9FAFB;
+            padding: 20px 30px;
+            border-radius: 12px;
+            border-left: 6px solid #E5E7EB;
+        }
+
+        .fps-row.standard {
+            border-left-color: #1C4ED8;
+            background: #EFF6FF;
+        }
+
+        .fps-row.high {
+            border-left-color: #059669;
+            background: #ECFDF5;
+        }
+
+        .fps-row.low {
+            border-left-color: #DC2626;
+            background: #FEF2F2;
+        }
+
+        .label-box {
+            width: 120px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .fps-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .fps-unit {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+        }
+
+        .visual-track {
+            flex-grow: 1;
+            height: 60px;
+            margin: 0 30px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ball {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #1C4ED8;
+            opacity: 0.3;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .ball:last-child {
+            opacity: 1;
+            background: #1C4ED8;
+            transform: scale(1.1);
+        }
+
+        .low .ball { background: #DC2626; }
+        .standard .ball { background: #1C4ED8; }
+        .high .ball { background: #059669; }
+
+        .description {
+            width: 200px;
+            flex-shrink: 0;
+        }
+
+        .desc-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .desc-text {
+            font-size: 14px;
+            color: #6B7280;
+            line-height: 1.4;
+        }
+
+        .low .desc-title { color: #DC2626; }
+        .standard .desc-title { color: #1C4ED8; }
+        .high .desc-title { color: #059669; }
+
+        .arrow-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #E5E7EB;
+            z-index: 0;
+            transform: translateY(-50%);
+        }
+
+        .ball-wrapper {
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Frame Rate Visual Comparison</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="comparison-container">
+            <!-- 60 FPS -->
+            <div class="fps-row low">
+                <div class="label-box">
+                    <div class="fps-number" style="color: #DC2626;">60</div>
+                    <div class="fps-unit">FPS</div>
+                </div>
+                <div class="visual-track">
+                    <div class="arrow-line"></div>
+                    <div class="ball-wrapper">
+                        <!-- Fewer balls, larger gaps -->
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                    </div>
+                </div>
+                <div class="description">
+                    <div class="desc-title">Choppy / Ghosting</div>
+                    <div class="desc-text">Large gaps between frames. High risk of motion sickness.</div>
+                </div>
+            </div>
+
+            <!-- 90 FPS -->
+            <div class="fps-row standard">
+                <div class="label-box">
+                    <div class="fps-number" style="color: #1C4ED8;">90</div>
+                    <div class="fps-unit">FPS</div>
+                </div>
+                <div class="visual-track">
+                    <div class="arrow-line"></div>
+                    <div class="ball-wrapper">
+                        <!-- More balls, smoother -->
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                    </div>
+                </div>
+                <div class="description">
+                    <div class="desc-title">Smooth / Standard</div>
+                    <div class="desc-text">Meta Quest standard. Comfortable for most users.</div>
+                </div>
+            </div>
+
+            <!-- 120 FPS -->
+            <div class="fps-row high">
+                <div class="label-box">
+                    <div class="fps-number" style="color: #059669;">120</div>
+                    <div class="fps-unit">FPS</div>
+                </div>
+                <div class="visual-track">
+                    <div class="arrow-line"></div>
+                    <div class="ball-wrapper">
+                        <!-- Many balls, very smooth -->
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                        <div class="ball"></div>
+                    </div>
+                </div>
+                <div class="description">
+                    <div class="desc-title">Ultra-Smooth</div>
+                    <div class="desc-text">Maximum realism. Lowest latency. Hardest to achieve.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 60px;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        /* Simulated Inspector */
+        .inspector-panel {
+            width: 450px;
+            background: #383838;
+            border-radius: 4px;
+            color: #BDBDBD;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+            border: 1px solid #222;
+        }
+
+        .inspector-header {
+            background: #424242;
+            padding: 8px 10px;
+            border-bottom: 1px solid #222;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .inspector-content {
+            padding: 15px;
+        }
+
+        .platform-tabs {
+            display: flex;
+            background: #282828;
+            margin-bottom: 10px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 18px;
+            color: #888;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab.active {
+            background: #424242;
+            color: #E0E0E0;
+            border-bottom-color: #1C4ED8;
+        }
+
+        .prop-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 4px;
+            border-radius: 2px;
+        }
+
+        .prop-row.highlight {
+            background: rgba(28, 78, 216, 0.3);
+            border: 1px solid #1C4ED8;
+        }
+
+        .prop-label {
+            flex: 1;
+        }
+
+        .prop-value {
+            flex: 1;
+            background: #282828;
+            border: 1px solid #222;
+            padding: 2px 6px;
+            border-radius: 2px;
+            color: #E0E0E0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            background: #282828;
+            border: 1px solid #555;
+            border-radius: 2px;
+        }
+
+        .checkbox.checked {
+            background: #1C4ED8;
+            border-color: #1C4ED8;
+            position: relative;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: -4px;
+            left: 2px;
+            color: white;
+            font-size: 12px;
+        }
+
+        /* Explanations */
+        .info-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .info-card {
+            background: #F9FAFB;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #9CA3AF;
+        }
+
+        .info-card.critical {
+            border-left-color: #DC2626;
+            background: #FEF2F2;
+        }
+
+        .info-card.recommended {
+            border-left-color: #059669;
+            background: #ECFDF5;
+        }
+
+        .info-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .setting-tag {
+            font-family: 'Roboto', monospace;
+            font-size: 12px;
+            background: #E5E7EB;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #374151;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Texture Import Settings</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Simulated Inspector -->
+            <div class="inspector-panel">
+                <div class="inspector-header">
+                    <i class="fas fa-image"></i> Wood_Floor_Albedo
+                </div>
+                <div class="inspector-content">
+                    <div class="prop-row">
+                        <div class="prop-label">Texture Type</div>
+                        <div class="prop-value">Default</div>
+                    </div>
+                    
+                    <div class="prop-row highlight">
+                        <div class="prop-label">Generate Mip Maps</div>
+                        <div class="checkbox checked"></div>
+                    </div>
+
+                    <div class="prop-row" style="margin-bottom: 20px;">
+                        <div class="prop-label">Read/Write</div>
+                        <div class="checkbox"></div>
+                    </div>
+
+                    <!-- Platform Tabs -->
+                    <div class="platform-tabs">
+                        <div class="tab"><i class="fas fa-desktop"></i></div>
+                        <div class="tab active"><i class="fab fa-android"></i></div>
+                        <div class="tab"><i class="fas fa-server"></i></div>
+                    </div>
+
+                    <div class="prop-row highlight">
+                        <div class="prop-label">Override for Android</div>
+                        <div class="checkbox checked"></div>
+                    </div>
+
+                    <div class="prop-row highlight">
+                        <div class="prop-label">Max Size</div>
+                        <div class="prop-value">2048</div>
+                    </div>
+
+                    <div class="prop-row highlight">
+                        <div class="prop-label">Format</div>
+                        <div class="prop-value">ASTC 6x6 block</div>
+                    </div>
+                    
+                    <div class="prop-row">
+                        <div class="prop-label">Compressor Quality</div>
+                        <div class="prop-value">Normal</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explanations -->
+            <div class="info-column">
+                <div class="info-card recommended">
+                    <div class="info-title">
+                        Format: ASTC
+                        <span class="setting-tag">Essential</span>
+                    </div>
+                    <div class="info-desc">
+                        <strong>Adaptive Scalable Texture Compression.</strong> The gold standard for Android VR. It provides high quality at significantly smaller file sizes than ETC2. Use 6x6 for most textures, 4x4 for high detail.
+                    </div>
+                </div>
+
+                <div class="info-card recommended">
+                    <div class="info-title">
+                        Generate Mip Maps
+                        <span class="setting-tag">ON</span>
+                    </div>
+                    <div class="info-desc">
+                        Creates smaller versions of the texture for distant objects. Reduces shimmering artifacts (aliasing) and improves GPU cache performance. <strong>Always enable</strong> for 3D objects.
+                    </div>
+                </div>
+
+                <div class="info-card critical">
+                    <div class="info-title">
+                        Max Size
+                        <span class="setting-tag">Limit 2048</span>
+                    </div>
+                    <div class="info-desc">
+                        A 4K texture uses <strong>4x more memory</strong> than a 2K texture. Only use 4K for massive hero assets (like a skybox). Stick to 2048 or 1024 for everything else.
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-title">
+                        Override for Android
+                        <span class="setting-tag">Required</span>
+                    </div>
+                    <div class="info-desc">
+                        You must check this box to apply specific settings for the Quest (Android) build target, separate from your PC settings.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

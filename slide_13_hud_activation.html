@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 60px;
+            gap: 40px;
+            height: 500px;
+        }
+
+        .method-column {
+            flex: 1;
+            background: #F9FAFB;
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border-top: 6px solid #9CA3AF;
+        }
+
+        .method-column.primary {
+            flex: 1.2;
+            background: #EFF6FF;
+            border-top-color: #1C4ED8;
+        }
+
+        .method-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .primary .method-title {
+            color: #1C4ED8;
+        }
+
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: #E5E7EB;
+            color: #4B5563;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .primary .step-number {
+            background: #1C4ED8;
+            color: white;
+        }
+
+        .step-text {
+            font-size: 18px;
+            color: #374151;
+            line-height: 1.4;
+        }
+
+        .step-text strong {
+            color: #111827;
+            font-weight: 700;
+        }
+
+        .pro-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #1C4ED8;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .note-box {
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #6B7280;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .icon-visual {
+            font-size: 24px;
+            color: #1C4ED8;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Activating the HUD</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Method 1: OVR Metrics Tool -->
+            <div class="method-column primary">
+                <div class="pro-badge">Recommended</div>
+                <div class="method-title">
+                    <i class="fas fa-download icon-visual"></i>
+                    Method A: OVR Metrics Tool
+                </div>
+                
+                <div class="step-list">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-text">
+                            <strong>Install the APK</strong><br>
+                            Use Meta Quest Developer Hub (MQDH) or SideQuest to install <code>OVRMetricsTool.apk</code>.
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-text">
+                            <strong>Launch App</strong><br>
+                            In the headset, go to App Library > Filter > <strong>Unknown Sources</strong> > OVR Metrics Tool.
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-text">
+                            <strong>Enable Overlay</strong><br>
+                            Toggle the <strong>"Persistent Overlay"</strong> switch to ON.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <i class="fas fa-info-circle"></i> 
+                    Best for detailed analysis (GPU/CPU utilization, Thermal throttling).
+                </div>
+            </div>
+
+            <!-- Method 2: Built-in -->
+            <div class="method-column">
+                <div class="method-title">
+                    <i class="fas fa-cog" style="color: #4B5563;"></i>
+                    Method B: Built-in Overlay
+                </div>
+
+                <div class="step-list">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-text">
+                            <strong>Open Settings</strong><br>
+                            Go to Settings > System > <strong>Developer</strong>.
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-text">
+                            <strong>Toggle HUD</strong><br>
+                            Find <strong>"Performance HUD"</strong> and switch it to "On".
+                        </div>
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <i class="fas fa-exclamation-circle"></i> 
+                    Requires "Developer Mode" to be enabled on your Meta account and headset.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

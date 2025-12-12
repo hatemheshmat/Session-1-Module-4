@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        /* Inspector Simulation */
+        .inspector-panel {
+            width: 380px;
+            background: #383838;
+            color: #BDBDBD;
+            font-family: 'Roboto', sans-serif;
+            border: 1px solid #222;
+            font-size: 13px;
+        }
+
+        .panel-header {
+            background: #424242;
+            padding: 8px 10px;
+            font-weight: 700;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .module-header {
+            background: #282828;
+            padding: 5px 10px;
+            border-bottom: 1px solid #222;
+            border-top: 1px solid #444;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 700;
+            color: #E0E0E0;
+        }
+
+        .module-body {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .setting-label { color: #BDBDBD; }
+        
+        .setting-input {
+            background: #202020;
+            border: 1px solid #111;
+            padding: 2px 5px;
+            width: 100px;
+            text-align: left;
+            color: #E0E0E0;
+        }
+
+        .setting-input.highlight {
+            border: 1px solid #F59E0B;
+            color: #F59E0B;
+            font-weight: 700;
+        }
+
+        .setting-dropdown {
+            background: #202020;
+            border: 1px solid #111;
+            padding: 2px 5px;
+            width: 100px;
+            color: #E0E0E0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checkbox {
+            width: 14px;
+            height: 14px;
+            background: #202020;
+            border: 1px solid #555;
+        }
+
+        /* Explanations */
+        .info-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: #F3F4F6;
+            padding: 20px;
+            border-left: 6px solid #1C4ED8;
+        }
+
+        .info-card.warning {
+            background: #FFFBEB;
+            border-left-color: #F59E0B;
+        }
+
+        .info-card.critical {
+            background: #FEF2F2;
+            border-left-color: #DC2626;
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-desc {
+            font-size: 15px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .value-badge {
+            font-family: 'Roboto', monospace;
+            font-size: 14px;
+            padding: 2px 8px;
+            background: #1F2937;
+            color: white;
+        }
+
+        .warning .value-badge { color: #F59E0B; }
+        .critical .value-badge { color: #DC2626; }
+
+        .overdraw-banner {
+            margin-top: 30px;
+            background: #1F2937;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+
+        .banner-icon {
+            font-size: 30px;
+            color: #DC2626;
+        }
+
+        .banner-text {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Particle System Optimization</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Inspector -->
+            <div class="inspector-panel">
+                <div class="panel-header">
+                    <i class="fas fa-snowflake"></i> Particle System
+                </div>
+                
+                <!-- Main Module -->
+                <div class="module-body">
+                    <div class="setting-row">
+                        <span class="setting-label">Duration</span>
+                        <span class="setting-input">5.00</span>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Looping</span>
+                        <div class="checkbox" style="background: #1C4ED8; border-color: #1C4ED8;"></div>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Start Lifetime</span>
+                        <span class="setting-input">2.0</span>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Max Particles</span>
+                        <span class="setting-input highlight">100</span>
+                    </div>
+                </div>
+
+                <!-- Emission -->
+                <div class="module-header">
+                    <div class="checkbox" style="background: #1C4ED8; border-color: #1C4ED8;"></div>
+                    <span>Emission</span>
+                </div>
+                <div class="module-body">
+                    <div class="setting-row">
+                        <span class="setting-label">Rate over Time</span>
+                        <span class="setting-input">10</span>
+                    </div>
+                </div>
+
+                <!-- Collision -->
+                <div class="module-header">
+                    <div class="checkbox" style="background: #1C4ED8; border-color: #1C4ED8;"></div>
+                    <span>Collision</span>
+                </div>
+                <div class="module-body">
+                    <div class="setting-row">
+                        <span class="setting-label">Type</span>
+                        <div class="setting-dropdown highlight">
+                            <span>Planes</span>
+                            <i class="fas fa-caret-down"></i>
+                        </div>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Quality</span>
+                        <div class="setting-dropdown">
+                            <span>Medium</span>
+                            <i class="fas fa-caret-down"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Renderer -->
+                <div class="module-header">
+                    <div class="checkbox" style="background: #555; border-color: #555;"></div> <!-- Always enabled visually -->
+                    <span>Renderer</span>
+                </div>
+                <div class="module-body">
+                    <div class="setting-row">
+                        <span class="setting-label">Render Mode</span>
+                        <div class="setting-dropdown highlight">
+                            <span>Billboard</span>
+                            <i class="fas fa-caret-down"></i>
+                        </div>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Material</span>
+                        <div class="setting-input">Smoke_Mat</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explanations -->
+            <div class="info-column">
+                <div class="info-card">
+                    <div class="card-title">
+                        Max Particles
+                        <span class="value-badge">Limit: &lt; 500</span>
+                    </div>
+                    <div class="card-desc">
+                        Hard limit on the number of particles alive at once. Keep this low. If you need more density, increase particle size instead of count.
+                    </div>
+                </div>
+
+                <div class="info-card warning">
+                    <div class="card-title">
+                        Collision Type
+                        <span class="value-badge">Use: Planes</span>
+                    </div>
+                    <div class="card-desc">
+                        <strong>World Collision</strong> is extremely expensive (raycasts per particle). Use <strong>Planes</strong> (simple geometric collision) whenever possible.
+                    </div>
+                </div>
+
+                <div class="info-card critical">
+                    <div class="card-title">
+                        Render Mode
+                        <span class="value-badge">Avoid: Mesh</span>
+                    </div>
+                    <div class="card-desc">
+                        <strong>Mesh Particles</strong> (3D models) are heavy on the vertex shader. Use <strong>Billboards</strong> (2D sprites facing camera) for 90% of effects.
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-title">
+                        Texture Sheet Animation
+                        <span class="value-badge">Recommended</span>
+                    </div>
+                    <div class="card-desc">
+                        Use a flipbook texture (grid of frames) to add detail and motion to a single particle, rather than spawning more particles.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="overdraw-banner">
+            <i class="fas fa-layer-group banner-icon"></i>
+            <div class="banner-text">
+                <strong>The Overdraw Killer:</strong> Large, semi-transparent particles covering the screen force the GPU to redraw pixels multiple times. This destroys fill rate. <strong>Keep particles small or opaque.</strong>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

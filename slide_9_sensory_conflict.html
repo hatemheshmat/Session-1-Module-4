@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+            position: relative;
+            padding: 0 50px;
+        }
+
+        /* Central Brain */
+        .brain-core {
+            width: 220px;
+            height: 220px;
+            background: white;
+            border: 8px solid #1F2937;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .brain-icon {
+            font-size: 80px;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .brain-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #1F2937;
+        }
+
+        /* Inputs */
+        .input-group {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 280px;
+        }
+
+        .input-left {
+            left: 100px;
+            top: 100px;
+        }
+
+        .input-right {
+            right: 100px;
+            top: 100px;
+        }
+
+        .input-box {
+            background: #EFF6FF;
+            border: 3px solid #1C4ED8;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .input-right .input-box {
+            background: #ECFDF5;
+            border-color: #059669;
+        }
+
+        .input-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .input-left .input-icon { color: #1C4ED8; }
+        .input-right .input-icon { color: #059669; }
+
+        .input-title {
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #111827;
+        }
+
+        .input-desc {
+            font-size: 16px;
+            color: #4B5563;
+        }
+
+        /* Connectors */
+        .connector {
+            position: absolute;
+            height: 4px;
+            background: #E5E7EB;
+            z-index: 0;
+        }
+
+        .conn-left {
+            top: 210px;
+            left: 380px;
+            width: 150px;
+            transform: rotate(20deg);
+        }
+
+        .conn-right {
+            top: 210px;
+            right: 380px;
+            width: 150px;
+            transform: rotate(-20deg);
+        }
+
+        /* Output */
+        .output-group {
+            position: absolute;
+            bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .output-line {
+            height: 60px;
+            width: 6px;
+            background: #DC2626;
+            margin-bottom: 10px;
+        }
+
+        .output-box {
+            background: #FEF2F2;
+            border: 4px solid #DC2626;
+            border-radius: 16px;
+            padding: 20px 40px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(220, 38, 38, 0.15);
+        }
+
+        .output-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #991B1B;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .output-desc {
+            font-size: 18px;
+            color: #7F1D1D;
+            font-weight: 600;
+        }
+
+        /* Animated signals */
+        .signal {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            z-index: 5;
+        }
+
+        .sig-left {
+            background: #1C4ED8;
+            top: 180px;
+            left: 380px;
+        }
+
+        .sig-right {
+            background: #059669;
+            top: 180px;
+            right: 380px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Sensory Conflict Theory</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="diagram-container">
+            <!-- Left Input: Visual -->
+            <div class="input-group input-left">
+                <div class="input-box">
+                    <i class="fas fa-vr-cardboard input-icon"></i>
+                    <div class="input-title">Visual Input</div>
+                    <div class="input-desc">"We are moving fast!"</div>
+                </div>
+            </div>
+
+            <!-- Right Input: Vestibular -->
+            <div class="input-group input-right">
+                <div class="input-box">
+                    <i class="fas fa-balance-scale-right input-icon"></i>
+                    <div class="input-title">Vestibular Input</div>
+                    <div class="input-desc">"We are stationary."</div>
+                </div>
+            </div>
+
+            <!-- Connectors -->
+            <div class="connector conn-left"></div>
+            <div class="connector conn-right"></div>
+            <div class="signal sig-left"></div>
+            <div class="signal sig-right"></div>
+
+            <!-- Central Processor -->
+            <div class="brain-core">
+                <i class="fas fa-brain brain-icon"></i>
+                <div class="brain-label">The Brain</div>
+            </div>
+
+            <!-- Output -->
+            <div class="output-group">
+                <div class="output-line"></div>
+                <div class="output-box">
+                    <div class="output-title">Conflict Detected</div>
+                    <div class="output-desc">Result: Motion Sickness</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

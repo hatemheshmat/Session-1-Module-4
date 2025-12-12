@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&family=Fira+Code:wght@400;600&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .visual-column {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .concept-box {
+            border-left: 6px solid #1C4ED8;
+            padding-left: 25px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .concept-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .comparison-box {
+            background: #F3F4F6;
+            padding: 25px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .comp-header {
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 15px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comp-list {
+            list-style: none;
+        }
+
+        .comp-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .forest-visual {
+            background: #ECFDF5;
+            border: 2px solid #059669;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tree-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            width: 90%;
+        }
+
+        .tree {
+            width: 0; 
+            height: 0; 
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #059669;
+        }
+
+        .visual-label {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: #059669;
+            color: white;
+            padding: 5px 10px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .code-panel {
+            background: #1E1E1E;
+            border: 1px solid #333;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            color: #D4D4D4;
+            padding: 20px;
+        }
+
+        .code-title {
+            color: #9CDCFE;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .keyword { color: #569CD6; }
+        .type { color: #4EC9B0; }
+        .string { color: #CE9178; }
+        .comment { color: #6A9955; }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>GPU Instancing</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-box">
+                    <div class="concept-title">Mass Replication</div>
+                    <div class="concept-desc">
+                        GPU Instancing tells the GPU to draw the same mesh thousands of times in a single draw call. Unlike Static Batching, these objects can <strong>move, rotate, and scale</strong> independently.
+                    </div>
+                </div>
+
+                <div class="comparison-box">
+                    <div class="comp-header">
+                        <i class="fas fa-balance-scale"></i> vs. Static Batching
+                    </div>
+                    <ul class="comp-list">
+                        <li class="comp-item">
+                            <i class="fas fa-check" style="color: #059669;"></i>
+                            <span>Low Memory Usage (No mesh copying)</span>
+                        </li>
+                        <li class="comp-item">
+                            <i class="fas fa-check" style="color: #059669;"></i>
+                            <span>Dynamic Transforms (Can move)</span>
+                        </li>
+                        <li class="comp-item">
+                            <i class="fas fa-times" style="color: #DC2626;"></i>
+                            <span>Requires Identical Mesh & Material</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="concept-box" style="border-color: #F59E0B;">
+                    <div class="concept-title" style="font-size: 20px;">Best For:</div>
+                    <div class="concept-desc">
+                        Forests, Grass, Asteroid Fields, Particles, Bullets, Crowd Characters.
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="forest-visual">
+                    <div class="tree-grid">
+                        <!-- Generating 40 trees visually -->
+                        <div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div>
+                        <div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div>
+                        <div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div>
+                        <div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div><div class="tree"></div>
+                    </div>
+                    <div class="visual-label">1 Draw Call</div>
+                </div>
+
+                <div class="code-panel">
+                    <div class="code-title">Per-Instance Properties (Color Variation)</div>
+                    <div>
+                        <span class="type">MaterialPropertyBlock</span> props = <span class="keyword">new</span> <span class="type">MaterialPropertyBlock</span>();<br>
+                        <br>
+                        <span class="keyword">foreach</span> (<span class="type">var</span> obj <span class="keyword">in</span> objects) {<br>
+                        &nbsp;&nbsp;props.SetColor(<span class="string">"_Color"</span>, Random.ColorHSV());<br>
+                        &nbsp;&nbsp;obj.renderer.SetPropertyBlock(props);<br>
+                        }
+                    </div>
+                    <div style="margin-top: 10px; color: #6A9955; font-size: 12px;">
+                        // Allows unique colors without breaking the batch!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

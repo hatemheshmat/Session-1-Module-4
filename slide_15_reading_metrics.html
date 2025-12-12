@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            padding: 0 60px;
+        }
+
+        .metric-card {
+            background: #F9FAFB;
+            border-left: 6px solid #9CA3AF;
+            padding: 20px 25px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .metric-card.primary {
+            border-left-color: #1C4ED8;
+            background: #EFF6FF;
+        }
+
+        .metric-card.warning {
+            border-left-color: #F59E0B;
+            background: #FFFBEB;
+        }
+
+        .metric-card.critical {
+            border-left-color: #DC2626;
+            background: #FEF2F2;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .metric-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1F2937;
+        }
+
+        .metric-target {
+            font-family: 'Roboto', monospace;
+            font-weight: 700;
+            font-size: 16px;
+            background: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid #E5E7EB;
+            color: #4B5563;
+        }
+
+        .metric-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .action-tip {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1C4ED8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-tip i {
+            font-size: 12px;
+        }
+
+        .metric-card.warning .action-tip { color: #D97706; }
+        .metric-card.critical .action-tip { color: #B91C1C; }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Reading Performance Metrics</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="metrics-grid">
+            <!-- FPS -->
+            <div class="metric-card primary">
+                <div class="card-header">
+                    <div class="metric-name">FPS (Frames Per Second)</div>
+                    <div class="metric-target">Target: 72 / 90 / 120</div>
+                </div>
+                <div class="metric-desc">
+                    The current refresh rate. If this dips below the target, you are dropping frames.
+                </div>
+                <div class="action-tip">
+                    <i class="fas fa-arrow-right"></i>
+                    If unstable, check CPU vs GPU times to find the bottleneck.
+                </div>
+            </div>
+
+            <!-- App GPU Time -->
+            <div class="metric-card warning">
+                <div class="card-header">
+                    <div class="metric-name">App GPU Time</div>
+                    <div class="metric-target">Target: &lt; 11ms (at 90Hz)</div>
+                </div>
+                <div class="metric-desc">
+                    Time spent by the GPU to render a single frame.
+                </div>
+                <div class="action-tip">
+                    <i class="fas fa-wrench"></i>
+                    High? Reduce resolution, shader complexity, or overdraw.
+                </div>
+            </div>
+
+            <!-- App CPU Time -->
+            <div class="metric-card warning">
+                <div class="card-header">
+                    <div class="metric-name">App CPU Time</div>
+                    <div class="metric-target">Target: &lt; 11ms (at 90Hz)</div>
+                </div>
+                <div class="metric-desc">
+                    Time spent by the Main Thread (scripts, physics, draw call submission).
+                </div>
+                <div class="action-tip">
+                    <i class="fas fa-code"></i>
+                    High? Optimize scripts, physics, or reduce draw calls.
+                </div>
+            </div>
+
+            <!-- Stale Frames -->
+            <div class="metric-card critical">
+                <div class="card-header">
+                    <div class="metric-name">Stale Frames</div>
+                    <div class="metric-target">Target: 0</div>
+                </div>
+                <div class="metric-desc">
+                    Number of frames that missed the display deadline in the last second.
+                </div>
+                <div class="action-tip">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Any value > 0 indicates visible judder/stuttering.
+                </div>
+            </div>
+
+            <!-- Thermal Level -->
+            <div class="metric-card">
+                <div class="card-header">
+                    <div class="metric-name">Thermal Level</div>
+                    <div class="metric-target">Safe: 0 - 2</div>
+                </div>
+                <div class="metric-desc">
+                    Device temperature status. Level 3+ triggers thermal throttling (reduced clock speeds).
+                </div>
+                <div class="action-tip">
+                    <i class="fas fa-thermometer-half"></i>
+                    Avoid sustained high load to prevent throttling.
+                </div>
+            </div>
+
+            <!-- Used Memory -->
+            <div class="metric-card">
+                <div class="card-header">
+                    <div class="metric-name">Used Memory</div>
+                    <div class="metric-target">Limit: ~5.5GB (Quest 2)</div>
+                </div>
+                <div class="metric-desc">
+                    Total RAM usage. Exceeding the limit causes the OS to kill the app.
+                </div>
+                <div class="action-tip">
+                    <i class="fas fa-memory"></i>
+                    Monitor texture compression and asset unloading.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

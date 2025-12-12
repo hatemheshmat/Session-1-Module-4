@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .comparison-column {
+            flex: 1.2;
+        }
+
+        .visual-column {
+            flex: 1;
+            background: #F9FAFB;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .comp-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .comp-table th {
+            background: #1F2937;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+        }
+
+        .comp-table td {
+            padding: 15px;
+            border-bottom: 1px solid #E5E7EB;
+            font-size: 16px;
+            color: #374151;
+        }
+
+        .comp-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .winner {
+            color: #059669;
+            font-weight: 700;
+        }
+
+        .loser {
+            color: #9CA3AF;
+        }
+
+        .rec-box {
+            background: #EFF6FF;
+            border-left: 6px solid #1C4ED8;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .rec-title {
+            font-weight: 700;
+            color: #1E40AF;
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rec-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        /* Visual Column Styles */
+        .visual-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .block-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .block-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .block-visual {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 2px solid #D1D5DB;
+            display: grid;
+            gap: 1px;
+            padding: 2px;
+            background-color: #E5E7EB;
+        }
+
+        .b-4x4 { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); }
+        .b-6x6 { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(6, 1fr); }
+        .b-8x8 { grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); }
+
+        .pixel {
+            background: #3B82F6;
+            opacity: 0.8;
+        }
+
+        .block-info {
+            flex: 1;
+        }
+
+        .block-name {
+            font-weight: 700;
+            color: #1F2937;
+            font-size: 18px;
+        }
+
+        .block-stats {
+            font-family: 'Roboto', monospace;
+            color: #6B7280;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .use-case {
+            font-size: 14px;
+            color: #059669;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Texture Compression Formats</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="comparison-column">
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>ASTC (New)</th>
+                            <th>ETC2 (Old)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Quality</strong></td>
+                            <td class="winner">High (Adaptive)</td>
+                            <td class="loser">Medium (Fixed)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flexibility</strong></td>
+                            <td class="winner">Block-based (4x4 to 12x12)</td>
+                            <td class="loser">Fixed 4 bits/pixel</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Alpha Channel</strong></td>
+                            <td class="winner">Excellent Support</td>
+                            <td class="loser">Separate/Split</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Build Size</strong></td>
+                            <td class="winner">Very Low</td>
+                            <td class="loser">Moderate</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="rec-box">
+                    <div class="rec-title">
+                        <i class="fas fa-check-circle"></i> Recommendation
+                    </div>
+                    <div class="rec-desc">
+                        <strong>Always use ASTC</strong> for Meta Quest development. It offers the best balance of visual fidelity and memory footprint. ETC2 should only be used for legacy Android device support (pre-2016).
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="visual-title">Understanding Block Sizes</div>
+                
+                <div class="block-container">
+                    <!-- 4x4 -->
+                    <div class="block-row">
+                        <div class="block-visual b-4x4">
+                            <!-- 16 pixels -->
+                            <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                            <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                            <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                            <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                        </div>
+                        <div class="block-info">
+                            <div class="block-name">ASTC 4x4</div>
+                            <div class="block-stats">8.00 bits/pixel</div>
+                            <div class="use-case">Use for: UI, Normal Maps, Hero Assets</div>
+                        </div>
+                    </div>
+
+                    <!-- 6x6 -->
+                    <div class="block-row">
+                        <div class="block-visual b-6x6">
+                            <!-- Just visual representation, not 36 divs to save code space, using background pattern instead -->
+                            <div style="grid-column: span 6; grid-row: span 6; background: repeating-linear-gradient(45deg, #3B82F6 0, #3B82F6 2px, transparent 2px, transparent 6px); opacity: 0.6;"></div>
+                        </div>
+                        <div class="block-info">
+                            <div class="block-name">ASTC 6x6</div>
+                            <div class="block-stats">3.56 bits/pixel</div>
+                            <div class="use-case">Use for: Standard Textures, Props</div>
+                        </div>
+                    </div>
+
+                    <!-- 8x8 -->
+                    <div class="block-row">
+                        <div class="block-visual b-8x8">
+                            <div style="grid-column: span 8; grid-row: span 8; background: repeating-linear-gradient(45deg, #3B82F6 0, #3B82F6 1px, transparent 1px, transparent 8px); opacity: 0.4;"></div>
+                        </div>
+                        <div class="block-info">
+                            <div class="block-name">ASTC 8x8</div>
+                            <div class="block-stats">2.00 bits/pixel</div>
+                            <div class="use-case">Use for: Distant Objects, Skyboxes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

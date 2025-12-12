@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .problem-box {
+            background: #FEF2F2;
+            border: 1px solid #DC2626;
+            padding: 25px;
+            border-left: 6px solid #DC2626;
+        }
+
+        .box-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #991B1B;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .box-desc {
+            font-size: 16px;
+            color: #7F1D1D;
+            line-height: 1.5;
+        }
+
+        .solution-box {
+            background: #ECFDF5;
+            border: 1px solid #059669;
+            padding: 25px;
+            border-left: 6px solid #059669;
+        }
+
+        .solution-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #065F46;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .solution-desc {
+            font-size: 16px;
+            color: #064E3B;
+            line-height: 1.5;
+        }
+
+        .visual-column {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Pooling Diagram */
+        .pool-diagram {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+        }
+
+        .zone {
+            position: absolute;
+            width: 100%;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .active-zone {
+            top: 0;
+            background: #DBEAFE;
+            color: #1E40AF;
+            border-bottom: 2px dashed #93C5FD;
+        }
+
+        .pool-zone {
+            bottom: 0;
+            background: #1F2937;
+            color: #9CA3AF;
+        }
+
+        .object {
+            width: 40px;
+            height: 40px;
+            background: #1C4ED8;
+            border-radius: 50%;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .object.inactive {
+            background: #4B5563;
+            box-shadow: none;
+        }
+
+        /* Flow Arrows */
+        .flow-arrow {
+            position: absolute;
+            width: 4px;
+            height: 100px;
+            background: #10B981;
+            top: 140px;
+        }
+
+        .arrow-head {
+            position: absolute;
+            width: 0; 
+            height: 0; 
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+        }
+
+        .spawn-arrow {
+            left: 30%;
+            background: #10B981; /* Green for Get */
+        }
+        .spawn-arrow .arrow-head {
+            border-bottom: 15px solid #10B981;
+            top: -10px;
+        }
+        .spawn-label {
+            position: absolute;
+            left: 32%;
+            top: 180px;
+            color: #059669;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .return-arrow {
+            right: 30%;
+            background: #F59E0B; /* Orange for Return */
+        }
+        .return-arrow .arrow-head {
+            border-top: 15px solid #F59E0B;
+            bottom: -10px;
+        }
+        .return-label {
+            position: absolute;
+            right: 32%;
+            top: 180px;
+            color: #D97706;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .checklist {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .check-item {
+            background: #1F2937;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Object Pooling</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="problem-box">
+                    <div class="box-title">
+                        <i class="fas fa-trash-alt"></i> The Problem
+                    </div>
+                    <div class="box-desc">
+                        Creating objects (<code>Instantiate</code>) allocates memory. Destroying them (<code>Destroy</code>) creates garbage. When the Garbage Collector runs to clean up, your game freezes for a few milliseconds. In VR, this causes nausea.
+                    </div>
+                </div>
+
+                <div class="solution-box">
+                    <div class="solution-title">
+                        <i class="fas fa-recycle"></i> The Solution
+                    </div>
+                    <div class="solution-desc">
+                        <strong>Recycle everything.</strong> Instead of destroying a bullet when it hits a wall, disable it and put it back in a "Pool". When you need a new bullet, take one from the pool and enable it.
+                    </div>
+                </div>
+
+                <div class="checklist">
+                    <div class="check-item">Bullets</div>
+                    <div class="check-item">Enemies</div>
+                    <div class="check-item">Particles</div>
+                    <div class="check-item">Sound Emitters</div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="pool-diagram">
+                    <!-- Zones -->
+                    <div class="zone active-zone">Active World</div>
+                    <div class="zone pool-zone">The Pool (Inactive)</div>
+
+                    <!-- Arrows -->
+                    <div class="flow-arrow spawn-arrow">
+                        <div class="arrow-head"></div>
+                    </div>
+                    <div class="spawn-label">Enable (Get)</div>
+
+                    <div class="flow-arrow return-arrow">
+                        <div class="arrow-head"></div>
+                    </div>
+                    <div class="return-label">Disable (Return)</div>
+
+                    <!-- Objects simulating flow -->
+                    <!-- In Pool -->
+                    <div class="object inactive" style="bottom: 40px; left: 20%;">1</div>
+                    <div class="object inactive" style="bottom: 40px; left: 35%;">2</div>
+                    <div class="object inactive" style="bottom: 40px; left: 50%;">3</div>
+                    
+                    <!-- Moving Up (Getting) -->
+                    <div class="object" style="bottom: 180px; left: 28%; opacity: 0.5;">4</div>
+
+                    <!-- Active -->
+                    <div class="object" style="top: 40px; left: 40%;">5</div>
+                    <div class="object" style="top: 40px; left: 60%;">6</div>
+
+                    <!-- Moving Down (Returning) -->
+                    <div class="object" style="top: 180px; right: 28%; opacity: 0.5; background: #F59E0B;">7</div>
+
+                    <!-- In Pool (Returned) -->
+                    <div class="object inactive" style="bottom: 40px; right: 20%;">8</div>
+                </div>
+                
+                <div style="margin-top: 15px; color: #6B7280; font-size: 14px; text-align: center;">
+                    <strong>Zero Allocation Cycle:</strong> Memory is allocated once at startup,<br>then reused forever.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

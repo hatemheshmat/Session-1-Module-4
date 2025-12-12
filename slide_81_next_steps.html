@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            border-bottom: 2px solid #E5E7EB;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .resource-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: #F9FAFB;
+            padding: 15px;
+            border: 1px solid #E5E7EB;
+            transition: transform 0.2s;
+        }
+
+        .res-icon {
+            font-size: 24px;
+            color: #1C4ED8;
+            margin-top: 3px;
+        }
+
+        .res-content {
+            flex: 1;
+        }
+
+        .res-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1F2937;
+            margin-bottom: 5px;
+        }
+
+        .res-desc {
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #EFF6FF;
+            padding: 15px 20px;
+            border: 1px solid #BFDBFE;
+            border-left: 4px solid #2563EB;
+        }
+
+        .tool-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1E40AF;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .download-badge {
+            background: #2563EB;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .challenge-box {
+            margin-top: 40px;
+            background: #1F2937;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+
+        .challenge-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #FCD34D;
+        }
+
+        .challenge-text {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .challenge-icon {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: #FCD34D;
+            color: #1F2937;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            border: 4px solid white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Next Steps & Resources</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Essential Reading -->
+            <div class="column">
+                <div class="section-title">
+                    <i class="fas fa-book-reader" style="color: #1C4ED8;"></i> Essential Reading
+                </div>
+                <div class="resource-list">
+                    <div class="resource-item">
+                        <i class="fas fa-file-alt res-icon"></i>
+                        <div class="res-content">
+                            <div class="res-title">Unity Manual: Optimization</div>
+                            <div class="res-desc">The official documentation on batching, culling, and memory management.</div>
+                        </div>
+                    </div>
+                    <div class="resource-item">
+                        <i class="fas fa-vr-cardboard res-icon"></i>
+                        <div class="res-content">
+                            <div class="res-title">Meta Quest Developer Center</div>
+                            <div class="res-desc">Detailed guides on VRCs, App Lab submission, and performance targets.</div>
+                        </div>
+                    </div>
+                    <div class="resource-item">
+                        <i class="fas fa-code res-icon"></i>
+                        <div class="res-content">
+                            <div class="res-title">Oculus Performance Guide</div>
+                            <div class="res-desc">Deep dive into mobile GPU architecture and tile-based rendering.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toolbox -->
+            <div class="column">
+                <div class="section-title">
+                    <i class="fas fa-toolbox" style="color: #059669;"></i> Your Toolbox
+                </div>
+                <div class="resource-list">
+                    <div class="tool-item">
+                        <div class="tool-name"><i class="fas fa-chart-line"></i> OVR Metrics Tool</div>
+                        <div class="download-badge">Install on Quest</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name"><i class="fas fa-bug"></i> RenderDoc</div>
+                        <div class="download-badge">Install on PC</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name"><i class="fas fa-microchip"></i> Snapdragon Profiler</div>
+                        <div class="download-badge">Advanced</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-name"><i class="fas fa-cubes"></i> Unity Memory Profiler</div>
+                        <div class="download-badge">Package Manager</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="challenge-box">
+            <div class="challenge-icon"><i class="fas fa-flag-checkered"></i></div>
+            <div class="challenge-title">The Challenge</div>
+            <div class="challenge-text">
+                Open your heaviest scene right now. Connect the Profiler. Find the top 3 CPU spikes and <strong>eliminate them</strong>.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

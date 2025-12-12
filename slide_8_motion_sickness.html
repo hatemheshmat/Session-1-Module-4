@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 80px;
+        }
+
+        .conflict-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+
+        .system-box {
+            background: #F3F4F6;
+            padding: 30px;
+            border-radius: 16px;
+            width: 350px;
+            text-align: center;
+            border-bottom: 6px solid #9CA3AF;
+        }
+
+        .system-box.visual {
+            border-bottom-color: #1C4ED8;
+        }
+
+        .system-box.vestibular {
+            border-bottom-color: #059669;
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .icon-circle i {
+            font-size: 36px;
+        }
+
+        .visual .icon-circle i { color: #1C4ED8; }
+        .vestibular .icon-circle i { color: #059669; }
+
+        .system-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1F2937;
+        }
+
+        .system-desc {
+            font-size: 18px;
+            color: #4B5563;
+            font-style: italic;
+        }
+
+        .clash-icon {
+            font-size: 48px;
+            color: #DC2626;
+            animation: pulse 2s infinite;
+        }
+
+        .result-box {
+            background: #FEF2F2;
+            border: 2px solid #FECACA;
+            border-radius: 12px;
+            padding: 30px 50px;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .result-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #991B1B;
+            margin-bottom: 15px;
+        }
+
+        .result-text {
+            font-size: 20px;
+            color: #7F1D1D;
+            line-height: 1.6;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Motion Sickness in VR</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="conflict-diagram">
+                <div class="system-box visual">
+                    <div class="icon-circle">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="system-title">Visual System</div>
+                    <div class="system-desc">"I see us moving forward at high speed."</div>
+                </div>
+
+                <div class="clash-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+
+                <div class="system-box vestibular">
+                    <div class="icon-circle">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="system-title">Vestibular System</div>
+                    <div class="system-desc">"I feel that we are sitting completely still."</div>
+                </div>
+            </div>
+
+            <div class="result-box">
+                <div class="result-title">The "Poison Theory" Response</div>
+                <p class="result-text">
+                    The brain interprets this sensory mismatch as a sign of hallucination caused by poisoning. 
+                    To protect the body, it triggers a nausea response to expel the "toxin."
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

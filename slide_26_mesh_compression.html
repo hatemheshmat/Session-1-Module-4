@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .text-column {
+            flex: 1;
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1C4ED8;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .levels-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .level-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            background: #F9FAFB;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #E5E7EB;
+        }
+
+        .level-item.recommended {
+            background: #EFF6FF;
+            border-left-color: #1C4ED8;
+        }
+
+        .level-badge {
+            font-family: 'Roboto', monospace;
+            font-weight: 700;
+            background: #E5E7EB;
+            color: #374151;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-right: 15px;
+            width: 80px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .recommended .level-badge {
+            background: #1C4ED8;
+            color: white;
+        }
+
+        .level-desc {
+            font-size: 16px;
+            color: #374151;
+        }
+
+        .inspector-mock {
+            width: 100%;
+            background: #383838;
+            border-radius: 6px;
+            padding: 10px;
+            font-family: 'Roboto', sans-serif;
+            color: #BDBDBD;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            font-size: 14px;
+        }
+
+        .inspector-header {
+            font-weight: 700;
+            border-bottom: 1px solid #555;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .inspector-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 4px 0;
+        }
+
+        .inspector-label {
+            color: #BDBDBD;
+        }
+
+        .inspector-value {
+            width: 180px;
+            background: #282828;
+            border: 1px solid #222;
+            padding: 4px 8px;
+            border-radius: 3px;
+            color: #FFF;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .warning-box {
+            margin-top: 30px;
+            background: #FFFBEB;
+            border: 1px solid #FCD34D;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .warning-icon {
+            color: #F59E0B;
+            font-size: 24px;
+            margin-top: 2px;
+        }
+
+        .warning-text h4 {
+            color: #92400E;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .warning-text p {
+            color: #78350F;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Mesh Compression</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <h2>Reduce Build Size</h2>
+                <p>
+                    Mesh Compression reduces the file size of your assets on disk (APK size) by using quantization algorithms to compress vertex positions and normals.
+                </p>
+
+                <ul class="levels-list">
+                    <div class="level-item">
+                        <div class="level-badge">Off</div>
+                        <div class="level-desc">No compression. Maximum precision. Use for modular walls/floors to prevent gaps.</div>
+                    </div>
+                    <div class="level-item recommended">
+                        <div class="level-badge">Medium</div>
+                        <div class="level-desc">Good balance. Minor artifacts. Suitable for most props and characters.</div>
+                    </div>
+                    <div class="level-item recommended">
+                        <div class="level-badge">High</div>
+                        <div class="level-desc">Aggressive compression. Use for organic shapes (rocks, trees) where precision matters less.</div>
+                    </div>
+                </ul>
+
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle warning-icon"></i>
+                    <div class="warning-text">
+                        <h4>The Trade-off</h4>
+                        <p>This is <strong>lossy</strong> compression. It does not improve runtime memory (RAM) significantly, but it drastically reduces download size and load times.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="inspector-mock">
+                    <div class="inspector-header">
+                        <i class="fas fa-cube"></i> Model Import Settings
+                    </div>
+                    <div class="inspector-row">
+                        <span class="inspector-label">Mesh Compression</span>
+                        <div class="inspector-value">
+                            <span>Medium</span>
+                            <i class="fas fa-caret-down" style="font-size: 10px;"></i>
+                        </div>
+                    </div>
+                    <div class="inspector-row">
+                        <span class="inspector-label">Read/Write Enabled</span>
+                        <div class="inspector-value">
+                            <i class="far fa-square"></i>
+                        </div>
+                    </div>
+                    <div class="inspector-row">
+                        <span class="inspector-label">Optimize Mesh</span>
+                        <div class="inspector-value">
+                            <i class="far fa-check-square"></i>
+                        </div>
+                    </div>
+                    <div class="inspector-row">
+                        <span class="inspector-label">Generate Colliders</span>
+                        <div class="inspector-value">
+                            <i class="far fa-square"></i>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; border-top: 1px solid #555; padding-top: 10px;">
+                        <div class="inspector-row">
+                            <span class="inspector-label">Normals</span>
+                            <div class="inspector-value">Import</div>
+                        </div>
+                        <div class="inspector-row">
+                            <span class="inspector-label">Tangents</span>
+                            <div class="inspector-value">Calculate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

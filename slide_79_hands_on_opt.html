@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .mission-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px; /* reduced gap to tighten vertical flow */
+        }
+
+        .mission-card {
+            border: 1px solid #E5E7EB;
+            padding: 25px;
+            position: relative;
+        }
+
+        .card-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            padding: 0 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .current-status {
+            background: #FEF2F2;
+            border-color: #FECACA;
+            border-left: 6px solid #DC2626;
+        }
+
+        .current-status .card-label {
+            background: #DC2626;
+            color: white;
+        }
+
+        .target-status {
+            background: #ECFDF5;
+            border-color: #A7F3D0;
+            border-left: 6px solid #059669;
+        }
+
+        .target-status .card-label {
+            background: #059669;
+            color: white;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #374151;
+            border-bottom: 1px dashed #D1D5DB;
+            padding-bottom: 5px;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .stat-val {
+            font-weight: 700;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .bad-val { color: #DC2626; }
+        .good-val { color: #059669; }
+
+        .checklist-column {
+            flex: 1.2;
+            background: #F3F4F6;
+            padding: 20px; /* reduced from 30px */
+            border: 1px solid #E5E7EB;
+        }
+
+        .checklist-header {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 16px; /* reduced from 20px */
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px; /* reduced from 15px */
+            background: white;
+            padding: 12px; /* reduced from 15px */
+            border: 1px solid #D1D5DB;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .task-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #9CA3AF;
+            border-radius: 4px;
+        }
+
+        .task-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .time-banner {
+            margin-top: 20px; /* reduced from 40px */
+            background: #1F2937;
+            color: white;
+            padding: 10px; /* reduced from 15px */
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Activity: Full Optimization</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="mission-column">
+                <!-- Current Status -->
+                <div class="mission-card current-status">
+                    <div class="card-label">Current Status</div>
+                    <div class="stat-row">
+                        <span>Frame Rate</span>
+                        <span class="stat-val bad-val">45 FPS</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Draw Calls</span>
+                        <span class="stat-val bad-val">240</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Triangles</span>
+                        <span class="stat-val bad-val">500k</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Lighting</span>
+                        <span class="stat-val bad-val">Realtime</span>
+                    </div>
+                </div>
+
+                <!-- Target Status -->
+                <div class="mission-card target-status">
+                    <div class="card-label">Mission Target</div>
+                    <div class="stat-row">
+                        <span>Frame Rate</span>
+                        <span class="stat-val good-val">72 FPS (Stable)</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Draw Calls</span>
+                        <span class="stat-val good-val">&lt; 50</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Triangles</span>
+                        <span class="stat-val good-val">&lt; 100k</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Lighting</span>
+                        <span class="stat-val good-val">Baked</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-column">
+                <div class="checklist-header">
+                    <i class="fas fa-clipboard-list" style="color: #1C4ED8;"></i> Execution Plan
+                </div>
+
+                <div class="task-item">
+                    <div class="checkbox"></div>
+                    <div class="task-text">Mark static objects as <strong>Static</strong></div>
+                </div>
+
+                <div class="task-item">
+                    <div class="checkbox"></div>
+                    <div class="task-text">Bake <strong>Lightmaps</strong> (Disable Realtime GI)</div>
+                </div>
+
+                <div class="task-item">
+                    <div class="checkbox"></div>
+                    <div class="task-text">Enable <strong>GPU Instancing</strong> on Materials</div>
+                </div>
+
+                <div class="task-item">
+                    <div class="checkbox"></div>
+                    <div class="task-text">Set Texture Compression to <strong>ASTC 6x6</strong></div>
+                </div>
+
+                <div class="task-item">
+                    <div class="checkbox"></div>
+                    <div class="task-text">Bake <strong>Occlusion Culling</strong></div>
+                </div>
+
+                <div class="task-item">
+                    <div class="checkbox"></div>
+                    <div class="task-text">Replace Projectile Prefabs with <strong>Object Pool</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="time-banner">
+            <i class="fas fa-stopwatch"></i> Time Limit: 30 Minutes
+        </div>
+    </div>
+</body>
+</html>

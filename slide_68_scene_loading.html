@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px; /* keep title top spacing consistent */
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 36px; /* reduced to save vertical space */
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 18px; /* tighten vertical spacing */
+        }
+
+        .concept-block {
+            border-left: 6px solid #DC2626;
+            padding-left: 25px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .concept-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.4; /* lighter line-height to reduce block height without changing font-size */
+        }
+
+        .tech-column {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* slightly tightened */
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #1E1E1E;
+            border: 1px solid #333;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            position: relative;
+        }
+
+        .code-header {
+            padding: 6px 12px; /* reduced padding */
+            background: #252526;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #9CA3AF;
+            border-bottom: 1px solid #333;
+        }
+
+        .code-content {
+            padding: 12px; /* reduced padding */
+            color: #D4D4D4;
+            line-height: 1.45; /* slightly tighter */
+        }
+
+        .kwd { color: #569CD6; }
+        .typ { color: #4EC9B0; }
+        .mtd { color: #DCDCAA; }
+        .str { color: #CE9178; }
+        .com { color: #6A9955; }
+        .var { color: #9CDCFE; }
+
+        /* Additive Diagram */
+        .diagram-box {
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+            padding: 14px; /* reduced padding */
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .diagram-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .scene-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .scene-layer {
+            height: 36px; /* slightly shorter rows */
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            font-weight: 700;
+            color: white;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .persistent { background: #1F2937; border-left: 4px solid #000; }
+        .loaded { background: #059669; border-left: 4px solid #064E3B; }
+        .loading { background: #F59E0B; border-left: 4px solid #B45309; }
+        
+        .loading-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid white;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            margin-left: auto;
+            transform: rotate(45deg);
+        }
+
+        /* Removed external warning banner to prevent overflow. Integrated note inline below. */
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Scene Loading Optimization</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-block">
+                    <div class="concept-title">The VR Freeze</div>
+                    <div class="concept-desc">
+                        Standard <code>SceneManager.LoadScene()</code> blocks the main thread. In VR, this freezes the image on the headset display, causing instant disorientation and nausea.
+                    </div>
+                </div>
+
+                <div class="concept-block" style="border-color: #059669;">
+                    <div class="concept-title">Async Loading</div>
+                    <div class="concept-desc">
+                        Always use <code>LoadSceneAsync()</code>. This loads the scene in the background over multiple frames, allowing the current scene (or a loading screen) to keep rendering smoothly.
+                        <br><strong>Comfort Rule:</strong> Never let the framerate drop during loading; if the scene is heavy, use a lightweight Transition Scene (black void with a logo) to bridge the gap.
+                    </div>
+                </div>
+
+                <div class="concept-block" style="border-color: #1C4ED8;">
+                    <div class="concept-title">Additive Loading</div>
+                    <div class="concept-desc">
+                        Don't load one giant world. Split your game into a <strong>Persistent Scene</strong> (Player, UI, Managers) and smaller <strong>Additive Scenes</strong> (Zones) that load/unload as you move.
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-column">
+                <div class="code-block">
+                    <div class="code-header">Async Loading Coroutine</div>
+                    <div class="code-content">
+<span class="kwd">IEnumerator</span> <span class="mtd">LoadLevel</span>(<span class="typ">string</span> <span class="var">sceneName</span>) {
+    <span class="com">// Start background loading</span>
+    <span class="typ">AsyncOperation</span> <span class="var">op</span> = <span class="typ">SceneManager</span>.<span class="mtd">LoadSceneAsync</span>(<span class="var">sceneName</span>);
+    
+    <span class="com">// Prevent auto-activation if needed</span>
+    <span class="var">op</span>.<span class="var">allowSceneActivation</span> = <span class="kwd">false</span>;
+
+    <span class="kwd">while</span> (!<span class="var">op</span>.<span class="var">isDone</span>) {
+        <span class="com">// Update Progress Bar</span>
+        <span class="var">progressBar</span>.<span class="var">value</span> = <span class="var">op</span>.<span class="var">progress</span>;
+        <span class="kwd">yield return null</span>;
+    }
+}
+                    </div>
+                </div>
+
+                <div class="diagram-box">
+                    <div class="diagram-title">Additive Scene Structure</div>
+                    <div class="scene-stack">
+                        <div class="scene-layer persistent">
+                            Persistent Scene (Player, Audio, UI)
+                            <span style="margin-left: auto; font-size: 12px; opacity: 0.7;">ALWAYS LOADED</span>
+                        </div>
+                        <div class="scene-layer loaded">
+                            Zone A (Forest)
+                            <span style="margin-left: auto; font-size: 12px; opacity: 0.7;">ACTIVE</span>
+                        </div>
+                        <div class="scene-layer loading">
+                            Zone B (Cave)
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

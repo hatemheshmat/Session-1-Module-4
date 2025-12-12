@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 0 80px;
+        }
+
+        .card {
+            background: #F9FAFB;
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            border-top: 8px solid #1C4ED8;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card.warning {
+            border-top-color: #DC2626;
+        }
+
+        .card.success {
+            border-top-color: #059669;
+        }
+
+        .icon-wrapper {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #1C4ED8;
+        }
+
+        .card.warning .icon-wrapper { color: #DC2626; }
+        .card.success .icon-wrapper { color: #059669; }
+
+        .stat {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #6B7280;
+        }
+
+        .bottom-note {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #4B5563;
+            background: #EFF6FF;
+            padding: 15px;
+            margin-left: 80px;
+            margin-right: 80px;
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Why Performance is Critical</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="grid-container">
+            <div class="card">
+                <div class="icon-wrapper"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="stat">90 FPS</div>
+                <h3>Comfort Standard</h3>
+                <p>The minimum target for a comfortable, presence-inducing VR experience on Meta Quest.</p>
+            </div>
+
+            <div class="card warning">
+                <div class="icon-wrapper"><i class="fas fa-dizzy"></i></div>
+                <div class="stat">Immediate</div>
+                <h3>Nausea Trigger</h3>
+                <p>Dropped frames and high latency cause sensory conflict, leading to instant motion sickness.</p>
+            </div>
+
+            <div class="card success">
+                <div class="icon-wrapper"><i class="fas fa-store"></i></div>
+                <div class="stat">Mandatory</div>
+                <h3>Store Requirement</h3>
+                <p>Apps failing performance checks are rejected from the Meta Quest Store to protect users.</p>
+            </div>
+        </div>
+
+        <div class="bottom-note">
+            <i class="fas fa-info-circle" style="color: #1C4ED8; margin-right: 10px;"></i>
+            In VR, performance is not just about "smoothness" — it's about <strong>physical user safety</strong>.
+        </div>
+    </div>
+</body>
+</html>

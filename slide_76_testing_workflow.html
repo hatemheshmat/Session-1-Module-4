@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .workflow-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 60px;
+            margin-bottom: 60px;
+        }
+
+        .step-card {
+            flex: 1;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            height: 320px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #1F2937;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: absolute;
+            top: -20px;
+        }
+
+        .step-icon {
+            font-size: 40px;
+            color: #1C4ED8;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .step-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .arrow-connector {
+            display: flex;
+            align-items: center;
+            color: #9CA3AF;
+            font-size: 24px;
+        }
+
+        .warning-banner {
+            background: #FEF2F2;
+            border: 2px solid #DC2626;
+            margin: 0 80px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .warning-icon {
+            font-size: 30px;
+            color: #DC2626;
+        }
+
+        .warning-text {
+            font-size: 16px;
+            color: #991B1B;
+            line-height: 1.4;
+        }
+
+        /* Specific Step Colors */
+        .step-1 .step-icon { color: #6B7280; } /* Editor - Grey */
+        .step-2 .step-icon { color: #F59E0B; } /* Build - Orange */
+        .step-3 .step-icon { color: #059669; } /* Device - Green */
+        .step-4 .step-icon { color: #DC2626; } /* Deep Dive - Red */
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Performance Testing Workflow</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="workflow-wrapper">
+            <!-- Step 1 -->
+            <div class="step-card step-1">
+                <div class="step-number">1</div>
+                <div class="step-icon"><i class="fas fa-laptop-code"></i></div>
+                <div class="step-title">Editor Check</div>
+                <div class="step-desc">
+                    Quickly validate logic and catch obvious errors (e.g., infinite loops, null refs).<br>
+                    <strong>Note:</strong> FPS here is meaningless.
+                </div>
+            </div>
+
+            <div class="arrow-connector"><i class="fas fa-chevron-right"></i></div>
+
+            <!-- Step 2 -->
+            <div class="step-card step-2">
+                <div class="step-number">2</div>
+                <div class="step-icon"><i class="fas fa-file-archive"></i></div>
+                <div class="step-title">Dev Build</div>
+                <div class="step-desc">
+                    Build Settings:<br>
+                    • Development Build: <strong>ON</strong><br>
+                    • Autoconnect Profiler: <strong>ON</strong><br>
+                    • Script Debugging: <strong>OFF</strong> (usually)
+                </div>
+            </div>
+
+            <div class="arrow-connector"><i class="fas fa-chevron-right"></i></div>
+
+            <!-- Step 3 -->
+            <div class="step-card step-3">
+                <div class="step-number">3</div>
+                <div class="step-icon"><i class="fas fa-vr-cardboard"></i></div>
+                <div class="step-title">Runtime Check</div>
+                <div class="step-desc">
+                    Wear the headset.<br>
+                    Open <strong>OVR Metrics Tool</strong> overlay.<br>
+                    Play through the level naturally.<br>
+                    Watch for FPS drops below 72/90.
+                </div>
+            </div>
+
+            <div class="arrow-connector"><i class="fas fa-chevron-right"></i></div>
+
+            <!-- Step 4 -->
+            <div class="step-card step-4">
+                <div class="step-number">4</div>
+                <div class="step-icon"><i class="fas fa-microscope"></i></div>
+                <div class="step-title">Deep Dive</div>
+                <div class="step-desc">
+                    If FPS drops:<br>
+                    • <strong>CPU Bound?</strong> Connect Unity Profiler.<br>
+                    • <strong>GPU Bound?</strong> Use RenderDoc or Snapdragon Profiler.
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-banner">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <div class="warning-text">
+                <strong>The Golden Rule:</strong> Never optimize based on Editor performance. The PC CPU/GPU is 10x-50x faster than the mobile chipset in the Quest. Always profile on the device.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

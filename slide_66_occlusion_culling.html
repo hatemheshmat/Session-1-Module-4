@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px; /* keep title top padding */
+            color: #1F2937;
+        }
+        .header { text-align: center; margin-bottom: 50px; }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+        .bar { width: 80px; height: 6px; background: #1C4ED8; margin: 0 auto; }
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+            align-items: flex-start;
+        }
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* reduced to save vertical space */
+        }
+        .concept-block { border-left: 6px solid #1C4ED8; padding-left: 25px; }
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+        .concept-desc { font-size: 18px; color: #4B5563; line-height: 1.5; }
+        .steps-box { background: #F3F4F6; padding: 10px; border: 1px solid #E5E7EB; }
+        .steps-header {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 12px; /* slightly tighter */
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 8px; /* tighter spacing */
+            background: white;
+            padding: 6px; /* reduced inner padding */
+            border: 1px solid #D1D5DB;
+        }
+        .step-num {
+            background: #1C4ED8;
+            color: white;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .step-text { font-size: 16px; color: #374151; font-weight: 600; }
+        .visual-column {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        /* Diagram */
+        .diagram-container {
+            background: #1F2937;
+            height: 350px;
+            position: relative;
+            border: 4px solid #374151;
+            overflow: hidden;
+        }
+        .camera-icon { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: #60A5FA; font-size: 40px; z-index: 10; }
+        .frustum-cone {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 250px solid rgba(96, 165, 250, 0.1);
+        }
+        .wall {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px; height: 20px;
+            background: #9CA3AF;
+            border: 2px solid #6B7280;
+            z-index: 5;
+            display: flex; justify-content: center; align-items: center;
+            color: #1F2937; font-weight: 700; font-size: 12px;
+        }
+        .object-visible { position: absolute; bottom: 80px; left: 30%; width: 40px; height: 40px; background: #059669; border: 2px solid #047857; display: flex; justify-content: center; align-items: center; color: white; font-weight: 700; font-size: 10px; }
+        .object-hidden { position: absolute; bottom: 200px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; background: #DC2626; border: 2px solid #B91C1C; display: flex; justify-content: center; align-items: center; color: white; font-weight: 700; font-size: 10px; opacity: 0.3; }
+        .sight-line { position: absolute; bottom: 50px; left: 50%; width: 2px; height: 70px; background: #F59E0B; transform-origin: bottom center; }
+        .blocked-label { position: absolute; top: 100px; left: 50%; transform: translateX(-50%); background: #DC2626; color: white; padding: 4px 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .diagram-legend {
+            display: flex; justify-content: center; gap: 20px; margin-top: 0; /* remove extra top margin */
+            font-size: 14px; color: #4B5563;
+        }
+        .legend-item { display: flex; align-items: center; gap: 5px; }
+        .dot { width: 12px; height: 12px; }
+        .use-case-box {
+            background: #ECFDF5;
+            border-left: 4px solid #059669;
+            padding: 12px; /* slightly tighter */
+            margin-top: 0; /* will rely on column gap */
+            color: #065F46; font-size: 15px; line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Occlusion Culling</h1>
+            <div class="bar"></div>
+        </div>
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-block">
+                    <div class="concept-title">Frustum vs. Occlusion</div>
+                    <div class="concept-desc">
+                        <strong>Frustum Culling</strong> hides objects outside the camera's view (automatic).<br>
+                        <strong>Occlusion Culling</strong> hides objects blocked by other objects (e.g., a room behind a wall). This requires pre-computation (Baking).
+                    </div>
+                </div>
+                <div class="steps-box">
+                    <div class="steps-header">Setup Workflow</div>
+                    <div class="step-item">
+                        <div class="step-num">1</div>
+                        <div class="step-text">Select large objects (Walls, Floors)</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">2</div>
+                        <div class="step-text">Inspector > Static > Check <strong>Occluder Static</strong></div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-text">Window > Rendering > Occlusion Culling</div>
+                    </div>
+                    <div class="step-item" style="margin-bottom:0;">
+                        <div class="step-num">4</div>
+                        <div class="step-text">Click <strong>Bake</strong></div>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-column">
+                <div class="diagram-container">
+                    <div class="camera-icon"><i class="fas fa-video"></i></div>
+                    <div class="frustum-cone"></div>
+                    <div class="object-visible">Draw</div>
+                    <div class="wall">Occluder (Wall)</div>
+                    <div class="object-hidden">Culled</div>
+                    <div class="blocked-label">Not Rendered</div>
+                    <div class="sight-line" style="transform: rotate(-20deg); height: 100px;"></div>
+                    <div class="sight-line" style="transform: rotate(0deg); height: 70px; border-bottom: 2px dashed #F59E0B;"></div>
+                </div>
+                <div class="diagram-legend">
+                    <div class="legend-item">
+                        <div class="dot" style="background: #059669;"></div>
+                        <span>Rendered</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="dot" style="background: #DC2626; opacity: 0.5;"></div>
+                        <span>Culled (Saved)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="dot" style="background: #9CA3AF;"></div>
+                        <span>Occluder</span>
+                    </div>
+                </div>
+                <div class="use-case-box">
+                    <strong><i class="fas fa-check-circle"></i> Best For:</strong> Indoor scenes, mazes, corridors, and cities with tall buildings. Not useful for open fields.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

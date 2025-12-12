@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .limits-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .limit-card {
+            border: 1px solid #E5E7EB;
+            background: #F9FAFB;
+            padding: 20px;
+            border-left: 8px solid #9CA3AF;
+        }
+
+        .limit-card.critical {
+            border-left-color: #DC2626;
+            background: #FEF2F2;
+        }
+
+        .limit-card.warning {
+            border-left-color: #F59E0B;
+            background: #FFFBEB;
+        }
+
+        .limit-card.safe {
+            border-left-color: #059669;
+            background: #ECFDF5;
+        }
+
+        .limit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .limit-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+        }
+
+        .limit-value {
+            font-family: 'Roboto', monospace;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .critical .limit-value { color: #DC2626; }
+        .warning .limit-value { color: #D97706; }
+        .safe .limit-value { color: #059669; }
+
+        .limit-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .explanation-column {
+            flex: 1.2;
+            background: #1F2937;
+            color: white;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .exp-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #60A5FA;
+            text-transform: uppercase;
+        }
+
+        .diagram-box {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .render-pass {
+            background: #374151;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid #4B5563;
+        }
+
+        .pass-label {
+            font-weight: 700;
+            width: 100px;
+            color: #9CA3AF;
+        }
+
+        .pass-bar {
+            flex-grow: 1;
+            height: 30px;
+            background: #DC2626;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .pass-bar.base { background: #2563EB; }
+        .pass-bar.add { background: #DC2626; }
+
+        .math-summary {
+            margin-top: 30px;
+            border-top: 1px solid #4B5563;
+            padding-top: 20px;
+            font-family: 'Roboto', monospace;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .math-highlight {
+            color: #F59E0B;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Real-time Lighting Limits</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="limits-column">
+                <!-- Shadow Limit -->
+                <div class="limit-card critical">
+                    <div class="limit-header">
+                        <div class="limit-title">Shadow Casters</div>
+                        <div class="limit-value">MAX 1</div>
+                    </div>
+                    <div class="limit-desc">
+                        Only <strong>one</strong> Directional Light (the Sun) should cast shadows. Real-time point/spot light shadows are too expensive for mobile VR.
+                    </div>
+                </div>
+
+                <!-- Pixel Light Limit -->
+                <div class="limit-card warning">
+                    <div class="limit-header">
+                        <div class="limit-title">Pixel Lights</div>
+                        <div class="limit-value">MAX 3</div>
+                    </div>
+                    <div class="limit-desc">
+                        The number of important lights affecting a single object. Each additional pixel light adds a rendering pass.
+                    </div>
+                </div>
+
+                <!-- Vertex Light Limit -->
+                <div class="limit-card safe">
+                    <div class="limit-header">
+                        <div class="limit-title">Vertex Lights</div>
+                        <div class="limit-value">MAX 4</div>
+                    </div>
+                    <div class="limit-desc">
+                        Cheaper lights calculated per-vertex. They look lower quality but are much faster. Use for small dynamic lights (explosions, spells).
+                    </div>
+                </div>
+            </div>
+
+            <div class="explanation-column">
+                <div class="exp-title">Why? Forward Rendering</div>
+                <div style="margin-bottom: 20px; font-size: 16px; color: #D1D5DB;">
+                    Mobile VR uses <strong>Forward Rendering</strong>. This means for every pixel light touching an object, the object must be drawn again.
+                </div>
+
+                <div class="diagram-box">
+                    <div class="render-pass">
+                        <div class="pass-label">Pass 1</div>
+                        <div class="pass-bar base">Base Pass (Ambient + Main Light)</div>
+                    </div>
+                    <div class="render-pass">
+                        <div class="pass-label">Pass 2</div>
+                        <div class="pass-bar add">Add Pass (Point Light 1)</div>
+                    </div>
+                    <div class="render-pass">
+                        <div class="pass-label">Pass 3</div>
+                        <div class="pass-bar add">Add Pass (Point Light 2)</div>
+                    </div>
+                    <div class="render-pass">
+                        <div class="pass-label">Pass 4</div>
+                        <div class="pass-bar add">Add Pass (Spot Light 1)</div>
+                    </div>
+                </div>
+
+                <div class="math-summary">
+                    1 Object × 4 Lights = <span class="math-highlight">4 Draw Calls</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

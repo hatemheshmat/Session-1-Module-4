@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .text-column {
+            flex: 1;
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            padding: 40px;
+            border: 2px solid #E5E7EB;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #1C4ED8;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 22px;
+            line-height: 1.6;
+            color: #4B5563;
+            margin-bottom: 30px;
+        }
+
+        .highlight-box {
+            background: #EFF6FF;
+            border-left: 6px solid #1C4ED8;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .highlight-box p {
+            font-size: 18px;
+            margin-bottom: 0;
+            color: #1F2937;
+            font-weight: 600;
+        }
+
+        .metric-display {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 120px;
+            font-weight: 800;
+            color: #1C4ED8;
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 24px;
+            font-weight: 700;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        .timeline-container {
+            margin-top: 60px;
+            padding: 0 80px;
+        }
+
+        .timeline-label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .timeline-bar {
+            height: 40px;
+            width: 100%;
+            background: linear-gradient(to right, #10B981 0%, #10B981 20%, #F59E0B 20%, #EF4444 100%);
+            position: relative;
+        }
+
+        .marker {
+            position: absolute;
+            left: 20%;
+            top: -10px;
+            bottom: -10px;
+            width: 4px;
+            background: #111827;
+        }
+
+        .marker-text {
+            position: absolute;
+            left: 20%;
+            top: -40px;
+            transform: translateX(-50%);
+            font-weight: 800;
+            color: #111827;
+            font-size: 20px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Understanding Latency</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <h2>Motion-to-Photon (MTP)</h2>
+                <p>
+                    The time elapsed between a physical movement of the user's head and the corresponding updated visual photon being emitted from the display.
+                </p>
+                <div class="highlight-box">
+                    <p>
+                        <i class="fas fa-brain" style="margin-right: 10px;"></i>
+                        High latency creates a disconnect between the vestibular system (inner ear) and the visual system, instantly breaking presence.
+                    </p>
+                </div>
+            </div>
+            <div class="visual-column">
+                <div class="metric-display">
+                    <div class="metric-value">&lt; 20ms</div>
+                    <div class="metric-label">Target Threshold</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-container">
+            <div class="marker-text">20ms Limit</div>
+            <div class="timeline-bar">
+                <div class="marker"></div>
+            </div>
+            <div class="legend">
+                <span style="color: #059669; font-weight: bold;">Comfortable (Presence Maintained)</span>
+                <span style="color: #DC2626; font-weight: bold;">Discomfort (Nausea Risk)</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

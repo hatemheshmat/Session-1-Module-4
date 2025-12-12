@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #1F2937;
+        }
+
+        /* Decorative Background Elements */
+        .bg-shape-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: rgba(28, 78, 216, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 400px;
+            height: 400px;
+            background: rgba(28, 78, 216, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .session-tag {
+            display: inline-block;
+            background-color: #1C4ED8;
+            color: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(28, 78, 216, 0.2);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #111827;
+            letter-spacing: -1px;
+        }
+
+        h1 span {
+            color: #1C4ED8;
+        }
+
+        h2 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            font-weight: 400;
+            color: #4B5563;
+            margin-bottom: 60px;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .info-item i {
+            color: #1C4ED8;
+            font-size: 24px;
+        }
+
+        .logo-placeholder {
+            margin-top: 60px;
+            opacity: 0.8;
+        }
+        
+        .bar {
+            width: 100px;
+            height: 6px;
+            background: #F59E0B;
+            margin: 0 auto 40px auto;
+            border-radius: 3px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="bg-shape-1"></div>
+        <div class="bg-shape-2"></div>
+        
+        <div class="content-wrapper">
+            <div class="session-tag">Session 1 Module 3</div>
+            
+            <h1>Why Performance<br><span>Matters in VR</span></h1>
+            <div class="bar"></div>
+            <h2>The Ultimate Optimization Guide for Meta Quest</h2>
+            
+            <div class="meta-info">
+                <div class="info-item">
+                    <i class="fas fa-vr-cardboard"></i>
+                    <span>Meta Quest Platform</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Duration: 3 Hours</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Full Optimization Suite</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

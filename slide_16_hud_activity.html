@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #F59E0B; /* Orange for Activity */
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .steps-column {
+            flex: 3;
+        }
+
+        .mission-column {
+            flex: 2;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            background: #F9FAFB;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 6px solid #1C4ED8;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #1C4ED8;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 20px;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .mission-card {
+            background: #FFFBEB;
+            border: 3px dashed #F59E0B;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .mission-icon {
+            font-size: 50px;
+            color: #F59E0B;
+            margin-bottom: 20px;
+        }
+
+        .mission-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #92400E;
+            margin-bottom: 20px;
+        }
+
+        .mission-list {
+            text-align: left;
+            list-style: none;
+        }
+
+        .mission-list li {
+            font-size: 18px;
+            color: #78350F;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .mission-list li i {
+            color: #F59E0B;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .timer-badge {
+            position: absolute;
+            top: 60px;
+            right: 80px;
+            background: #1F2937;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: 'Roboto', monospace;
+            font-weight: 700;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="timer-badge">
+            <i class="fas fa-stopwatch"></i> 5:00
+        </div>
+
+        <div class="header">
+            <h1>Activity: Activate the HUD</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="steps-column">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Put on your Meta Quest headset.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Open the <strong>OVR Metrics Tool</strong> from your App Library (Unknown Sources).</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Enable the <strong>"Persistent Overlay"</strong> toggle switch.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-text">Launch any other VR application or game.</div>
+                </div>
+            </div>
+
+            <div class="mission-column">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="mission-title">Mission Objectives</div>
+                    <ul class="mission-list">
+                        <li><i class="fas fa-check-square"></i> Verify HUD is visible</li>
+                        <li><i class="fas fa-check-square"></i> Identify current FPS</li>
+                        <li><i class="fas fa-check-square"></i> Check GPU Utilization %</li>
+                        <li><i class="fas fa-check-square"></i> Note any graph spikes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

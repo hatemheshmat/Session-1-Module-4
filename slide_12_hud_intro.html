@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .text-column {
+            flex: 1;
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tool-card {
+            background: #F9FAFB;
+            border-left: 6px solid #1C4ED8;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .tool-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1C4ED8;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-card p {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        /* HUD Simulation */
+        .hud-simulator {
+            width: 450px;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Roboto', monospace;
+            color: #00FF00;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 1px solid #333;
+        }
+
+        .hud-header {
+            font-size: 16px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: #888;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .hud-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .hud-label {
+            color: #AAA;
+        }
+
+        .hud-value {
+            color: #00FF00;
+        }
+
+        .hud-value.warning {
+            color: #FFA500;
+        }
+
+        .hud-value.critical {
+            color: #FF0000;
+        }
+
+        .graph-placeholder {
+            height: 60px;
+            background: linear-gradient(to top, rgba(0,255,0,0.2) 0%, rgba(0,255,0,0) 100%);
+            border-bottom: 1px solid #00FF00;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .graph-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            border-top: 2px solid #00FF00;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Meta Quest Performance HUD</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="tool-card">
+                    <h3><i class="fas fa-tools"></i> OVR Metrics Tool</h3>
+                    <p>
+                        The gold standard for standalone profiling. A persistent overlay that tracks FPS, thermal levels, GPU/CPU utilization, and latency in real-time over any running application.
+                    </p>
+                </div>
+
+                <div class="tool-card" style="border-left-color: #6B7280;">
+                    <h3><i class="fas fa-layer-group"></i> Built-in Overlay</h3>
+                    <p>
+                        A simpler, developer-only overlay accessible via the Quest settings. Good for quick FPS checks but lacks the detailed metrics required for deep optimization.
+                    </p>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="hud-simulator">
+                    <div class="hud-header">
+                        <span>OVR Metrics Tool</span>
+                        <span>v1.5.0</span>
+                    </div>
+                    <div class="hud-row">
+                        <span class="hud-label">FPS</span>
+                        <span class="hud-value">72.0</span>
+                    </div>
+                    <div class="hud-row">
+                        <span class="hud-label">Stale Frames</span>
+                        <span class="hud-value warning">2</span>
+                    </div>
+                    <div class="hud-row">
+                        <span class="hud-label">GPU Level</span>
+                        <span class="hud-value">4</span>
+                    </div>
+                    <div class="hud-row">
+                        <span class="hud-label">CPU Level</span>
+                        <span class="hud-value">2</span>
+                    </div>
+                    <div class="hud-row">
+                        <span class="hud-label">App GPU Time</span>
+                        <span class="hud-value">8.4 ms</span>
+                    </div>
+                    <div class="graph-placeholder">
+                        <div class="graph-line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 60px;
+            gap: 40px;
+        }
+
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .col-header {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #E5E7EB;
+            padding-bottom: 10px;
+        }
+
+        .code-block {
+            background: #1E1E1E;
+            border: 1px solid #333;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            padding: 15px;
+            color: #D4D4D4;
+            line-height: 1.5;
+            height: 180px;
+        }
+
+        .pros-cons {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            padding: 15px;
+        }
+
+        .list-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #4B5563;
+        }
+
+        .icon-good { color: #059669; }
+        .icon-bad { color: #DC2626; }
+
+        /* Syntax Highlighting */
+        .kwd { color: #569CD6; }
+        .typ { color: #4EC9B0; }
+        .mtd { color: #DCDCAA; }
+        .str { color: #CE9178; }
+        .com { color: #6A9955; }
+
+        .optimization-tip {
+            margin-top: 30px;
+            margin-left: 60px;
+            margin-right: 60px;
+            background: #FFFBEB;
+            border: 1px solid #F59E0B;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .tip-icon {
+            font-size: 30px;
+            color: #D97706;
+        }
+
+        .tip-text {
+            font-size: 16px;
+            color: #92400E;
+            line-height: 1.4;
+        }
+
+        .vs-badge {
+            position: absolute;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1F2937;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            font-size: 14px;
+            z-index: 10;
+            border: 4px solid white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Async & Coroutines</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="vs-badge">VS</div>
+
+        <div class="content-wrapper">
+            <!-- Coroutines -->
+            <div class="column">
+                <div class="col-header">
+                    <i class="fas fa-clock" style="color: #1C4ED8;"></i> Coroutines
+                </div>
+                <div class="code-block">
+<span class="kwd">IEnumerator</span> <span class="mtd">SpawnRoutine</span>() {
+    <span class="kwd">while</span> (<span class="kwd">true</span>) {
+        <span class="mtd">SpawnEnemy</span>();
+        <span class="com">// Allocates memory!</span>
+        <span class="kwd">yield return new</span> <span class="typ">WaitForSeconds</span>(1f);
+    }
+}
+                </div>
+                <div class="pros-cons">
+                    <div class="list-title" style="color: #059669;">Best For</div>
+                    <div class="list-item"><i class="fas fa-check icon-good"></i> Visual sequences (Wait, then Move)</div>
+                    <div class="list-item"><i class="fas fa-check icon-good"></i> Frame-based timing</div>
+                    
+                    <div class="list-title" style="color: #DC2626; margin-top: 15px;">Downsides</div>
+                    <div class="list-item"><i class="fas fa-times icon-bad"></i> Runs on Main Thread (Can stutter)</div>
+                    <div class="list-item"><i class="fas fa-times icon-bad"></i> Garbage Allocation (new WaitForSeconds)</div>
+                </div>
+            </div>
+
+            <!-- Async/Await -->
+            <div class="column">
+                <div class="col-header">
+                    <i class="fas fa-bolt" style="color: #F59E0B;"></i> Async / Await
+                </div>
+                <div class="code-block">
+<span class="kwd">async</span> <span class="typ">Task</span> <span class="mtd">LoadDataAsync</span>() {
+    <span class="com">// Runs on background thread</span>
+    <span class="kwd">await</span> <span class="typ">Task</span>.<span class="mtd">Run</span>(() => {
+        <span class="mtd">HeavyCalculation</span>();
+    });
+    <span class="com">// Back to main thread</span>
+}
+                </div>
+                <div class="pros-cons">
+                    <div class="list-title" style="color: #059669;">Best For</div>
+                    <div class="list-item"><i class="fas fa-check icon-good"></i> Heavy Logic (Pathfinding, I/O)</div>
+                    <div class="list-item"><i class="fas fa-check icon-good"></i> Clean return values</div>
+
+                    <div class="list-title" style="color: #DC2626; margin-top: 15px;">Downsides</div>
+                    <div class="list-item"><i class="fas fa-times icon-bad"></i> Exception handling is tricky</div>
+                    <div class="list-item"><i class="fas fa-times icon-bad"></i> Harder to sync with Unity frames</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="optimization-tip">
+            <i class="fas fa-exclamation-circle tip-icon"></i>
+            <div class="tip-text">
+                <strong>Optimization Tip:</strong> If you use Coroutines, <strong>CACHE</strong> your wait objects. Don't create <code>new WaitForSeconds(0.1f)</code> inside a loop. Create it once in <code>Start()</code> and reuse it to avoid Garbage Collection spikes.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

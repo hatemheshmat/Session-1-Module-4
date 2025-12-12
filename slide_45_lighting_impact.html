@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 40px;
+            height: 450px;
+        }
+
+        .column {
+            flex: 1;
+            border: 1px solid #E5E7EB;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .col-header {
+            padding: 20px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .realtime .col-header { background: #DC2626; }
+        .baked .col-header { background: #059669; }
+
+        .col-body {
+            padding: 30px;
+            flex-grow: 1;
+            background: #F9FAFB;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            font-size: 20px;
+            margin-top: 3px;
+        }
+
+        .realtime .feature-icon { color: #DC2626; }
+        .baked .feature-icon { color: #059669; }
+
+        .feature-text {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .feature-text strong {
+            color: #1F2937;
+        }
+
+        /* Cost Visualization */
+        .cost-section {
+            margin-top: 20px;
+            padding: 0 80px;
+        }
+
+        .cost-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 15px;
+        }
+
+        .cost-bar-container {
+            display: flex;
+            height: 60px;
+            background: #E5E7EB;
+            position: relative;
+        }
+
+        .cost-bar-realtime {
+            width: 85%;
+            background: #DC2626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .cost-bar-baked {
+            width: 15%;
+            background: #059669;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .cost-label {
+            position: absolute;
+            top: -25px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #6B7280;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Lighting Performance Impact</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Real-time -->
+            <div class="column realtime">
+                <div class="col-header">
+                    <i class="fas fa-bolt"></i> Real-time Lighting
+                </div>
+                <div class="col-body">
+                    <div class="feature-row">
+                        <i class="fas fa-calculator feature-icon"></i>
+                        <div class="feature-text">
+                            <strong>Calculated Per Frame:</strong> Every pixel's lighting is re-calculated 72-90 times per second.
+                        </div>
+                    </div>
+                    <div class="feature-row">
+                        <i class="fas fa-ghost feature-icon"></i>
+                        <div class="feature-text">
+                            <strong>Shadows are Expensive:</strong> Real-time shadows require rendering the scene multiple times (Shadow Cascades).
+                        </div>
+                    </div>
+                    <div class="feature-row">
+                        <i class="fas fa-microchip feature-icon"></i>
+                        <div class="feature-text">
+                            <strong>High CPU & GPU Cost:</strong> Heavily impacts Draw Calls and Fill Rate.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Baked -->
+            <div class="column baked">
+                <div class="col-header">
+                    <i class="fas fa-cookie-bite"></i> Baked Lighting
+                </div>
+                <div class="col-body">
+                    <div class="feature-row">
+                        <i class="fas fa-save feature-icon"></i>
+                        <div class="feature-text">
+                            <strong>Pre-calculated:</strong> Lighting is calculated once in the editor and saved into textures (Lightmaps).
+                        </div>
+                    </div>
+                    <div class="feature-row">
+                        <i class="fas fa-tachometer-alt feature-icon"></i>
+                        <div class="feature-text">
+                            <strong>Zero Runtime Cost:</strong> Rendering a baked object is as cheap as rendering an unlit texture.
+                        </div>
+                    </div>
+                    <div class="feature-row">
+                        <i class="fas fa-image feature-icon"></i>
+                        <div class="feature-text">
+                            <strong>High Quality:</strong> Can support global illumination (GI) and soft shadows without performance loss.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cost-section">
+            <div class="cost-title">Relative Performance Cost (ms per frame)</div>
+            <div class="cost-bar-container">
+                <div class="cost-bar-realtime">Real-time (High Cost)</div>
+                <div class="cost-bar-baked">Baked</div>
+                <div class="cost-label" style="left: 0;">0ms</div>
+                <div class="cost-label" style="right: 0;">11ms (Budget)</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

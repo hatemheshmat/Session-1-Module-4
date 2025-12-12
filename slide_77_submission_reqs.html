@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 18px;
+            color: #4B5563;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            line-height: 1.5;
+        }
+
+        .cards-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 0 60px;
+        }
+
+        .req-card {
+            flex: 1;
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            padding: 20px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perf-header { background: #1C4ED8; }
+        .func-header { background: #059669; }
+        .comfort-header { background: #D97706; }
+
+        .card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .req-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .req-code {
+            font-size: 12px;
+            font-weight: 700;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .req-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1F2937;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .req-desc {
+            font-size: 14px;
+            color: #4B5563;
+            line-height: 1.4;
+            margin-left: 24px; /* Align with text start */
+        }
+
+        .check-icon {
+            color: #059669;
+            margin-top: 3px;
+        }
+
+        .store-badge {
+            position: absolute;
+            bottom: 30px;
+            right: 60px;
+            border: 4px solid #1C4ED8;
+            color: #1C4ED8;
+            padding: 10px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            text-transform: uppercase;
+            transform: rotate(-10deg);
+            opacity: 0.2;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Submission Requirements</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="intro-text">
+            To publish on the <strong>Meta Quest Store</strong> or <strong>App Lab</strong>, your application must pass a strict set of <strong>Virtual Reality Checks (VRCs)</strong>. Failure results in automatic rejection.
+        </div>
+
+        <div class="cards-wrapper">
+            <!-- Performance -->
+            <div class="req-card">
+                <div class="card-header perf-header">
+                    <i class="fas fa-tachometer-alt"></i> Performance
+                </div>
+                <div class="card-content">
+                    <div class="req-item">
+                        <div class="req-code">VRC.Performance.1</div>
+                        <div class="req-title"><i class="fas fa-check check-icon"></i> Stable Frame Rate</div>
+                        <div class="req-desc">Must maintain 72/90 FPS for the majority of gameplay. Frequent drops below target are grounds for rejection.</div>
+                    </div>
+                    <div class="req-item">
+                        <div class="req-code">VRC.Performance.2</div>
+                        <div class="req-title"><i class="fas fa-check check-icon"></i> Load Times</div>
+                        <div class="req-desc">App must display a splash screen or loading indicator if loading takes longer than 3 seconds. No black screens > 10s.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Functionality -->
+            <div class="req-card">
+                <div class="card-header func-header">
+                    <i class="fas fa-cogs"></i> Functionality
+                </div>
+                <div class="card-content">
+                    <div class="req-item">
+                        <div class="req-code">VRC.Functional.1</div>
+                        <div class="req-title"><i class="fas fa-check check-icon"></i> Entitlement Check</div>
+                        <div class="req-desc">App must verify the user owns the app via the Platform SDK within 10 seconds of launch.</div>
+                    </div>
+                    <div class="req-item">
+                        <div class="req-code">VRC.Functional.2</div>
+                        <div class="req-title"><i class="fas fa-check check-icon"></i> System Events</div>
+                        <div class="req-desc">App must handle the "Oculus Button" press (pause/menu) and headset removal (auto-pause) correctly.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comfort -->
+            <div class="req-card">
+                <div class="card-header comfort-header">
+                    <i class="fas fa-heart"></i> Comfort
+                </div>
+                <div class="card-content">
+                    <div class="req-item">
+                        <div class="req-code">VRC.Comfort.1</div>
+                        <div class="req-title"><i class="fas fa-check check-icon"></i> No Forced Motion</div>
+                        <div class="req-desc">The camera must never move or rotate without user input (except for teleportation). No "head locking" during cutscenes.</div>
+                    </div>
+                    <div class="req-item">
+                        <div class="req-code">VRC.Comfort.2</div>
+                        <div class="req-title"><i class="fas fa-check check-icon"></i> Rating Accuracy</div>
+                        <div class="req-desc">The app's comfort rating (Comfortable, Moderate, Intense) must match the actual experience.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="store-badge">Store Ready</div>
+    </div>
+</body>
+</html>

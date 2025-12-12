@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .tips-column {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .tip-card {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            padding: 20px;
+            border-left: 6px solid #1C4ED8;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .tip-icon {
+            font-size: 24px;
+            color: #1C4ED8;
+            margin-top: 3px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .tip-content {
+            flex: 1;
+        }
+
+        .tip-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 5px;
+        }
+
+        .tip-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .overdraw-box {
+            background: #1F2937;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            height: 400px;
+        }
+
+        .overdraw-title {
+            color: #F59E0B;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .particle-stack {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .particle {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.15); /* Low alpha */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .p1 { transform: translate(-20px, -20px); }
+        .p2 { transform: translate(20px, -20px); }
+        .p3 { transform: translate(-20px, 20px); }
+        .p4 { transform: translate(20px, 20px); }
+        .p5 { transform: translate(0, 0); }
+
+        .center-hotspot {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(220, 38, 38, 0.8); /* Red hotspot */
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .overdraw-label {
+            margin-top: 30px;
+            color: #E5E7EB;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            color: #F59E0B;
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>VFX Performance Tips</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="tips-column">
+                <div class="tip-card">
+                    <div class="tip-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                    <div class="tip-content">
+                        <div class="tip-title">Reduce Particle Count</div>
+                        <div class="tip-desc">
+                            Don't use 1000 particles when 50 larger ones will do. Use "Bursts" for impact instead of high constant emission rates.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon"><i class="fas fa-th-large"></i></div>
+                    <div class="tip-content">
+                        <div class="tip-title">Use Texture Sheet Animation</div>
+                        <div class="tip-desc">
+                            Instead of spawning new particles for animation frames, use a single particle with a sprite sheet (flipbook). This is much cheaper on the CPU.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon"><i class="fas fa-cube"></i></div>
+                    <div class="tip-content">
+                        <div class="tip-title">Avoid Mesh Emitters</div>
+                        <div class="tip-desc">
+                            Emitting particles from a Mesh shape is expensive (CPU must calculate surface positions). Use simple Sphere, Box, or Cone shapes.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-icon"><i class="fas fa-eye-slash"></i></div>
+                    <div class="tip-content">
+                        <div class="tip-title">Aggressive Culling</div>
+                        <div class="tip-desc">
+                            Set "Culling Mode" to <strong>Pause and Catch Up</strong>. Don't simulate particles that are behind the player or in another room.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="overdraw-box">
+                    <div class="overdraw-title">
+                        <i class="fas fa-exclamation-triangle"></i> The Enemy: Overdraw
+                    </div>
+                    
+                    <div class="particle-stack">
+                        <div class="particle p1"></div>
+                        <div class="particle p2"></div>
+                        <div class="particle p3"></div>
+                        <div class="particle p4"></div>
+                        <div class="particle p5"></div>
+                        <div class="center-hotspot">5x Cost</div>
+                    </div>
+
+                    <div class="overdraw-label">
+                        When transparent particles overlap, the GPU must calculate the pixel color multiple times per frame.
+                        <br><br>
+                        <span class="highlight">Fill Rate</span> is the #1 bottleneck for VFX on mobile VR.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

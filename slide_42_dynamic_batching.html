@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px; /* keep title upper padding */
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px; /* reduced from 50 to save vertical space */
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .left-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px; /* reduced from 30 */
+        }
+
+        .right-column {
+            flex: 1;
+            background: #F3F4F6;
+            padding: 20px; /* reduced from 30 */
+            border: 1px solid #E5E7EB;
+        }
+
+        .concept-box {
+            border-left: 6px solid #1C4ED8;
+            padding-left: 25px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .concept-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .cpu-warning {
+            background: #FFFBEB;
+            border: 1px solid #FCD34D;
+            padding: 12px; /* reduced from 20 */
+            margin-top: 10px; /* reduced from 20 */
+        }
+
+        .warning-header {
+            color: #92400E;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px; /* slightly reduced */
+        }
+
+        /* Visual Rules */
+        .rules-header {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 24px; /* reduced from 30 */
+            text-transform: uppercase;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 11px; /* reduced from 15 */
+            margin-bottom: 12px; /* reduced from 15 */
+            border: 1px solid #E5E7EB;
+        }
+
+        .rule-icon {
+            width: 50px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .rule-text {
+            flex: 1;
+            font-size: 16px;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .status-stamp {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 4px 10px;
+            text-transform: uppercase;
+        }
+
+        .pass { color: #059669; border: 2px solid #059669; }
+        .fail { color: #DC2626; border: 2px solid #DC2626; }
+
+        .urp-note {
+            margin-top: 12px; /* reduced from 40 */
+            background: #1F2937;
+            color: white;
+            padding: 14px; /* reduced from 20 */
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .urp-icon {
+            font-size: 30px;
+            color: #60A5FA;
+        }
+
+        .urp-text {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Dynamic Batching</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="left-column">
+                <div class="concept-box">
+                    <div class="concept-title">For Moving Objects</div>
+                    <div class="concept-desc">
+                        Unlike Static Batching, this works for objects that move, rotate, or scale. Unity transforms their vertices on the CPU into world space, then draws them together.
+                    </div>
+                </div>
+
+                <div class="cpu-warning">
+                    <div class="warning-header">
+                        <i class="fas fa-microchip"></i> The CPU Cost
+                    </div>
+                    <div class="concept-desc" style="font-size: 16px;">
+                        Transforming vertices on the CPU is slow. If the mesh has too many vertices, the CPU time spent transforming them is <strong>higher</strong> than the time saved by batching the draw call.
+                    </div>
+                </div>
+
+                <div class="concept-box" style="border-color: #059669;">
+                    <div class="concept-title">Best Use Cases</div>
+                    <div class="concept-desc">
+                        <ul>
+                            <li>Particle Systems</li>
+                            <li>Simple UI Elements</li>
+                            <li>Low-poly projectiles (bullets, debris)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="rules-header">The Strict Rules</div>
+
+                <div class="rule-item">
+                    <div class="rule-icon"><i class="fas fa-cube" style="color: #3B82F6;"></i></div>
+                    <div class="rule-text">Mesh &lt; 300 Vertices</div>
+                    <div class="status-stamp pass">BATCH</div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-icon"><i class="fas fa-shapes" style="color: #F59E0B;"></i></div>
+                    <div class="rule-text">Mesh &gt; 300 Vertices</div>
+                    <div class="status-stamp fail">SKIP</div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-icon"><i class="fas fa-layer-group" style="color: #10B981;"></i></div>
+                    <div class="rule-text">Same Material Instance</div>
+                    <div class="status-stamp pass">BATCH</div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-icon"><i class="fas fa-arrows-alt-v" style="color: #8B5CF6;"></i></div>
+                    <div class="rule-text">Different Scales (e.g. (1,1,1) vs (2,2,2))</div>
+                    <div class="status-stamp fail">SKIP</div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-icon"><i class="fas fa-lightbulb" style="color: #FCD34D;"></i></div>
+                    <div class="rule-text">Real-time Shadows Enabled</div>
+                    <div class="status-stamp fail">SKIP</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="urp-note" style="margin-left: 80px; margin-right: 80px;">
+            <i class="fas fa-info-circle urp-icon"></i>
+            <div class="urp-text">
+                <strong>Modern Pipeline Note:</strong> In URP, Dynamic Batching is often less efficient than the <strong>SRP Batcher</strong>. For identical meshes (like bullets), use <strong>GPU Instancing</strong> instead.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

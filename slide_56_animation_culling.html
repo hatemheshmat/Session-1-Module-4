@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .concept-block {
+            border-left: 6px solid #1C4ED8;
+            padding-left: 25px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .concept-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .mode-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mode-item {
+            background: #F3F4F6;
+            padding: 15px;
+            border: 1px solid #E5E7EB;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .mode-icon {
+            font-size: 20px;
+            margin-top: 3px;
+        }
+
+        .mode-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #1F2937;
+            margin-bottom: 5px;
+        }
+
+        .mode-text {
+            font-size: 14px;
+            color: #4B5563;
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Inspector Simulation */
+        .inspector-panel {
+            background: #383838;
+            color: #BDBDBD;
+            font-family: 'Roboto', sans-serif;
+            border: 1px solid #222;
+            font-size: 14px;
+            padding: 15px;
+        }
+
+        .panel-header {
+            font-weight: 700;
+            color: #E0E0E0;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .setting-label { color: #BDBDBD; }
+        
+        .setting-dropdown {
+            background: #282828;
+            border: 1px solid #222;
+            padding: 4px 8px;
+            color: #E0E0E0;
+            min-width: 180px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .setting-dropdown.highlight {
+            border: 1px solid #F59E0B;
+            color: #F59E0B;
+            font-weight: 700;
+        }
+
+        /* Diagram */
+        .culling-diagram {
+            background: #1F2937;
+            height: 250px;
+            position: relative;
+            border: 4px solid #374151;
+            overflow: hidden;
+        }
+
+        .camera-view {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 60%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-right: 2px dashed #60A5FA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .view-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #60A5FA;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .obj-visible {
+            width: 60px;
+            height: 80px;
+            background: #059669;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .obj-hidden {
+            position: absolute;
+            right: 50px;
+            top: 80px;
+            width: 60px;
+            height: 80px;
+            background: #DC2626;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: -25px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 6px;
+        }
+
+        .status-badge.active { background: #059669; color: white; }
+        .status-badge.paused { background: #DC2626; color: white; }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Animation Culling</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-block">
+                    <div class="concept-title">The Invisible Cost</div>
+                    <div class="concept-desc">
+                        By default, Unity updates every bone in a skeleton every frame, even if the character is behind a wall or behind the player. This wastes massive amounts of CPU time.
+                    </div>
+                </div>
+
+                <div class="mode-list">
+                    <div class="mode-item" style="border-left: 4px solid #DC2626;">
+                        <div class="mode-icon" style="color: #DC2626;"><i class="fas fa-times-circle"></i></div>
+                        <div>
+                            <div class="mode-name">Always Animate (Default)</div>
+                            <div class="mode-text">Updates bones even when off-screen. Avoid this.</div>
+                        </div>
+                    </div>
+
+                    <div class="mode-item" style="border-left: 4px solid #059669;">
+                        <div class="mode-icon" style="color: #059669;"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <div class="mode-name">Cull Update Transforms</div>
+                            <div class="mode-text">Stops moving bones when invisible. Logic still runs. Safe & Recommended.</div>
+                        </div>
+                    </div>
+
+                    <div class="mode-item" style="border-left: 4px solid #F59E0B;">
+                        <div class="mode-icon" style="color: #F59E0B;"><i class="fas fa-exclamation-circle"></i></div>
+                        <div>
+                            <div class="mode-name">Cull Completely</div>
+                            <div class="mode-text">Stops everything. Best performance, but can cause "pop" glitches if animation state desyncs.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="inspector-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-running"></i> Animator
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Controller</span>
+                        <span class="setting-label">Enemy_Controller</span>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Avatar</span>
+                        <span class="setting-label">Enemy_Avatar</span>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Apply Root Motion</span>
+                        <div style="width: 14px; height: 14px; background: #282828; border: 1px solid #555;"></div>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Update Mode</span>
+                        <span class="setting-label">Normal</span>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Culling Mode</span>
+                        <div class="setting-dropdown highlight">
+                            <span>Cull Update Transforms</span>
+                            <i class="fas fa-caret-down"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="culling-diagram">
+                    <div class="camera-view">
+                        <div class="view-label">Camera View</div>
+                        <div class="obj-visible">
+                            Visible
+                            <div class="status-badge active">Updating</div>
+                        </div>
+                    </div>
+                    
+                    <div class="obj-hidden">
+                        Hidden
+                        <div class="status-badge paused">Paused</div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 10px; right: 10px; color: #9CA3AF; font-size: 12px; text-align: right;">
+                        Off-screen objects<br>stop processing
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

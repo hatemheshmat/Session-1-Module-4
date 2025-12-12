@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 0 60px;
+            margin-bottom: 50px;
+        }
+
+        .impact-card {
+            background: #F9FAFB;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 6px solid #DC2626;
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: #FEF2F2;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
+        }
+
+        .icon-wrapper i {
+            font-size: 36px;
+            color: #DC2626;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+
+        .cause {
+            font-size: 16px;
+            color: #6B7280;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .effect-box {
+            background: white;
+            padding: 15px;
+            border: 1px solid #E5E7EB;
+            margin-top: 15px;
+        }
+
+        .effect-title {
+            color: #DC2626;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .effect-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .recovery-warning {
+            background: #1F2937;
+            color: white;
+            margin: 0 60px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .warning-icon {
+            font-size: 40px;
+            color: #F59E0B;
+        }
+
+        .warning-text h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #F59E0B;
+        }
+
+        .warning-text p {
+            font-size: 18px;
+            color: #D1D5DB;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Performance Impact on Comfort</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="impact-grid">
+            <!-- Dropped Frames -->
+            <div class="impact-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-video-slash"></i>
+                </div>
+                <h3>Dropped Frames</h3>
+                <div class="cause">Technical Failure</div>
+                <div class="effect-box">
+                    <div class="effect-title">The "Freeze" Effect</div>
+                    <div class="effect-desc">
+                        The world stops moving while the head continues. Instant vestibular mismatch.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Judder -->
+            <div class="impact-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-wave-square"></i>
+                </div>
+                <h3>Judder</h3>
+                <div class="cause">Inconsistent Frame Time</div>
+                <div class="effect-box">
+                    <div class="effect-title">Visual Smearing</div>
+                    <div class="effect-desc">
+                        Objects appear to vibrate or double. Causes severe eye strain and headaches.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latency -->
+            <div class="impact-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-hourglass-end"></i>
+                </div>
+                <h3>High Latency</h3>
+                <div class="cause">> 20ms Delay</div>
+                <div class="effect-box">
+                    <div class="effect-title">"Swimming" World</div>
+                    <div class="effect-desc">
+                        The environment drags behind head movement, creating a "sea sickness" sensation.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recovery-warning">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <div class="warning-text">
+                <h4>The Cost of Sickness</h4>
+                <p>Once triggered, VR motion sickness can last for hours. Most users will never open your app again.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

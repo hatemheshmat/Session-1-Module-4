@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        /* Inspector Simulation */
+        .inspector-panel {
+            width: 400px;
+            background: #383838;
+            color: #BDBDBD;
+            font-family: 'Roboto', sans-serif;
+            border: 1px solid #222;
+            font-size: 13px;
+        }
+
+        .panel-header {
+            background: #424242;
+            padding: 8px 10px;
+            font-weight: 700;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .panel-body {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .setting-label {
+            color: #E0E0E0;
+        }
+
+        .setting-input {
+            background: #282828;
+            border: 1px solid #222;
+            padding: 2px 5px;
+            width: 120px;
+            text-align: left;
+            color: #E0E0E0;
+        }
+
+        .setting-input.highlight {
+            border: 1px solid #F59E0B;
+            color: #F59E0B;
+            font-weight: 700;
+        }
+
+        .section-header {
+            font-weight: 700;
+            color: #BDBDBD;
+            margin-top: 10px;
+            border-bottom: 1px solid #555;
+            padding-bottom: 2px;
+        }
+
+        /* Explanations */
+        .guide-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .guide-card {
+            background: #F3F4F6;
+            padding: 20px;
+            border-left: 6px solid #1C4ED8;
+            position: relative;
+        }
+
+        .guide-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .guide-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .value-badge {
+            background: #1F2937;
+            color: #F59E0B;
+            padding: 2px 8px;
+            font-family: 'Roboto', monospace;
+            font-size: 14px;
+        }
+
+        .connector-dot {
+            position: absolute;
+            left: -46px; /* Adjust based on gap */
+            top: 50%;
+            width: 12px;
+            height: 12px;
+            background: #1C4ED8;
+            border-radius: 50%; /* Small dot is allowed */
+        }
+
+        .connector-line {
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            width: 40px;
+            height: 2px;
+            background: #1C4ED8;
+        }
+
+        .pro-tip {
+            margin-top: 20px;
+            background: #1F2937;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tip-icon {
+            font-size: 24px;
+            color: #10B981;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Lightmapping Best Practices</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Simulated Inspector -->
+            <div class="inspector-panel">
+                <div class="panel-header">
+                    <i class="fas fa-sun"></i> Lighting Settings
+                </div>
+                <div class="panel-body">
+                    <div class="section-header">Lightmapping Settings</div>
+                    
+                    <div class="setting-row">
+                        <span class="setting-label">Lightmapper</span>
+                        <span class="setting-input">Progressive GPU</span>
+                    </div>
+
+                    <div class="setting-row">
+                        <span class="setting-label">Lightmap Resolution</span>
+                        <span class="setting-input highlight">20 - 40</span>
+                    </div>
+
+                    <div class="setting-row">
+                        <span class="setting-label">Lightmap Padding</span>
+                        <span class="setting-input">2</span>
+                    </div>
+
+                    <div class="setting-row">
+                        <span class="setting-label">Max Lightmap Size</span>
+                        <span class="setting-input highlight">1024</span>
+                    </div>
+
+                    <div class="setting-row">
+                        <span class="setting-label">Lightmap Compression</span>
+                        <span class="setting-input highlight">High Quality</span>
+                    </div>
+
+                    <div class="setting-row">
+                        <span class="setting-label">Ambient Occlusion</span>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <div style="width: 12px; height: 12px; background: #1C4ED8; border: 1px solid #555;"></div>
+                            <span class="setting-label">Checked</span>
+                        </div>
+                    </div>
+
+                    <div class="setting-row">
+                        <span class="setting-label">Directional Mode</span>
+                        <span class="setting-input">Non-Directional</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explanations -->
+            <div class="guide-column">
+                <div class="guide-card">
+                    <div class="connector-line" style="top: 25%;"></div>
+                    <div class="guide-title">
+                        Texels Per Unit
+                        <span class="value-badge">Target: 20-40</span>
+                    </div>
+                    <div class="guide-desc">
+                        This controls the quality. For VR, <strong>40</strong> is high quality (indoors), <strong>20</strong> is standard, and <strong>10</strong> is fine for large outdoor terrains. Don't use default (which is often too high).
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <div class="connector-line" style="top: 50%;"></div>
+                    <div class="guide-title">
+                        Max Lightmap Size
+                        <span class="value-badge">Target: 1024</span>
+                    </div>
+                    <div class="guide-desc">
+                        Keep individual maps small to reduce loading hitches. <strong>1024px</strong> is the sweet spot for Quest 2. <strong>2048px</strong> is acceptable for Quest 3 but consumes 4x memory.
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <div class="connector-line" style="top: 75%;"></div>
+                    <div class="guide-title">
+                        Compression
+                        <span class="value-badge">High Quality</span>
+                    </div>
+                    <div class="guide-desc">
+                        Always use <strong>High Quality</strong> compression. Low quality creates ugly banding artifacts in VR that are very noticeable.
+                    </div>
+                </div>
+
+                <div class="pro-tip">
+                    <i class="fas fa-eye tip-icon"></i>
+                    <div>
+                        <strong>Visual Debugging:</strong> Use the <em>Draw Mode > Lightmap Resolution</em> view in the Scene window to see a checkerboard pattern. Ensure squares are roughly consistent in size.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

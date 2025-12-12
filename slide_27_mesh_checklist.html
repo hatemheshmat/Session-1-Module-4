@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .checklist-column {
+            flex: 1.5;
+        }
+
+        .info-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .category-group {
+            margin-bottom: 30px;
+        }
+
+        .category-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1C4ED8;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #E5E7EB;
+            padding-bottom: 5px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #374151;
+        }
+
+        .check-icon {
+            color: #059669;
+            margin-right: 15px;
+            font-size: 20px;
+            margin-top: 3px;
+        }
+
+        .info-card {
+            background: #F9FAFB;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 6px solid #1C4ED8;
+        }
+
+        .info-card.warning {
+            background: #FFFBEB;
+            border-left-color: #F59E0B;
+        }
+
+        .info-title {
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #1F2937;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-desc {
+            font-size: 16px;
+            color: #6B7280;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            font-weight: 700;
+            color: #111827;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Mesh Optimization Checklist</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="checklist-column">
+                <!-- Geometry -->
+                <div class="category-group">
+                    <div class="category-title">Geometry & Topology</div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle check-icon"></i>
+                        <span><strong>Poly Count:</strong> Within budget for object type (e.g., &lt;1000 tris for props).</span>
+                    </div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle check-icon"></i>
+                        <span><strong>Clean Topology:</strong> No N-gons, T-vertices, or non-manifold geometry.</span>
+                    </div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle check-icon"></i>
+                        <span><strong>Backfaces:</strong> Hidden faces deleted (e.g., bottom of a crate).</span>
+                    </div>
+                </div>
+
+                <!-- Transforms -->
+                <div class="category-group">
+                    <div class="category-title">Transforms & Scale</div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle check-icon"></i>
+                        <span><strong>Scale:</strong> Reset to (1, 1, 1). Modeled in real-world units (Meters).</span>
+                    </div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle check-icon"></i>
+                        <span><strong>Pivot Point:</strong> Correctly placed (Base for props, Center for physics).</span>
+                    </div>
+                </div>
+
+                <!-- UVs & Materials -->
+                <div class="category-group">
+                    <div class="category-title">UVs & Materials</div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle check-icon"></i>
+                        <span><strong>UV Maps:</strong> No overlapping UVs (unless intentional stacking).</span>
+                    </div>
+                    <div class="checklist-item">
+                        <i class="fas fa-check-circle check-icon"></i>
+                        <span><strong>Materials:</strong> Single material per mesh whenever possible.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-column">
+                <div class="info-card">
+                    <div class="info-title">
+                        <i class="fas fa-ruler-combined" style="color: #1C4ED8;"></i>
+                        Real-World Scale
+                    </div>
+                    <div class="info-desc">
+                        VR relies on accurate scale for presence. If a chair is 2 meters tall, the user will feel like a child. Always model with <strong>1 Unit = 1 Meter</strong>.
+                    </div>
+                </div>
+
+                <div class="info-card warning">
+                    <div class="info-title">
+                        <i class="fas fa-exclamation-triangle" style="color: #F59E0B;"></i>
+                        The "Read/Write" Trap
+                    </div>
+                    <div class="info-desc">
+                        In Unity Import Settings, ensure <strong>"Read/Write Enabled"</strong> is UNCHECKED unless you are modifying the mesh via script at runtime. Leaving it on doubles memory usage.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

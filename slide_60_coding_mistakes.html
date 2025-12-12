@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .grid-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 30px;
+            padding: 0 80px;
+            height: 500px;
+        }
+
+        .trap-card {
+            border: 1px solid #E5E7EB;
+            background: #F9FAFB;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border-left: 6px solid #DC2626;
+        }
+
+        .trap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .trap-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .impact-badge {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            color: white;
+        }
+
+        .impact-cpu { background: #EA580C; }
+        .impact-mem { background: #7C3AED; }
+        .impact-io { background: #DC2626; }
+
+        .code-snippet {
+            background: #1E1E1E;
+            color: #D4D4D4;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            padding: 10px;
+            border: 1px solid #333;
+            margin-bottom: 10px;
+        }
+
+        .trap-desc {
+            font-size: 15px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .kwd { color: #569CD6; }
+        .mtd { color: #DCDCAA; }
+        .str { color: #CE9178; }
+
+        .pro-tip-banner {
+            position: absolute;
+            bottom: 30px;
+            left: 80px;
+            right: 80px;
+            background: #1F2937;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Common Coding Mistakes</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="grid-wrapper">
+            <!-- Trap 1: LINQ -->
+            <div class="trap-card">
+                <div class="trap-header">
+                    <div class="trap-title"><i class="fas fa-trash-alt"></i> LINQ in Update</div>
+                    <div class="impact-badge impact-mem">Memory Garbage</div>
+                </div>
+                <div class="code-snippet">
+                    <span class="kwd">var</span> active = list.<span class="mtd">Where</span>(x => x.isOn).<span class="mtd">ToList</span>();
+                </div>
+                <div class="trap-desc">
+                    LINQ creates hidden memory allocations every time it runs. Doing this in <code>Update()</code> triggers the Garbage Collector frequently, causing frame stutters. Use <code>for</code> loops instead.
+                </div>
+            </div>
+
+            <!-- Trap 2: Debug.Log -->
+            <div class="trap-card">
+                <div class="trap-header">
+                    <div class="trap-title"><i class="fas fa-terminal"></i> Debug.Log Spam</div>
+                    <div class="impact-badge impact-io">Heavy I/O</div>
+                </div>
+                <div class="code-snippet">
+                    <span class="mtd">Debug.Log</span>(<span class="str">"Player Pos: "</span> + transform.position);
+                </div>
+                <div class="trap-desc">
+                    Logging involves string concatenation, stack trace capture, and writing to device logs. It is extremely slow. <strong>Remove all logs</strong> in release builds!
+                </div>
+            </div>
+
+            <!-- Trap 3: Find -->
+            <div class="trap-card">
+                <div class="trap-header">
+                    <div class="trap-title"><i class="fas fa-search"></i> GameObject.Find</div>
+                    <div class="impact-badge impact-cpu">CPU Spike</div>
+                </div>
+                <div class="code-snippet">
+                    <span class="kwd">var</span> boss = <span class="mtd">GameObject.Find</span>(<span class="str">"Boss"</span>);
+                </div>
+                <div class="trap-desc">
+                    This iterates through <strong>every object in the scene</strong> comparing strings. It is a performance disaster if called every frame. Cache references in <code>Start()</code>.
+                </div>
+            </div>
+
+            <!-- Trap 4: Empty Update -->
+            <div class="trap-card">
+                <div class="trap-header">
+                    <div class="trap-title"><i class="fas fa-ghost"></i> Empty Update()</div>
+                    <div class="impact-badge impact-cpu">Overhead</div>
+                </div>
+                <div class="code-snippet">
+                    <span class="kwd">void</span> <span class="mtd">Update</span>() { <span class="com">/* TODO */</span> }
+                </div>
+                <div class="trap-desc">
+                    Even an empty <code>Update()</code> method has a cost (Native C++ to Managed C# context switch). If you don't need it, delete the method entirely.
+                </div>
+            </div>
+        </div>
+
+        <div class="pro-tip-banner">
+            <i class="fas fa-lightbulb" style="color: #FCD34D; font-size: 24px;"></i>
+            <div style="font-size: 16px;">
+                <strong>Golden Rule:</strong> If it happens every frame (Update/FixedUpdate), it must be zero-allocation and O(1) complexity.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

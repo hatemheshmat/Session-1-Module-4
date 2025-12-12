@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            padding: 0 80px;
+            gap: 40px;
+        }
+
+        /* Vignette Section */
+        .vignette-section {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            background: #F3F4F6;
+            padding: 20px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .vignette-text {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .vignette-demo {
+            width: 400px;
+            height: 220px;
+            background: url('https://images.unsplash.com/photo-1626379953822-baec19c3accd?q=80&w=1000&auto=format&fit=crop'); /* Generic VR/Cyber background */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border: 4px solid #1F2937;
+        }
+
+        .vignette-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle, transparent 40%, black 95%);
+            z-index: 10;
+        }
+
+        .demo-label {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            z-index: 20;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px black;
+        }
+
+        /* Bottom Columns */
+        .bottom-row {
+            display: flex;
+            gap: 40px;
+        }
+
+        .feature-card {
+            flex: 1;
+            background: white;
+            border: 1px solid #E5E7EB;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-top: 4px solid #1C4ED8;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: #EFF6FF;
+            color: #1C4ED8;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+        }
+
+        .card-desc {
+            font-size: 15px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .pro-tip {
+            margin-top: 10px;
+            background: #FFFBEB;
+            padding: 10px;
+            font-size: 13px;
+            color: #92400E;
+            border-left: 3px solid #F59E0B;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Comfort Features</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Vignette / Tunneling -->
+            <div class="vignette-section">
+                <div class="vignette-text">
+                    <div class="feature-title">
+                        <i class="fas fa-bullseye" style="color: #DC2626;"></i> Tunneling (Vignette)
+                    </div>
+                    <div class="feature-desc">
+                        <strong>The #1 Comfort Feature.</strong> When the player moves or turns smoothly, restrict their Field of View (FOV) with a black border. This tricks the brain into focusing on the static "cockpit" view, reducing vection and nausea.
+                    </div>
+                    <div class="pro-tip">
+                        <strong>Implementation:</strong> Use OVRVignette or a simple UI Image overlay that fades in based on velocity.
+                    </div>
+                </div>
+                <div class="vignette-demo">
+                    <div class="vignette-overlay"></div>
+                    <div class="demo-label">Simulated Tunneling Effect</div>
+                </div>
+            </div>
+
+            <div class="bottom-row">
+                <!-- Teleportation -->
+                <div class="feature-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="card-title">Teleportation</div>
+                    </div>
+                    <div class="card-desc">
+                        Instantly moving from Point A to Point B eliminates "acceleration," which is the primary cause of vestibular conflict. It is the safest locomotion method for sensitive users.
+                    </div>
+                </div>
+
+                <!-- Snap Turn -->
+                <div class="feature-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-sync-alt"></i></div>
+                        <div class="card-title">Snap Turn</div>
+                    </div>
+                    <div class="card-desc">
+                        Instead of rotating smoothly (which makes the world spin), rotate the camera instantly by fixed angles (e.g., 30° or 45°). The brain perceives this as a "cut" rather than motion.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

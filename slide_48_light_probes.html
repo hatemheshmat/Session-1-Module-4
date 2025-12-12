@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .visual-column {
+            flex: 1.2;
+            background: #1F2937;
+            padding: 30px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .concept-block {
+            border-left: 6px solid #1C4ED8;
+            padding-left: 25px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .concept-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .benefit-box {
+            background: #ECFDF5;
+            padding: 25px;
+            border: 1px solid #059669;
+        }
+
+        .benefit-header {
+            color: #065F46;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .benefit-list {
+            list-style: none;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #065F46;
+        }
+
+        /* Probe Visualization */
+        .scene-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #333 50%, #555 50%);
+            opacity: 0.3;
+        }
+
+        .probe-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .probe {
+            width: 12px;
+            height: 12px;
+            background: #FCD34D;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #FCD34D;
+        }
+
+        .probe.dark {
+            background: #4B5563;
+            box-shadow: none;
+        }
+
+        .player-obj {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FCD34D 0%, #4B5563 100%);
+            border-radius: 50%;
+            z-index: 3;
+            border: 2px solid white;
+            box-shadow: 0 0 20px rgba(252, 211, 77, 0.5);
+        }
+
+        .connection-line {
+            position: absolute;
+            background: rgba(252, 211, 77, 0.4);
+            height: 2px;
+            transform-origin: left center;
+            z-index: 1;
+        }
+
+        .label-tag {
+            position: absolute;
+            background: white;
+            color: #1F2937;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Light Probes</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-block">
+                    <div class="concept-title">Lighting Moving Objects</div>
+                    <div class="concept-desc">
+                        Baked Lightmaps only work for static objects. Moving objects (players, enemies, physics props) cannot use them. Without lighting, they look flat and detached from the scene.
+                    </div>
+                </div>
+
+                <div class="concept-block" style="border-color: #F59E0B;">
+                    <div class="concept-title">The Solution</div>
+                    <div class="concept-desc">
+                        <strong>Light Probes</strong> are invisible points in space that sample the baked lighting. As an object moves, it interpolates lighting data from the nearest probes.
+                    </div>
+                </div>
+
+                <div class="benefit-box">
+                    <div class="benefit-header">
+                        <i class="fas fa-tachometer-alt"></i> Performance Win
+                    </div>
+                    <ul class="benefit-list">
+                        <li class="benefit-item">
+                            <i class="fas fa-check"></i> Cheaper than Real-time Lights
+                        </li>
+                        <li class="benefit-item">
+                            <i class="fas fa-check"></i> No Draw Call overhead
+                        </li>
+                        <li class="benefit-item">
+                            <i class="fas fa-check"></i> High quality indirect light
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="scene-bg"></div>
+                
+                <!-- Visualizing the grid -->
+                <div class="probe-grid">
+                    <!-- Row 1 -->
+                    <div class="probe dark"></div><div class="probe dark"></div><div class="probe dark"></div><div class="probe"></div><div class="probe"></div>
+                    <!-- Row 2 -->
+                    <div class="probe dark"></div><div class="probe dark"></div><div class="probe"></div><div class="probe"></div><div class="probe"></div>
+                    <!-- Row 3 -->
+                    <div class="probe dark"></div><div class="probe dark"></div><div class="probe"></div><div class="probe"></div><div class="probe"></div>
+                    <!-- Row 4 -->
+                    <div class="probe dark"></div><div class="probe dark"></div><div class="probe dark"></div><div class="probe"></div><div class="probe"></div>
+                    <!-- Row 5 -->
+                    <div class="probe dark"></div><div class="probe dark"></div><div class="probe dark"></div><div class="probe dark"></div><div class="probe"></div>
+                </div>
+
+                <!-- The Player -->
+                <div class="player-obj"></div>
+
+                <!-- Labels -->
+                <div class="label-tag" style="top: 20px; left: 20px;">Shadow Area</div>
+                <div class="label-tag" style="top: 20px; right: 20px;">Lit Area</div>
+                <div class="label-tag" style="bottom: 20px; left: 50%; transform: translateX(-50%);">Dynamic Object</div>
+
+                <!-- Simulated Connection Lines (Static for visual) -->
+                <div class="connection-line" style="top: 50%; left: 50%; width: 60px; transform: rotate(45deg);"></div>
+                <div class="connection-line" style="top: 50%; left: 50%; width: 60px; transform: rotate(-45deg);"></div>
+                <div class="connection-line" style="top: 50%; left: 50%; width: 60px; transform: rotate(135deg);"></div>
+                <div class="connection-line" style="top: 50%; left: 50%; width: 60px; transform: rotate(-135deg);"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

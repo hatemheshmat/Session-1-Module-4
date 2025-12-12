@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .info-block {
+            background: #F3F4F6;
+            padding: 25px;
+            border-left: 6px solid #1C4ED8;
+        }
+
+        .info-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .warning-block {
+            background: #FFFBEB;
+            padding: 25px;
+            border-left: 6px solid #F59E0B;
+        }
+
+        .warning-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #92400E;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Inspector Simulation */
+        .inspector-mock {
+            width: 450px;
+            background: #383838;
+            color: #BDBDBD;
+            font-family: 'Roboto', sans-serif;
+            border: 1px solid #222;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.5);
+        }
+
+        .inspector-header {
+            padding: 10px 15px;
+            background: #424242;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cube-icon {
+            color: #BDBDBD;
+            font-size: 16px;
+        }
+
+        .obj-name {
+            font-weight: 700;
+            color: #E0E0E0;
+            flex-grow: 1;
+        }
+
+        .static-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .static-label {
+            font-size: 12px;
+            color: #BDBDBD;
+        }
+
+        .checkbox-container {
+            width: 16px;
+            height: 16px;
+            background: #282828;
+            border: 1px solid #555;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .checkbox-container.checked {
+            background: #1C4ED8; /* Unity Blue */
+            border-color: #1C4ED8;
+        }
+
+        .checkbox-container.checked::after {
+            content: '✓';
+            position: absolute;
+            top: -4px;
+            left: 2px;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .inspector-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .transform-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .transform-label {
+            font-weight: 700;
+            color: #BDBDBD;
+        }
+
+        .transform-values {
+            display: flex;
+            gap: 5px;
+        }
+
+        .t-field {
+            background: #282828;
+            border: 1px solid #222;
+            padding: 2px 5px;
+            width: 50px;
+            text-align: right;
+            color: #E0E0E0;
+        }
+
+        .arrow-pointer {
+            position: absolute;
+            right: -60px;
+            top: 15px;
+            color: #DC2626;
+            font-size: 40px;
+            animation: none; /* No animation allowed */
+        }
+
+        .click-here {
+            position: absolute;
+            right: -160px;
+            top: 20px;
+            color: #DC2626;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Static Batching</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="info-block">
+                    <div class="info-title">
+                        <i class="fas fa-magic"></i> The Concept
+                    </div>
+                    <div class="info-desc">
+                        Unity takes all objects marked as <strong>Static</strong> and combines their meshes into one large mesh at build time. This allows them to be drawn in a single batch (Draw Call).
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <div class="info-title">
+                        <i class="fas fa-thumbtack"></i> The Requirement
+                    </div>
+                    <div class="info-desc">
+                        Objects must <strong>never move, rotate, or scale</strong> during gameplay. Perfect for buildings, terrain, rocks, and walls.
+                    </div>
+                </div>
+
+                <div class="warning-block">
+                    <div class="warning-title">
+                        <i class="fas fa-exclamation-triangle"></i> Memory Trade-off
+                    </div>
+                    <div class="info-desc" style="color: #92400E;">
+                        Static Batching creates a copy of the combined mesh in memory. If you have a dense forest of 1,000 identical trees, Static Batching will consume huge amounts of RAM. Use GPU Instancing for that instead.
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column" style="position: relative;">
+                <div class="inspector-mock">
+                    <div class="inspector-header">
+                        <i class="fas fa-cube cube-icon"></i>
+                        <div class="checkbox-container" style="margin-right: 10px;"></div>
+                        <div class="obj-name">Environment_Building_01</div>
+                        <div class="static-toggle">
+                            <div class="static-label">Static</div>
+                            <div class="checkbox-container checked"></div>
+                            <div class="arrow-pointer"><i class="fas fa-arrow-left"></i></div>
+                            <div class="click-here">Check This!</div>
+                        </div>
+                    </div>
+                    <div class="inspector-body">
+                        <div class="transform-row">
+                            <div class="transform-label">Position</div>
+                            <div class="transform-values">
+                                <div class="t-field">X 10</div>
+                                <div class="t-field">Y 0</div>
+                                <div class="t-field">Z 5</div>
+                            </div>
+                        </div>
+                        <div class="transform-row">
+                            <div class="transform-label">Rotation</div>
+                            <div class="transform-values">
+                                <div class="t-field">X 0</div>
+                                <div class="t-field">Y 90</div>
+                                <div class="t-field">Z 0</div>
+                            </div>
+                        </div>
+                        <div class="transform-row">
+                            <div class="transform-label">Scale</div>
+                            <div class="transform-values">
+                                <div class="t-field">X 1</div>
+                                <div class="t-field">Y 1</div>
+                                <div class="t-field">Z 1</div>
+                            </div>
+                        </div>
+                        <div style="height: 1px; background: #555; margin: 10px 0;"></div>
+                        <div style="color: #BDBDBD; font-size: 12px; font-weight: 700;">
+                            <i class="fas fa-check-square" style="margin-right: 5px;"></i> Mesh Renderer
+                        </div>
+                        <div style="color: #BDBDBD; font-size: 12px; font-weight: 700;">
+                            <i class="fas fa-check-square" style="margin-right: 5px;"></i> Box Collider
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

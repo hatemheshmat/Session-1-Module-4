@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .steps-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #1C4ED8;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 5px;
+        }
+
+        .step-content p {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Inspector Mockup */
+        .inspector-panel {
+            width: 100%;
+            background: #383838;
+            border-radius: 6px;
+            padding: 10px;
+            font-family: 'Roboto', sans-serif;
+            color: #BDBDBD;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            font-size: 14px;
+        }
+
+        .inspector-header {
+            font-weight: 700;
+            border-bottom: 1px solid #555;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #E0E0E0;
+        }
+
+        .lod-slider-container {
+            background: #282828;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .lod-bar {
+            height: 40px;
+            display: flex;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .lod-segment {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            border-right: 1px solid rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .lod-0 { width: 40%; background: #4CAF50; } /* Green */
+        .lod-1 { width: 30%; background: #2196F3; } /* Blue */
+        .lod-2 { width: 20%; background: #FFC107; color: #333; } /* Yellow */
+        .culled { width: 10%; background: #F44336; } /* Red */
+
+        .camera-icon {
+            position: absolute;
+            top: -25px;
+            left: 35%; /* Simulating camera position */
+            color: white;
+            font-size: 16px;
+        }
+
+        .percentage-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #999;
+            padding: 0 5px;
+        }
+
+        .renderers-box {
+            background: #282828;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .renderer-slot {
+            background: #424242;
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #555;
+        }
+
+        .slot-icon {
+            color: #4CAF50; /* Matches LOD0 */
+        }
+
+        .slot-text {
+            color: #E0E0E0;
+            font-size: 12px;
+        }
+
+        .naming-tip {
+            margin-top: 30px;
+            background: #EFF6FF;
+            border-left: 4px solid #1C4ED8;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #1E40AF;
+        }
+
+        .naming-code {
+            font-family: 'Roboto', monospace;
+            background: rgba(255,255,255,0.5);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>LOD Implementation Guide</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="steps-column">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Prepare Your Models</h3>
+                        <p>Export 3 versions of your mesh. Ensure they share the same pivot point (0,0,0) so they align perfectly when swapped.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Add Component</h3>
+                        <p>Create an empty GameObject. Add the <strong>LOD Group</strong> component. Parent your 3 meshes under this object.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Assign Renderers</h3>
+                        <p>Select "LOD 0" in the component bar. Drag your High-Poly mesh renderer into the "Renderers" slot. Repeat for LOD 1 and 2.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Adjust Thresholds</h3>
+                        <p>Drag the vertical dividers in the colored bar to define at what screen percentage the switch happens.</p>
+                    </div>
+                </div>
+
+                <div class="naming-tip">
+                    <strong>Pro Tip:</strong> Use suffix naming like <span class="naming-code">_LOD0</span>, <span class="naming-code">_LOD1</span>, <span class="naming-code">_LOD2</span>. Unity's Model Importer can automatically set up the LOD Group for you if named correctly!
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="inspector-panel">
+                    <div class="inspector-header">
+                        <i class="fas fa-layer-group"></i> LOD Group
+                    </div>
+                    
+                    <div class="lod-slider-container">
+                        <div style="margin-bottom: 25px; position: relative;">
+                            <i class="fas fa-video camera-icon"></i>
+                        </div>
+                        <div class="lod-bar">
+                            <div class="lod-segment lod-0">LOD 0</div>
+                            <div class="lod-segment lod-1">LOD 1</div>
+                            <div class="lod-segment lod-2">LOD 2</div>
+                            <div class="lod-segment culled">Culled</div>
+                        </div>
+                        <div class="percentage-labels">
+                            <span>100%</span>
+                            <span>60%</span>
+                            <span>30%</span>
+                            <span>10%</span>
+                            <span>0%</span>
+                        </div>
+                    </div>
+
+                    <div class="renderers-box">
+                        <div style="margin-bottom: 8px; font-weight: 700;">LOD 0 Renderers</div>
+                        <div class="renderer-slot">
+                            <i class="fas fa-cube slot-icon"></i>
+                            <span class="slot-text">Tree_High_Poly (Mesh Renderer)</span>
+                        </div>
+                        
+                        <div style="margin: 15px 0 8px 0; font-weight: 700; color: #999;">LOD 1 Renderers</div>
+                        <div class="renderer-slot" style="border-color: #2196F3;">
+                            <i class="fas fa-cube slot-icon" style="color: #2196F3;"></i>
+                            <span class="slot-text">Tree_Med_Poly (Mesh Renderer)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

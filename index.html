@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Performance Matters in VR - Meta Quest | Ultimate Optimization Guide</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .lms-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Header with Custom Branding */
+        .lms-header {
+            background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+            color: white;
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border-bottom: 3px solid #10B981;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .lms-logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .lms-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #F9FAFB;
+        }
+
+        .slide-counter {
+            font-size: 16px;
+            color: #9CA3AF;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        /* Slide Content Area */
+        .slide-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+            background: #e5e7eb;
+            padding: 20px;
+        }
+
+        .slide-frame {
+            width: 1280px;
+            height: 720px;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #10B981;
+        }
+
+        .slide-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Navigation Footer */
+        .lms-footer {
+            background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border-top: 3px solid #10B981;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);
+        }
+
+        .nav-button:disabled {
+            background: #4B5563;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.5;
+        }
+
+        .nav-button i {
+            font-size: 18px;
+        }
+
+        .progress-container {
+            flex: 1;
+            margin: 0 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 10px;
+            background: #374151;
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid #4B5563;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981, #34D399, #6EE7B7);
+            transition: width 0.3s ease;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #D1D5DB;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Control Buttons */
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background: #374151;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            font-size: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: #4B5563;
+            transform: translateY(-1px);
+        }
+
+        .control-btn i {
+            font-size: 16px;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 24px;
+            color: #6B7280;
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .slide-frame {
+                transform: scale(0.9);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .slide-frame {
+                transform: scale(0.8);
+            }
+            .lms-title {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-frame {
+                transform: scale(0.6);
+            }
+            .progress-container {
+                margin: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lms-container">
+        <!-- Header -->
+        <div class="lms-header">
+            <div class="header-left">
+                <div class="lms-title">
+                    <i class="fas fa-vr-cardboard"></i> Why Performance Matters in VR - Meta Quest | Ultimate Optimization Guide
+                </div>
+            </div>
+            <div class="slide-counter">
+                Slide <span id="currentSlide">1</span> of <span id="totalSlides">81</span>
+            </div>
+        </div>
+
+        <!-- Slide Content -->
+        <div class="slide-content">
+            <div class="slide-frame">
+                <iframe id="slideFrame" src="slide_1_title.html"></iframe>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="lms-footer">
+            <button class="nav-button" id="prevBtn" onclick="previousSlide()">
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+
+            <div class="progress-container">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="progress-text" id="progressText">0% Complete</div>
+            </div>
+
+            <button class="nav-button" id="nextBtn" onclick="nextSlide()">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <div class="control-buttons">
+                <button class="control-btn" onclick="toggleFullscreen()" title="Fullscreen (F)">
+                    <i class="fas fa-expand"></i>
+                </button>
+                <button class="control-btn" onclick="resetProgress()" title="Reset Progress">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Slide configuration - All 81 slides
+        const slides = [
+            'slide_1_title.html',
+            'slide_2_agenda.html',
+            'slide_3_critical.html',
+            'slide_4_framerate.html',
+            'slide_5_fps_visual.html',
+            'slide_6_latency.html',
+            'slide_7_latency_pipeline.html',
+            'slide_8_motion_sickness.html',
+            'slide_9_sensory_conflict.html',
+            'slide_10_perf_sickness.html',
+            'slide_11_break_1.html',
+            'slide_12_hud_intro.html',
+            'slide_13_hud_activation.html',
+            'slide_14_hud_modes.html',
+            'slide_15_reading_metrics.html',
+            'slide_16_hud_activity.html',
+            'slide_17_profiler_overview.html',
+            'slide_18_profiling_workflow.html',
+            'slide_19_profiler_deep_dive.html',
+            'slide_20_frame_budget.html',
+            'slide_21_profiling_best_practices.html',
+            'slide_22_break_2.html',
+            'slide_23_model_opt_overview.html',
+            'slide_24_poly_counts.html',
+            'slide_25_model_import.html',
+            'slide_26_mesh_compression.html',
+            'slide_27_mesh_checklist.html',
+            'slide_28_lod_system.html',
+            'slide_29_lod_implementation.html',
+            'slide_30_imposters.html',
+            'slide_31_texture_opt.html',
+            'slide_32_texture_import.html',
+            'slide_33_compression_formats.html',
+            'slide_34_atlasing.html',
+            'slide_35_material_opt.html',
+            'slide_36_material_best_practices.html',
+            'slide_37_shader_opt.html',
+            'slide_38_texture_streaming.html',
+            'slide_39_draw_calls.html',
+            'slide_40_draw_call_stats.html',
+            'slide_41_static_batching.html',
+            'slide_42_dynamic_batching.html',
+            'slide_43_gpu_instancing.html',
+            'slide_44_srp_batcher.html',
+            'slide_45_lighting_impact.html',
+            'slide_46_baked_lighting.html',
+            'slide_47_lightmapping_practices.html',
+            'slide_48_light_probes.html',
+            'slide_49_realtime_limits.html',
+            'slide_50_reflection_probes.html',
+            'slide_51_particle_opt.html',
+            'slide_52_vfx_tips.html',
+            'slide_53_vfx_best_practices.html',
+            'slide_54_post_processing.html',
+            'slide_55_animation_opt.html',
+            'slide_56_animation_culling.html',
+            'slide_57_animation_compression.html',
+            'slide_58_skinned_mesh.html',
+            'slide_59_script_opt.html',
+            'slide_60_coding_mistakes.html',
+            'slide_61_object_pooling.html',
+            'slide_62_memory_management.html',
+            'slide_63_physics_opt.html',
+            'slide_64_event_system.html',
+            'slide_65_async_coroutines.html',
+            'slide_66_occlusion_culling.html',
+            'slide_67_frustum_culling.html',
+            'slide_68_scene_loading.html',
+            'slide_69_asset_bundles.html',
+            'slide_70_build_settings.html',
+            'slide_71_comfort_killers.html',
+            'slide_72_perf_killers.html',
+            'slide_73_design_killers.html',
+            'slide_74_visual_killers.html',
+            'slide_75_comfort_features.html',
+            'slide_76_testing_workflow.html',
+            'slide_77_submission_reqs.html',
+            'slide_78_priority_matrix.html',
+            'slide_79_hands_on_opt.html',
+            'slide_80_summary.html',
+            'slide_81_next_steps.html'
+        ];
+
+        let currentSlideIndex = 0;
+        const totalSlides = slides.length;
+
+        // Initialize
+        document.getElementById('totalSlides').textContent = totalSlides;
+        updateSlide();
+
+        // Navigation functions
+        function nextSlide() {
+            if (currentSlideIndex < totalSlides - 1) {
+                currentSlideIndex++;
+                updateSlide();
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlide();
+            }
+        }
+
+        function updateSlide() {
+            // Update iframe source
+            document.getElementById('slideFrame').src = slides[currentSlideIndex];
+            
+            // Update counter
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            
+            // Update progress bar
+            const progress = ((currentSlideIndex + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '% Complete';
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
+            
+            // Save progress
+            saveProgress();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            } else if (e.key === 'f' || e.key === 'F') {
+                toggleFullscreen();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                currentSlideIndex = 0;
+                updateSlide();
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                currentSlideIndex = totalSlides - 1;
+                updateSlide();
+            }
+        });
+
+        // Fullscreen toggle
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            localStorage.setItem('vr_performance_slide_81', currentSlideIndex);
+            localStorage.setItem('vr_performance_timestamp', new Date().toISOString());
+        }
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('vr_performance_slide_81');
+            if (saved !== null) {
+                currentSlideIndex = parseInt(saved);
+                updateSlide();
+            }
+        }
+
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Reset progress and start from the beginning?')) {
+                currentSlideIndex = 0;
+                localStorage.removeItem('vr_performance_slide_81');
+                updateSlide();
+            }
+        }
+
+        // Auto-save progress
+        window.addEventListener('beforeunload', saveProgress);
+        
+        // Load saved progress on start
+        loadProgress();
+
+        // Update progress every 30 seconds
+        setInterval(saveProgress, 30000);
+    </script>
+</body>
+</html>

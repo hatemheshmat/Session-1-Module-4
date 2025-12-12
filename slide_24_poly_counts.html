@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .hero-budget {
+            background: #1F2937;
+            color: white;
+            margin: 0 80px 50px 80px;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .hero-icon {
+            font-size: 60px;
+            color: #F59E0B;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero-label {
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #9CA3AF;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .hero-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            color: white;
+            line-height: 1;
+        }
+
+        .hero-sub {
+            font-size: 18px;
+            color: #D1D5DB;
+            margin-top: 5px;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            padding: 0 80px;
+        }
+
+        .budget-item {
+            background: #F9FAFB;
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 6px solid #1C4ED8;
+        }
+
+        .item-icon {
+            width: 70px;
+            height: 70px;
+            background: #EFF6FF;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
+            color: #1C4ED8;
+            font-size: 32px;
+        }
+
+        .item-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .item-value {
+            font-family: 'Roboto', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1C4ED8;
+            margin-bottom: 5px;
+        }
+
+        .item-unit {
+            font-size: 14px;
+            color: #6B7280;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .bottom-note {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 18px;
+            color: #4B5563;
+            background: #FFFBEB;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 1px solid #FCD34D;
+        }
+
+        .bottom-note strong {
+            color: #D97706;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Polygon Count Guidelines</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="hero-budget">
+            <div class="hero-icon">
+                <i class="fas fa-cubes"></i>
+            </div>
+            <div class="hero-text">
+                <div class="hero-label">Total Scene Budget</div>
+                <div class="hero-value">750k - 1,000,000</div>
+                <div class="hero-sub">Visible Triangles per Frame (Quest 2 / 3)</div>
+            </div>
+        </div>
+
+        <div class="breakdown-grid">
+            <!-- Main Character -->
+            <div class="budget-item">
+                <div class="item-icon">
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+                <div class="item-title">Main Character</div>
+                <div class="item-value">15k - 20k</div>
+                <div class="item-unit">Triangles</div>
+            </div>
+
+            <!-- NPC -->
+            <div class="budget-item">
+                <div class="item-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="item-title">Background NPC</div>
+                <div class="item-value">3k - 5k</div>
+                <div class="item-unit">Triangles</div>
+            </div>
+
+            <!-- Hero Prop -->
+            <div class="budget-item">
+                <div class="item-icon">
+                    <i class="fas fa-gun"></i>
+                </div>
+                <div class="item-title">Hero Prop</div>
+                <div class="item-value">2k - 5k</div>
+                <div class="item-unit">Triangles</div>
+            </div>
+
+            <!-- Env Prop -->
+            <div class="budget-item">
+                <div class="item-icon">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <div class="item-title">Small Prop</div>
+                <div class="item-value">100 - 500</div>
+                <div class="item-unit">Triangles</div>
+            </div>
+        </div>
+
+        <div class="bottom-note">
+            <i class="fas fa-exclamation-triangle" style="color: #D97706; margin-right: 10px;"></i>
+            <strong>Important:</strong> Unity counts <strong>Triangles</strong>, not Quads. 1 Quad = 2 Triangles.
+        </div>
+    </div>
+</body>
+</html>

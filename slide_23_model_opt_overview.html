@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 60px;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .text-column {
+            flex: 1;
+        }
+
+        .visual-column {
+            flex: 1.2;
+        }
+
+        .concept-box {
+            margin-bottom: 30px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1C4ED8;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .concept-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .highlight-box {
+            background: #EFF6FF;
+            border-left: 6px solid #1C4ED8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .highlight-text {
+            font-weight: 600;
+            color: #1E40AF;
+            font-size: 18px;
+        }
+
+        /* Viewport Simulation */
+        .viewport-frame {
+            background: #2D2D2D;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 1px solid #4B5563;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .viewport-header {
+            background: #1F2937;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #4B5563;
+        }
+
+        .viewport-title {
+            color: #E5E7EB;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .viewport-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #6B7280;
+        }
+
+        .viewport-content {
+            flex-grow: 1;
+            display: flex;
+            position: relative;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .model-view {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #4B5563;
+            padding: 20px;
+        }
+
+        .model-view:last-child {
+            border-right: none;
+        }
+
+        .wireframe-icon {
+            font-size: 80px;
+            color: #9CA3AF;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .model-label {
+            color: #E5E7EB;
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .model-stats {
+            color: #F87171; /* Red for bad */
+            font-family: 'Roboto', monospace;
+            font-size: 14px;
+        }
+
+        .good .model-stats {
+            color: #34D399; /* Green for good */
+        }
+
+        .good .wireframe-icon {
+            color: #34D399;
+        }
+
+        .bad .wireframe-icon {
+            color: #F87171;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>3D Model Optimization</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-box">
+                    <div class="concept-title">
+                        <i class="fas fa-cubes"></i> Geometry Cost
+                    </div>
+                    <div class="concept-desc">
+                        Every vertex must be processed by the GPU's Vertex Shader. In VR, this happens <strong>twice</strong> (once per eye).
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <div class="concept-title">
+                        <i class="fas fa-vector-square"></i> Topology Matters
+                    </div>
+                    <div class="concept-desc">
+                        Clean edge flow isn't just for animation; it reduces overdraw and lighting artifacts. Avoid N-gons and messy booleans.
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="highlight-text">
+                        <i class="fas fa-lightbulb" style="margin-right: 10px;"></i>
+                        The Golden Rule: If a polygon doesn't contribute to the silhouette or lighting, <strong>delete it</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="viewport-frame">
+                    <div class="viewport-header">
+                        <div class="viewport-title">Scene View - Wireframe</div>
+                        <div class="viewport-controls">
+                            <div class="control-dot"></div>
+                            <div class="control-dot"></div>
+                        </div>
+                    </div>
+                    <div class="viewport-content">
+                        <!-- Bad Example -->
+                        <div class="model-view bad">
+                            <i class="fas fa-globe wireframe-icon"></i>
+                            <div class="model-label">High Poly</div>
+                            <div class="model-stats">100,000 Tris</div>
+                            <div class="model-stats">Slow Render</div>
+                        </div>
+
+                        <!-- Good Example -->
+                        <div class="model-view good">
+                            <i class="fas fa-cube wireframe-icon" style="transform: rotate(45deg);"></i>
+                            <div class="model-label">Optimized</div>
+                            <div class="model-stats">5,000 Tris</div>
+                            <div class="model-stats">Fast Render</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

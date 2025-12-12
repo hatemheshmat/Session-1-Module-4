@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px; /* reduced from 50 to save vertical space */
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* reduced from 30 */
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .concept-card {
+            background: #F9FAFB;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 6px solid #1C4ED8;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .concept-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .guidelines-box {
+            margin-top: 0; /* removed extra top margin */
+        }
+
+        .guideline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0; /* reduced from 12px to compact list */
+            border-bottom: 1px solid #E5E7EB;
+            font-size: 16px;
+        }
+
+        .guideline-label {
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .guideline-value {
+            color: #1C4ED8;
+            font-family: 'Roboto', monospace;
+        }
+
+        /* Visuals */
+        .size-visual {
+            position: relative;
+            width: 400px;
+            height: 360px; /* reduced from 400px */
+            background: #E5E7EB;
+            border: 2px dashed #9CA3AF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px; /* reduced from 30px */
+        }
+
+        .box-4k {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(28, 78, 216, 0.1);
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            padding: 10px;
+            color: #1C4ED8;
+            font-weight: 700;
+        }
+
+        .box-2k {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 50%;
+            background: rgba(5, 150, 105, 0.2);
+            border: 2px solid #059669;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #047857;
+            font-weight: 700;
+        }
+
+        .box-1k {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 25%;
+            height: 25%;
+            background: rgba(217, 119, 6, 0.3);
+            border: 2px solid #D97706;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #B45309;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .memory-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+        }
+
+        .memory-table th {
+            background: #1F2937;
+            color: white;
+            padding: 6px; /* reduced from 10px */
+            text-align: left;
+        }
+
+        .memory-table td {
+            padding: 6px; /* reduced from 10px */
+            border-bottom: 1px solid #E5E7EB;
+            color: #374151;
+        }
+
+        .memory-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .danger-text {
+            color: #DC2626;
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Texture Optimization</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-expand"></i> Power of Two (POT)
+                    </div>
+                    <div class="concept-desc">
+                        GPUs are optimized for textures with dimensions that are powers of two (e.g., 512, 1024, 2048). Non-POT textures cannot be compressed and consume significantly more memory.
+                    </div>
+                </div>
+
+                <div class="concept-card" style="border-left-color: #F59E0B;">
+                    <div class="concept-title">
+                        <i class="fas fa-chart-line"></i> The Exponential Cost
+                    </div>
+                    <div class="concept-desc">
+                        Doubling the resolution (1K → 2K) quadruples the memory usage. A 4K texture is <strong>16 times</strong> larger than a 1K texture.
+                    </div>
+                </div>
+
+                <div class="guidelines-box">
+                    <h3>Usage Guidelines</h3>
+                    <div class="guideline-item">
+                        <span class="guideline-label">Skybox / Hero Asset</span>
+                        <span class="guideline-value">2048 - 4096</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-label">Walls / Floors</span>
+                        <span class="guideline-value">1024 - 2048</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-label">Props / Weapons</span>
+                        <span class="guideline-value">512 - 1024</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-label">Small Items</span>
+                        <span class="guideline-value">256 - 512</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="size-visual">
+                    <div class="box-4k">4K (4096)</div>
+                    <div class="box-2k">2K (2048)</div>
+                    <div class="box-1k">1K</div>
+                </div>
+
+                <table class="memory-table">
+                    <thead>
+                        <tr>
+                            <th>Resolution</th>
+                            <th>Uncompressed (RGBA)</th>
+                            <th>Compressed (ASTC)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>4096 x 4096</td>
+                            <td class="danger-text">64 MB</td>
+                            <td>~2-8 MB</td>
+                        </tr>
+                        <tr>
+                            <td>2048 x 2048</td>
+                            <td>16 MB</td>
+                            <td>~0.5-2 MB</td>
+                        </tr>
+                        <tr>
+                            <td>1024 x 1024</td>
+                            <td>4 MB</td>
+                            <td>~128-512 KB</td>
+                        </tr>
+                        <tr>
+                            <td>512 x 512</td>
+                            <td>1 MB</td>
+                            <td>~32-128 KB</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

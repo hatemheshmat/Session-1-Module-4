@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #F59E0B; /* Orange for Design Caution */
+            margin: 0 auto;
+        }
+
+        .intro-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .cards-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 0 60px;
+        }
+
+        .killer-card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #E5E7EB;
+            height: 420px;
+        }
+
+        /* Top Half: The Problem (Red) */
+        .problem-zone {
+            flex: 1.2;
+            background: #FEF2F2;
+            padding: 20px;
+            border-bottom: 1px solid #FECACA;
+            position: relative;
+        }
+
+        .zone-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #EF4444;
+        }
+
+        .zone-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #991B1B;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .zone-desc {
+            font-size: 14px;
+            color: #7F1D1D;
+            line-height: 1.5;
+        }
+
+        /* Bottom Half: The Solution (Green) */
+        .solution-zone {
+            flex: 1;
+            background: #ECFDF5;
+            padding: 20px;
+            position: relative;
+        }
+
+        .solution-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #10B981;
+        }
+
+        .solution-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: #065F46;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .solution-desc {
+            font-size: 14px;
+            color: #064E3B;
+            line-height: 1.5;
+        }
+
+        .arrow-divider {
+            height: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .arrow-circle {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: -15px;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #6B7280;
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Design Comfort Killers</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="intro-box">
+            The inner ear (vestibular system) detects <strong>acceleration</strong>, not velocity. If your eyes see acceleration but your ear feels nothing, the brain assumes you have been poisoned and induces nausea.
+        </div>
+
+        <div class="cards-wrapper">
+            <!-- Card 1: Acceleration -->
+            <div class="killer-card">
+                <div class="problem-zone">
+                    <i class="fas fa-tachometer-alt zone-icon"></i>
+                    <div class="zone-title">Acceleration</div>
+                    <div class="zone-desc">
+                        Gradually speeding up or slowing down (like a car) creates a massive sensory conflict. "Ease-in / Ease-out" animations are deadly in VR.
+                    </div>
+                </div>
+                <div class="arrow-divider">
+                    <div class="arrow-circle"><i class="fas fa-arrow-down"></i></div>
+                </div>
+                <div class="solution-zone">
+                    <i class="fas fa-check-circle solution-icon"></i>
+                    <div class="solution-title">Constant Speed</div>
+                    <div class="solution-desc">
+                        Move at a fixed velocity instantly (0 to 100 in 1 frame). Or use <strong>Teleportation</strong> to skip movement entirely.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Rotation -->
+            <div class="killer-card">
+                <div class="problem-zone">
+                    <i class="fas fa-sync-alt zone-icon"></i>
+                    <div class="zone-title">Smooth Rotation</div>
+                    <div class="zone-desc">
+                        Slowly rotating the camera creates "Vection" (the illusion that the world is spinning). This is the #1 cause of motion sickness for new users.
+                    </div>
+                </div>
+                <div class="arrow-divider">
+                    <div class="arrow-circle"><i class="fas fa-arrow-down"></i></div>
+                </div>
+                <div class="solution-zone">
+                    <i class="fas fa-check-circle solution-icon"></i>
+                    <div class="solution-title">Snap Turn</div>
+                    <div class="solution-desc">
+                        Rotate the camera instantly by 30° or 45°. The brain treats it like a "blink" or a cut, avoiding the motion conflict.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Camera Control -->
+            <div class="killer-card">
+                <div class="problem-zone">
+                    <i class="fas fa-video-slash zone-icon"></i>
+                    <div class="zone-title">Forced Movement</div>
+                    <div class="zone-desc">
+                        Taking control of the camera for a "Cutscene", shaking the screen for impact, or moving the head without user input.
+                    </div>
+                </div>
+                <div class="arrow-divider">
+                    <div class="arrow-circle"><i class="fas fa-arrow-down"></i></div>
+                </div>
+                <div class="solution-zone">
+                    <i class="fas fa-check-circle solution-icon"></i>
+                    <div class="solution-title">Never Lock Head</div>
+                    <div class="solution-desc">
+                        <strong>The user is the camera.</strong> Never move it against their will. If you need a cutscene, project it on a virtual 2D screen in front of them.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

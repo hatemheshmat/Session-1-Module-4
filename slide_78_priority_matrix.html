@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .matrix-container {
+            position: relative;
+            width: 900px;
+            height: 500px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+            padding-left: 40px; /* Space for Y axis */
+            padding-bottom: 40px; /* Space for X axis */
+        }
+
+        /* Axes Labels */
+        .axis-y {
+            position: absolute;
+            left: -20px;
+            top: 0;
+            bottom: 40px;
+            width: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #4B5563;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .axis-y-label {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            height: 100%;
+            text-align: center;
+            letter-spacing: 2px;
+            border-right: 2px solid #9CA3AF;
+            padding-right: 10px;
+        }
+
+        .axis-x {
+            position: absolute;
+            left: 40px;
+            right: 0;
+            bottom: 0;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #4B5563;
+            text-transform: uppercase;
+            font-size: 14px;
+            border-top: 2px solid #9CA3AF;
+            padding-top: 10px;
+        }
+
+        .quadrant {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid #E5E7EB;
+        }
+
+        /* Quadrant Styles */
+        .q-wins {
+            background: #ECFDF5;
+            border-top: 6px solid #059669;
+        }
+
+        .q-projects {
+            background: #EFF6FF;
+            border-top: 6px solid #2563EB;
+        }
+
+        .q-fillers {
+            background: #F3F4F6;
+            border-top: 6px solid #9CA3AF;
+        }
+
+        .q-pits {
+            background: #FEF2F2;
+            border-top: 6px solid #DC2626;
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .q-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        .q-wins .q-title { color: #065F46; }
+        .q-projects .q-title { color: #1E40AF; }
+        .q-fillers .q-title { color: #374151; }
+        .q-pits .q-title { color: #991B1B; }
+
+        .q-icon {
+            font-size: 24px;
+        }
+
+        .q-list {
+            list-style: none;
+        }
+
+        .q-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .q-item i {
+            font-size: 12px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .arrow-label {
+            font-size: 12px;
+            color: #6B7280;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Optimization Priority Matrix</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="matrix-container">
+            <!-- Y Axis -->
+            <div class="axis-y">
+                <div class="arrow-label">High</div>
+                <div class="axis-y-label">IMPACT (Performance Gain)</div>
+                <div class="arrow-label">Low</div>
+            </div>
+
+            <!-- Quadrant 1: Quick Wins (High Impact, Low Effort) -->
+            <div class="quadrant q-wins">
+                <div class="q-header">
+                    <div class="q-title">Quick Wins</div>
+                    <i class="fas fa-bolt q-icon" style="color: #059669;"></i>
+                </div>
+                <ul class="q-list">
+                    <li class="q-item"><i class="fas fa-check"></i> Enable ASTC Compression</li>
+                    <li class="q-item"><i class="fas fa-check"></i> Bake Lighting</li>
+                    <li class="q-item"><i class="fas fa-check"></i> Enable GPU Instancing</li>
+                    <li class="q-item"><i class="fas fa-check"></i> Set Fixed Timestep (1/72)</li>
+                    <li class="q-item"><i class="fas fa-check"></i> Use IL2CPP + ARM64</li>
+                </ul>
+                <div style="margin-top: auto; font-size: 12px; color: #065F46; font-weight: 700; text-align: right;">DO FIRST</div>
+            </div>
+
+            <!-- Quadrant 2: Major Projects (High Impact, High Effort) -->
+            <div class="quadrant q-projects">
+                <div class="q-header">
+                    <div class="q-title">Major Projects</div>
+                    <i class="fas fa-project-diagram q-icon" style="color: #2563EB;"></i>
+                </div>
+                <ul class="q-list">
+                    <li class="q-item"><i class="fas fa-tools"></i> Implement Object Pooling</li>
+                    <li class="q-item"><i class="fas fa-tools"></i> Create LOD Models</li>
+                    <li class="q-item"><i class="fas fa-tools"></i> Set up Occlusion Culling</li>
+                    <li class="q-item"><i class="fas fa-tools"></i> Rewrite Physics Layer Matrix</li>
+                    <li class="q-item"><i class="fas fa-tools"></i> Addressables System</li>
+                </ul>
+                <div style="margin-top: auto; font-size: 12px; color: #1E40AF; font-weight: 700; text-align: right;">PLAN & SCHEDULE</div>
+            </div>
+
+            <!-- Quadrant 3: Fillers (Low Impact, Low Effort) -->
+            <div class="quadrant q-fillers">
+                <div class="q-header">
+                    <div class="q-title">Fillers</div>
+                    <i class="fas fa-coffee q-icon" style="color: #4B5563;"></i>
+                </div>
+                <ul class="q-list">
+                    <li class="q-item"><i class="fas fa-minus"></i> Micro-optimizing Start()</li>
+                    <li class="q-item"><i class="fas fa-minus"></i> Removing unused variables</li>
+                    <li class="q-item"><i class="fas fa-minus"></i> Small texture tweaks</li>
+                </ul>
+                <div style="margin-top: auto; font-size: 12px; color: #374151; font-weight: 700; text-align: right;">DO IF TIME PERMITS</div>
+            </div>
+
+            <!-- Quadrant 4: Money Pits (Low Impact, High Effort) -->
+            <div class="quadrant q-pits">
+                <div class="q-header">
+                    <div class="q-title">Money Pits</div>
+                    <i class="fas fa-ban q-icon" style="color: #DC2626;"></i>
+                </div>
+                <ul class="q-list">
+                    <li class="q-item"><i class="fas fa-times"></i> Rewriting working systems</li>
+                    <li class="q-item"><i class="fas fa-times"></i> Optimizing code without Profiling</li>
+                    <li class="q-item"><i class="fas fa-times"></i> Custom Render Pipelines (SRP)</li>
+                </ul>
+                <div style="margin-top: auto; font-size: 12px; color: #991B1B; font-weight: 700; text-align: right;">AVOID</div>
+            </div>
+
+            <!-- X Axis -->
+            <div class="axis-x">
+                <div class="arrow-label">Low</div>
+                <div class="arrow-label">EFFORT (Time & Cost)</div>
+                <div class="arrow-label">High</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            padding: 0 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .comparison-container {
+            display: flex;
+            gap: 40px;
+            height: 320px;
+        }
+
+        .material-card {
+            flex: 1;
+            border: 1px solid #E5E7EB;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            padding: 20px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .expensive .card-header {
+            background: #DC2626;
+        }
+
+        .optimized .card-header {
+            background: #059669;
+        }
+
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+            background: #F9FAFB;
+        }
+
+        .shader-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #E5E7EB;
+            padding-bottom: 10px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #4B5563;
+        }
+
+        .feature-item i {
+            width: 25px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        .expensive .feature-item i { color: #DC2626; }
+        .optimized .feature-item i { color: #059669; }
+
+        .bottom-section {
+            display: flex;
+            gap: 40px;
+        }
+
+        .info-block {
+            flex: 1;
+            background: #EFF6FF;
+            padding: 25px;
+            border-left: 6px solid #1C4ED8;
+        }
+
+        .info-block.warning {
+            background: #FFFBEB;
+            border-left-color: #F59E0B;
+        }
+
+        .info-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .highlight-text {
+            font-weight: 700;
+            color: #111827;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Material Optimization</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="comparison-container">
+                <!-- Expensive -->
+                <div class="material-card expensive">
+                    <div class="card-header">
+                        <i class="fas fa-weight-hanging"></i> The Heavyweight
+                    </div>
+                    <div class="card-body">
+                        <div class="shader-name">Standard Shader</div>
+                        <ul class="feature-list">
+                            <li class="feature-item"><i class="fas fa-times-circle"></i> Real-time Reflections</li>
+                            <li class="feature-item"><i class="fas fa-times-circle"></i> Parallax / Height Maps</li>
+                            <li class="feature-item"><i class="fas fa-times-circle"></i> Per-Pixel Lighting Calculation</li>
+                            <li class="feature-item"><i class="fas fa-times-circle"></i> Multiple Texture Lookups</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Optimized -->
+                <div class="material-card optimized">
+                    <div class="card-header">
+                        <i class="fas fa-feather-alt"></i> The Sprinter
+                    </div>
+                    <div class="card-body">
+                        <div class="shader-name">URP Simple Lit / Unlit</div>
+                        <ul class="feature-list">
+                            <li class="feature-item"><i class="fas fa-check-circle"></i> Baked Lighting Support</li>
+                            <li class="feature-item"><i class="fas fa-check-circle"></i> Vertex Lighting (Optional)</li>
+                            <li class="feature-item"><i class="fas fa-check-circle"></i> Single Texture Fetch</li>
+                            <li class="feature-item"><i class="fas fa-check-circle"></i> No Normal Map (Use Geometry)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-section">
+                <div class="info-block warning">
+                    <div class="info-title">
+                        <i class="fas fa-ghost" style="color: #F59E0B;"></i>
+                        The Transparency Trap
+                    </div>
+                    <div class="info-desc">
+                        Transparent materials (Alpha Blend) cause <span class="highlight-text">Overdraw</span>. The GPU must render pixels behind the object <em>and</em> the object itself. Use Opaque materials whenever possible.
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <div class="info-title">
+                        <i class="fas fa-layer-group" style="color: #1C4ED8;"></i>
+                        Enable GPU Instancing
+                    </div>
+                    <div class="info-desc">
+                        Always check <span class="highlight-text">"Enable GPU Instancing"</span> on your materials. This allows Unity to draw many copies of the same mesh in a single draw call, massively reducing CPU overhead.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

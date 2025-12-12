@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px; /* Keep upper title padding consistent */
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px; /* was 50px -> reduce by 20px */
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .formula-section {
+            text-align: center;
+            margin-bottom: 30px; /* was 50px -> reduce by 20px */
+            background: #F3F4F6;
+            padding: 14px; /* was 20px -> reduce vertical by 12px total */
+            width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 8px; /* Minimal rounding allowed for containers */
+        }
+
+        .formula-label {
+            font-size: 18px;
+            color: #6B7280;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .formula {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #1F2937;
+        }
+
+        .formula span {
+            color: #1C4ED8;
+        }
+
+        .targets-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 0 60px;
+        }
+
+        .target-column {
+            flex: 1;
+            text-align: center;
+            padding: 24px 20px; /* was 40px 20px -> reduce vertical by 32px total */
+            background: #F9FAFB;
+            position: relative;
+        }
+
+        .target-column.standard {
+            background: #EFF6FF;
+            border: 2px solid #1C4ED8; /* Solid border, not card accent */
+        }
+
+        .hz-label {
+            font-size: 42px;
+            font-weight: 800;
+            color: #374151;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .target-column.standard .hz-label {
+            color: #1C4ED8;
+        }
+
+        .ms-value {
+            font-size: 56px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1;
+        }
+
+        .target-column.standard .ms-value {
+            color: #1C4ED8;
+        }
+
+        .description {
+            font-size: 18px;
+            color: #6B7280;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: #E5E7EB;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .target-column.standard .badge {
+            background: #1C4ED8;
+            color: white;
+        }
+
+        .icon-display {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #9CA3AF;
+        }
+        
+        .target-column.standard .icon-display {
+            color: #1C4ED8;
+        }
+
+        .bottom-warning {
+            text-align: center;
+            margin-top: 30px; /* was 50px -> reduce by 20px */
+            font-size: 18px;
+            color: #DC2626;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Frame Rate Fundamentals</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="formula-section">
+            <div class="formula-label">The Golden Formula</div>
+            <div class="formula">1000ms / Target FPS = <span>Frame Budget</span></div>
+        </div>
+
+        <div class="targets-container">
+            <!-- 72Hz -->
+            <div class="target-column">
+                <div class="badge">Minimum</div>
+                <div class="icon-display"><i class="fas fa-battery-half"></i></div>
+                <div class="hz-label">72 Hz</div>
+                <div class="ms-value">13.88<span style="font-size: 24px;">ms</span></div>
+                <div class="description">Acceptable for slower-paced content or older hardware.</div>
+            </div>
+
+            <!-- 90Hz -->
+            <div class="target-column standard">
+                <div class="badge">Standard</div>
+                <div class="icon-display"><i class="fas fa-check-circle"></i></div>
+                <div class="hz-label">90 Hz</div>
+                <div class="ms-value">11.11<span style="font-size: 24px;">ms</span></div>
+                <div class="description">The gold standard for Meta Quest comfort and presence.</div>
+            </div>
+
+            <!-- 120Hz -->
+            <div class="target-column">
+                <div class="badge">Performance</div>
+                <div class="icon-display"><i class="fas fa-bolt"></i></div>
+                <div class="hz-label">120 Hz</div>
+                <div class="ms-value">8.33<span style="font-size: 24px;">ms</span></div>
+                <div class="description">Ultra-smooth for fast action, but extremely demanding.</div>
+            </div>
+        </div>
+
+        <div class="bottom-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            Exceeding the budget by even 0.1ms causes the entire frame to be dropped.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&family=Fira+Code:wght@500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+        }
+
+        .left-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .right-column {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .concept-box {
+            border-left: 6px solid #DC2626;
+            padding-left: 25px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .concept-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        /* Code Block */
+        .code-window {
+            background: #1E1E1E;
+            border: 1px solid #333;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            color: #D4D4D4;
+            padding: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .code-header {
+            background: #252526;
+            padding: 8px 15px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .red { background: #FF5F56; }
+        .yellow { background: #FFBD2E; }
+        .green { background: #27C93F; }
+
+        .code-body {
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .keyword { color: #569CD6; }
+        .type { color: #4EC9B0; }
+        .string { color: #CE9178; }
+        .comment { color: #6A9955; }
+        .method { color: #DCDCAA; }
+        .variable { color: #9CDCFE; }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .comparison-table th {
+            background: #1F2937;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .comparison-table td {
+            border: 1px solid #E5E7EB;
+            padding: 12px;
+            font-size: 16px;
+            color: #374151;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #F9FAFB;
+        }
+
+        .check-icon { color: #059669; margin-right: 8px; }
+        .cross-icon { color: #DC2626; margin-right: 8px; }
+
+        .pro-tip {
+            margin-top: 20px;
+            background: #ECFDF5;
+            border: 1px solid #059669;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #065F46;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Animation System Optimization</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="left-column">
+                <div class="concept-box">
+                    <div class="concept-title">The String Problem</div>
+                    <div class="concept-desc">
+                        Using strings to control animations (e.g., <code>Play("Run")</code>) forces Unity to hash that string every single time it's called. This creates CPU overhead and garbage collection spikes.
+                    </div>
+                </div>
+
+                <div class="concept-box" style="border-color: #1C4ED8;">
+                    <div class="concept-title">The Solution: Hashes</div>
+                    <div class="concept-desc">
+                        Calculate the hash ID once at startup (or compile time) and use the integer ID for all checks and updates. Integers are blazing fast compared to strings.
+                    </div>
+                </div>
+
+                <div class="pro-tip">
+                    <i class="fas fa-lightbulb" style="font-size: 24px;"></i>
+                    <div>
+                        <strong>Tip:</strong> For simple movements (doors, spinning coins), don't use an Animator at all. Use a <strong>Tweening Library</strong> (like DOTween) or simple script rotation.
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                        <span style="margin-left: 10px; font-size: 12px; color: #999;">PlayerAnimation.cs</span>
+                    </div>
+                    <div class="code-body">
+                        <span class="keyword">private</span> <span class="type">int</span> <span class="variable">runHash</span>;<br><br>
+                        <span class="keyword">void</span> <span class="method">Start</span>() {<br>
+                        &nbsp;&nbsp;<span class="comment">// Cache the hash ID once</span><br>
+                        &nbsp;&nbsp;<span class="variable">runHash</span> = <span class="type">Animator</span>.<span class="method">StringToHash</span>(<span class="string">"Run"</span>);<br>
+                        }<br><br>
+                        <span class="keyword">void</span> <span class="method">Update</span>() {<br>
+                        &nbsp;&nbsp;<span class="comment">// Use the integer ID (Fast!)</span><br>
+                        &nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">isMoving</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">animator</span>.<span class="method">SetBool</span>(<span class="variable">runHash</span>, <span class="keyword">true</span>);<br>
+                        }
+                    </div>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Animator</th>
+                            <th>Simple Animation / Tween</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Overhead</strong></td>
+                            <td><i class="fas fa-times cross-icon"></i> High (Even Idle)</td>
+                            <td><i class="fas fa-check check-icon"></i> Near Zero</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Complexity</strong></td>
+                            <td><i class="fas fa-check check-icon"></i> Good for Characters</td>
+                            <td><i class="fas fa-times cross-icon"></i> Bad for State Machines</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Use Case</strong></td>
+                            <td>Humanoids, AI</td>
+                            <td>UI, Doors, Props</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

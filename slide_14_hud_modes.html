@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .modes-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 0 60px;
+        }
+
+        .mode-card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hud-preview {
+            width: 100%;
+            height: 220px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Roboto', monospace;
+            color: #00FF00;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border: 1px solid #333;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .hud-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .hud-label { color: #AAA; }
+        .hud-val { font-weight: 700; }
+        .hud-val.warn { color: #FFA500; }
+
+        /* Graph Mode Specifics */
+        .graph-area {
+            flex-grow: 1;
+            border-left: 1px solid #333;
+            border-bottom: 1px solid #333;
+            position: relative;
+            margin-top: 10px;
+        }
+        
+        .graph-line {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to top, rgba(0,255,0,0.2), transparent);
+            border-top: 2px solid #00FF00;
+            clip-path: polygon(0% 100%, 10% 80%, 20% 60%, 30% 70%, 40% 40%, 50% 80%, 60% 50%, 70% 60%, 80% 30%, 90% 70%, 100% 50%, 100% 100%, 0% 100%);
+        }
+
+        .mode-info {
+            text-align: center;
+        }
+
+        .mode-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1C4ED8;
+            margin-bottom: 10px;
+        }
+
+        .mode-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .use-case {
+            margin-top: 15px;
+            background: #EFF6FF;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #1E40AF;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>HUD Display Modes</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="modes-container">
+            <!-- Basic Mode -->
+            <div class="mode-card">
+                <div class="hud-preview">
+                    <div class="hud-row"><span class="hud-label">FPS</span><span class="hud-val">72.0</span></div>
+                    <div class="hud-row"><span class="hud-label">Pred</span><span class="hud-val">13.8ms</span></div>
+                    <div class="hud-row"><span class="hud-label">Bat</span><span class="hud-val">85%</span></div>
+                </div>
+                <div class="mode-info">
+                    <div class="mode-title">Basic Mode</div>
+                    <div class="mode-desc">Minimal overlay showing only the most critical health stats. Obstructs very little of the view.</div>
+                    <div class="use-case">Best for: Quick Health Checks</div>
+                </div>
+            </div>
+
+            <!-- Advanced Mode -->
+            <div class="mode-card">
+                <div class="hud-preview">
+                    <div class="hud-row"><span class="hud-label">FPS</span><span class="hud-val">72.0</span></div>
+                    <div class="hud-row"><span class="hud-label">App T</span><span class="hud-val">8.2ms</span></div>
+                    <div class="hud-row"><span class="hud-label">CPU Lvl</span><span class="hud-val">2</span></div>
+                    <div class="hud-row"><span class="hud-label">GPU Lvl</span><span class="hud-val">4</span></div>
+                    <div class="hud-row"><span class="hud-label">Util</span><span class="hud-val warn">85%</span></div>
+                    <div class="hud-row"><span class="hud-label">Foveation</span><span class="hud-val">High</span></div>
+                </div>
+                <div class="mode-info">
+                    <div class="mode-title">Advanced Mode</div>
+                    <div class="mode-desc">Detailed numerical breakdown of system resources, thermal levels, and utilization percentages.</div>
+                    <div class="use-case">Best for: Deep Profiling</div>
+                </div>
+            </div>
+
+            <!-- Graph Mode -->
+            <div class="mode-card">
+                <div class="hud-preview">
+                    <div class="hud-row"><span class="hud-label">FPS</span><span class="hud-val">72.0</span></div>
+                    <div class="graph-area">
+                        <div class="graph-line"></div>
+                    </div>
+                    <div class="hud-row" style="margin-top: 5px;"><span class="hud-label">Frame Time History</span></div>
+                </div>
+                <div class="mode-info">
+                    <div class="mode-title">Graph Mode</div>
+                    <div class="mode-desc">Visualizes performance over time. Essential for spotting intermittent stutters or spikes.</div>
+                    <div class="use-case">Best for: Spotting Spikes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

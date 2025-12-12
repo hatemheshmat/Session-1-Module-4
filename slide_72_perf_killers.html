@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px; /* keep title upper padding consistent */
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #DC2626;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            padding: 0 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px; /* reduced from 30px to save height */
+        }
+
+        .killer-row {
+            display: flex;
+            align-items: stretch;
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+        }
+
+        .icon-box {
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            color: white;
+        }
+
+        .icon-judder { background: #DC2626; }
+        .icon-latency { background: #F59E0B; }
+        .icon-variable { background: #4B5563; }
+
+        .info-section {
+            flex: 1;
+            padding: 16px; /* reduced from 25px */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid #E5E7EB;
+        }
+
+        .killer-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .killer-tech {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            color: #6B7280;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .effect-section {
+            flex: 1.2;
+            padding: 16px; /* reduced from 25px */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+        }
+
+        .effect-header {
+            font-weight: 700;
+            color: #991B1B;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .effect-desc {
+            font-size: 16px;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        /* Visualizing Frame Drops */
+        .frame-viz {
+            display: flex;
+            gap: 4px;
+            margin-top: 15px;
+        }
+        .f-block { width: 20px; height: 10px; background: #10B981; }
+        .f-drop { background: #DC2626; }
+
+        .pro-tip {
+            margin-top: 0; /* removed extra 40px margin to avoid overflow */
+            background: #1F2937;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .tip-icon {
+            font-size: 24px;
+            color: #FCD34D;
+        }
+
+        .tip-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Performance Comfort Killers</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Row 1: Judder -->
+            <div class="killer-row">
+                <div class="icon-box icon-judder">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="info-section">
+                    <div class="killer-title">Judder</div>
+                    <div class="killer-tech">Cause: Missed Frame Budget (>11ms)</div>
+                    <div class="frame-viz">
+                        <div class="f-block"></div><div class="f-block"></div><div class="f-block"></div>
+                        <div class="f-block f-drop"></div>
+                        <div class="f-block"></div><div class="f-block"></div>
+                    </div>
+                </div>
+                <div class="effect-section">
+                    <div class="effect-header">Physical Effect</div>
+                    <div class="effect-desc">
+                        The world momentarily "freezes" or drags behind your head movement. This breaks the <strong>Vestibulo-Ocular Reflex (VOR)</strong>, causing instant dizziness.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Latency -->
+            <div class="killer-row">
+                <div class="icon-box icon-latency">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <div class="info-section">
+                    <div class="killer-title">High Latency</div>
+                    <div class="killer-tech">Cause: Motion-to-Photon > 20ms</div>
+                </div>
+                <div class="effect-section">
+                    <div class="effect-header">Physical Effect</div>
+                    <div class="effect-desc">
+                        A "swimming" or "drunk" sensation. The visual world reacts slightly later than your inner ear expects, leading to a feeling of heaviness and disorientation.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3: Variable FPS -->
+            <div class="killer-row">
+                <div class="icon-box icon-variable">
+                    <i class="fas fa-wave-square"></i>
+                </div>
+                <div class="info-section">
+                    <div class="killer-title">Unstable FPS</div>
+                    <div class="killer-tech">Cause: Fluctuating Workload</div>
+                </div>
+                <div class="effect-section">
+                    <div class="effect-header">Physical Effect</div>
+                    <div class="effect-desc">
+                        Constant switching between 72Hz and 90Hz (or relying heavily on ASW reprojection) creates visual artifacts and unpredictable motion, which is often worse than a steady lower framerate.
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip">
+                <i class="fas fa-lightbulb tip-icon"></i>
+                <div class="tip-text">
+                    Golden Rule: A rock-solid 72 FPS is always better than a jittery 90 FPS. Consistency is king.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

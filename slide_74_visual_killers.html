@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .grid-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 30px;
+            padding: 0 80px;
+            height: 500px;
+        }
+
+        .killer-card {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            padding: 25px;
+            display: flex;
+            gap: 20px;
+            position: relative;
+            border-left: 6px solid #9CA3AF;
+        }
+
+        .killer-card.severe { border-left-color: #DC2626; }
+        .killer-card.moderate { border-left-color: #F59E0B; }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            color: #4B5563;
+            flex-shrink: 0;
+        }
+
+        .content-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 15px;
+            color: #4B5563;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+
+        .fix-box {
+            background: #ECFDF5;
+            padding: 10px 15px;
+            border-left: 4px solid #059669;
+            font-size: 14px;
+            color: #065F46;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fix-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            color: #059669;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Visual Comfort Killers</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="grid-wrapper">
+            <!-- Z-Fighting -->
+            <div class="killer-card severe">
+                <div class="icon-box" style="color: #DC2626;">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <div class="content-box">
+                    <div class="card-title">Z-Fighting (Flicker)</div>
+                    <div class="card-desc">
+                        When two surfaces occupy the exact same position, the GPU rapidly switches between them, causing intense high-frequency flickering. This is extremely painful in VR.
+                    </div>
+                    <div class="fix-box">
+                        <span class="fix-label">FIX:</span>
+                        Offset geometry by at least 1mm or use Decal shaders.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aliasing -->
+            <div class="killer-card moderate">
+                <div class="icon-box" style="color: #F59E0B;">
+                    <i class="fas fa-wave-square"></i>
+                </div>
+                <div class="content-box">
+                    <div class="card-title">Aliasing (Shimmer)</div>
+                    <div class="card-desc">
+                        Jagged edges that "crawl" or shimmer as the player moves their head. This visual noise forces the eyes to constantly refocus, causing strain.
+                    </div>
+                    <div class="fix-box">
+                        <span class="fix-label">FIX:</span>
+                        Enable <strong>MSAA 4x</strong> in Quality Settings.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Face-Locked UI -->
+            <div class="killer-card severe">
+                <div class="icon-box" style="color: #DC2626;">
+                    <i class="fas fa-sticky-note"></i>
+                </div>
+                <div class="content-box">
+                    <div class="card-title">Face-Locked UI</div>
+                    <div class="card-desc">
+                        UI elements that are perfectly locked to the camera (Screen Space) feel like "dirt on glasses." The eyes struggle to converge on them because they have no depth.
+                    </div>
+                    <div class="fix-box">
+                        <span class="fix-label">FIX:</span>
+                        Use <strong>World Space Canvas</strong> placed 1-2m away.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scale Issues -->
+            <div class="killer-card moderate">
+                <div class="icon-box" style="color: #F59E0B;">
+                    <i class="fas fa-ruler-combined"></i>
+                </div>
+                <div class="content-box">
+                    <div class="card-title">Incorrect Scale</div>
+                    <div class="card-desc">
+                        If the world scale is wrong (e.g., a chair is 3 meters tall), it creates a sensory conflict known as "Alice in Wonderland" syndrome.
+                    </div>
+                    <div class="fix-box">
+                        <span class="fix-label">FIX:</span>
+                        Ensure <strong>1 Unity Unit = 1 Meter</strong>. Measure everything.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

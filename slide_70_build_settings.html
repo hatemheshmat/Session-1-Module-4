@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        .text-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .concept-block {
+            border-left: 6px solid #1C4ED8;
+            padding-left: 25px;
+        }
+
+        .concept-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+
+        .concept-desc {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+
+        .highlight-box {
+            background: #ECFDF5;
+            border: 1px solid #059669;
+            padding: 20px;
+            border-radius: 0; /* Strict rectangular style */
+        }
+
+        .highlight-title {
+            color: #065F46;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .highlight-text {
+            color: #064E3B;
+            font-size: 16px;
+        }
+
+        .visual-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Unity Inspector Simulation */
+        .inspector-window {
+            width: 100%;
+            background: #383838;
+            border: 1px solid #222;
+            font-family: 'Roboto', sans-serif;
+            color: #BDBDBD;
+            font-size: 13px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .window-header {
+            background: #2D2D2D;
+            padding: 8px 15px;
+            font-weight: 700;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .inspector-content {
+            padding: 15px;
+        }
+
+        .setting-group {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 15px;
+        }
+
+        .setting-group:last-child {
+            border-bottom: none;
+        }
+
+        .group-title {
+            font-weight: 700;
+            color: #E0E0E0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding-left: 15px;
+        }
+
+        .setting-label {
+            color: #BDBDBD;
+        }
+
+        .setting-value {
+            width: 180px;
+            background: #282828;
+            border: 1px solid #222;
+            padding: 3px 8px;
+            color: #E0E0E0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .setting-value.dropdown::after {
+            content: '▼';
+            font-size: 8px;
+            color: #666;
+        }
+
+        .checkbox {
+            width: 14px;
+            height: 14px;
+            background: #282828;
+            border: 1px solid #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #E0E0E0;
+            font-size: 10px;
+        }
+
+        .good-value {
+            border-color: #059669;
+            color: #34D399;
+            font-weight: 700;
+        }
+
+        .pro-tip-banner {
+            margin-top: 30px;
+            background: #1F2937;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Build Settings Optimization</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-column">
+                <div class="concept-block">
+                    <div class="concept-title">Scripting Backend: IL2CPP</div>
+                    <div class="concept-desc">
+                        <strong>Mono</strong> is fast to build but slow to run. <strong>IL2CPP</strong> converts C# to C++ and compiles to native machine code. It is significantly faster and required for the Quest Store.
+                    </div>
+                </div>
+
+                <div class="concept-block" style="border-color: #059669;">
+                    <div class="concept-title">Architecture: ARM64</div>
+                    <div class="concept-desc">
+                        Quest 2, 3, and Pro are 64-bit Android devices. Always select <strong>ARM64</strong>. Never build for x86 or ARMv7 (32-bit) as they are deprecated and slower.
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="highlight-title">Graphics API</div>
+                    <div class="highlight-text">
+                        Use <strong>Vulkan</strong>. It has lower CPU overhead than OpenGLES3, allowing for more draw calls and better multi-threading support.
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-column">
+                <div class="inspector-window">
+                    <div class="window-header">
+                        <span>Player Settings</span>
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="inspector-content">
+                        <div class="setting-group">
+                            <div class="group-title"><i class="fas fa-caret-down"></i> Configuration</div>
+                            
+                            <div class="setting-row">
+                                <span class="setting-label">Scripting Backend</span>
+                                <div class="setting-value dropdown good-value">IL2CPP</div>
+                            </div>
+                            
+                            <div class="setting-row">
+                                <span class="setting-label">Api Compatibility</span>
+                                <div class="setting-value dropdown">.NET Standard 2.1</div>
+                            </div>
+
+                            <div class="setting-row">
+                                <span class="setting-label">Target Architectures</span>
+                                <div style="width: 180px;">
+                                    <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 2px;">
+                                        <div class="checkbox"></div> <span style="color: #666;">ARMv7</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <div class="checkbox good-value">✓</div> <span class="good-value">ARM64</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <div class="group-title"><i class="fas fa-caret-down"></i> Optimization</div>
+                            
+                            <div class="setting-row">
+                                <span class="setting-label">Prebake Collision</span>
+                                <div class="checkbox">✓</div>
+                            </div>
+                            
+                            <div class="setting-row">
+                                <span class="setting-label">Strip Engine Code</span>
+                                <div class="checkbox good-value">✓</div>
+                            </div>
+                            
+                            <div class="setting-row">
+                                <span class="setting-label">Managed Stripping</span>
+                                <div class="setting-value dropdown">High</div>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <div class="group-title"><i class="fas fa-caret-down"></i> Graphics APIs</div>
+                            <div class="setting-row">
+                                <span class="setting-label">Android</span>
+                                <div class="setting-value dropdown good-value">Vulkan</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pro-tip-banner">
+                    <i class="fas fa-lightbulb" style="color: #FCD34D; font-size: 24px;"></i>
+                    <div style="font-size: 15px;">
+                        <strong>Pro Tip:</strong> Always uncheck "Development Build" for performance testing. Debug builds have overhead that skews profiler data.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

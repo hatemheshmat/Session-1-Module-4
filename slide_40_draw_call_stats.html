@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            padding: 0 80px;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        /* Simulated Stats Window */
+        .game-view-container {
+            flex: 1;
+            height: 400px;
+            background: #333;
+            position: relative;
+            border: 2px solid #1F2937;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            padding: 10px;
+            background-image: linear-gradient(45deg, #333 25%, #444 25%, #444 50%, #333 50%, #333 75%, #444 75%, #444 100%);
+            background-size: 20px 20px;
+        }
+
+        .stats-window {
+            width: 220px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #E0E0E0;
+            font-family: 'Roboto', monospace;
+            font-size: 14px;
+            padding: 10px;
+            border: 1px solid #555;
+        }
+
+        .stats-header {
+            font-weight: 700;
+            border-bottom: 1px solid #555;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .stat-label { color: #BDBDBD; }
+        .stat-value { font-weight: 700; color: white; }
+
+        .highlight-row {
+            background: rgba(28, 78, 216, 0.4);
+            margin: 0 -5px;
+            padding: 0 5px;
+        }
+
+        /* Explanations */
+        .info-column {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .metric-card {
+            border: 1px solid #E5E7EB;
+            padding: 20px;
+            border-left: 6px solid #9CA3AF;
+            background: #F9FAFB;
+        }
+
+        .metric-card.primary {
+            border-left-color: #1C4ED8;
+            background: #EFF6FF;
+        }
+
+        .metric-card.critical {
+            border-left-color: #DC2626;
+            background: #FEF2F2;
+        }
+
+        .metric-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .metric-desc {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.4;
+        }
+
+        .target-badge {
+            font-size: 12px;
+            background: #1F2937;
+            color: white;
+            padding: 2px 8px;
+            text-transform: uppercase;
+        }
+
+        .metric-card.critical .target-badge { background: #DC2626; }
+        .metric-card.primary .target-badge { background: #1C4ED8; }
+
+        .connector-line {
+            position: absolute;
+            height: 2px;
+            background: #1C4ED8;
+            z-index: 10;
+        }
+
+        .bottom-bar {
+            margin-top: 40px;
+            background: #1F2937;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+
+        .bottom-bar strong {
+            color: #F59E0B;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Draw Call Statistics</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Simulated Game View -->
+            <div class="game-view-container">
+                <div class="stats-window">
+                    <div class="stats-header">
+                        <span>Statistics</span>
+                        <span>Audio</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">FPS:</span>
+                        <span class="stat-value">72.0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">CPU:</span>
+                        <span class="stat-value">8.2ms</span>
+                    </div>
+                    <div class="stat-row highlight-row">
+                        <span class="stat-label">Batches:</span>
+                        <span class="stat-value">185</span>
+                    </div>
+                    <div class="stat-row highlight-row">
+                        <span class="stat-label">Saved by batching:</span>
+                        <span class="stat-value">420</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Tris:</span>
+                        <span class="stat-value">450.2k</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Verts:</span>
+                        <span class="stat-value">600.5k</span>
+                    </div>
+                    <div class="stat-row highlight-row" style="background: rgba(220, 38, 38, 0.4);">
+                        <span class="stat-label">SetPass calls:</span>
+                        <span class="stat-value">45</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Shadow casters:</span>
+                        <span class="stat-value">12</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explanations -->
+            <div class="info-column">
+                <div class="metric-card primary">
+                    <div class="metric-title">
+                        Batches
+                        <span class="target-badge">Target: &lt; 200</span>
+                    </div>
+                    <div class="metric-desc">
+                        The total number of draw calls sent to the GPU. This includes geometry, UI, and shadows. Keep this low to avoid CPU bottlenecks.
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-title">
+                        Saved by Batching
+                        <span class="target-badge">Target: High</span>
+                    </div>
+                    <div class="metric-desc">
+                        The number of draw calls Unity <em>avoided</em> thanks to Static Batching, Dynamic Batching, or GPU Instancing. Higher is better!
+                    </div>
+                </div>
+
+                <div class="metric-card critical">
+                    <div class="metric-title">
+                        SetPass Calls
+                        <span class="target-badge">Target: &lt; 50</span>
+                    </div>
+                    <div class="metric-desc">
+                        The number of times the GPU had to switch rendering states (Materials/Shaders). This is the <strong>most expensive</strong> part of rendering. Reduce unique materials to lower this.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-bar">
+            <i class="fas fa-bullseye" style="margin-right: 10px;"></i>
+            Quest Performance Target: <strong>&lt; 200 Batches</strong> per frame.
+        </div>
+    </div>
+</body>
+</html>

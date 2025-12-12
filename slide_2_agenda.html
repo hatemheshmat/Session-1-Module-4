@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .agenda-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .agenda-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 25px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 6px solid #1C4ED8;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: #EFF6FF;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 30px;
+            flex-shrink: 0;
+        }
+
+        .icon-box i {
+            font-size: 28px;
+            color: #1C4ED8;
+        }
+
+        .text-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 5px;
+        }
+
+        .text-content p {
+            font-size: 18px;
+            color: #6B7280;
+        }
+
+        .highlight {
+            border-left-color: #F59E0B;
+        }
+        
+        .highlight .icon-box {
+            background: #FFFBEB;
+        }
+        
+        .highlight .icon-box i {
+            color: #F59E0B;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Agenda Overview</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="agenda-wrapper">
+            <div class="agenda-item">
+                <div class="icon-box">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <div class="text-content">
+                    <h3>Performance Fundamentals</h3>
+                    <p>FPS, Latency, Motion Sickness & Comfort Standards</p>
+                </div>
+            </div>
+
+            <div class="agenda-item">
+                <div class="icon-box">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="text-content">
+                    <h3>Profiling & Measurement</h3>
+                    <p>Meta Quest Performance HUD, Unity Profiler, Frame Budgets</p>
+                </div>
+            </div>
+
+            <div class="agenda-item highlight">
+                <div class="icon-box">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="text-content">
+                    <h3>Complete Optimization Suite</h3>
+                    <p>Models, Textures, Lighting, Code, Physics, Audio & More</p>
+                </div>
+            </div>
+
+            <div class="agenda-item">
+                <div class="icon-box">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="text-content">
+                    <h3>Hands-On Activities</h3>
+                    <p>HUD Activation, Profiling Analysis, Scene Optimization</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

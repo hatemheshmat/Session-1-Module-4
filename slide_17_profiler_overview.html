@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: url('background.svg') no-repeat center center, #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            color: #1F2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            width: 80px;
+            height: 6px;
+            background: #1C4ED8;
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 60px;
+        }
+
+        .screenshot-frame {
+            width: 900px;
+            height: 400px;
+            background: #1F2937;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border: 4px solid #374151;
+            overflow: hidden;
+            margin-bottom: 40px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screenshot-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+
+        .module-card {
+            background: #F9FAFB;
+            padding: 20px;
+            border-left: 4px solid #1C4ED8;
+            border-radius: 8px;
+        }
+
+        .module-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .module-title i {
+            color: #1C4ED8;
+        }
+
+        .module-desc {
+            font-size: 16px;
+            color: #6B7280;
+            line-height: 1.4;
+        }
+
+        /* Overlay labels for the screenshot if image is generic */
+        .label-overlay {
+            position: absolute;
+            background: rgba(28, 78, 216, 0.9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h1>Unity Profiler Overview</h1>
+            <div class="bar"></div>
+        </div>
+
+        <div class="main-content">
+            <div class="screenshot-frame">
+                <!-- Placeholder for the real screenshot -->
+                <img src="assets/unity_profiler_main.png" alt="Unity Profiler Interface" onerror="this.src='https://via.placeholder.com/900x400/2d2d2d/888888?text=Unity+Profiler+Interface+Screenshot'">
+                
+                <!-- Simulated annotations in case image doesn't have them -->
+                <div class="label-overlay" style="top: 20px; left: 20px;">Timeline View</div>
+                <div class="label-overlay" style="bottom: 20px; left: 20px;">Module Details</div>
+                <div class="label-overlay" style="top: 20px; right: 20px;">Frame Selection</div>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-title">
+                        <i class="fas fa-microchip"></i> CPU Usage
+                    </div>
+                    <div class="module-desc">
+                        Tracks time spent in scripts, physics, animation, and garbage collection. The most critical module for logic optimization.
+                    </div>
+                </div>
+
+                <div class="module-card" style="border-left-color: #059669;">
+                    <div class="module-title">
+                        <i class="fas fa-layer-group"></i> Rendering
+                    </div>
+                    <div class="module-desc">
+                        Displays Draw Calls (Batches), SetPass calls, and triangle counts. Essential for optimizing graphics performance.
+                    </div>
+                </div>
+
+                <div class="module-card" style="border-left-color: #F59E0B;">
+                    <div class="module-title">
+                        <i class="fas fa-memory"></i> Memory
+                    </div>
+                    <div class="module-desc">
+                        Monitors RAM usage, texture memory, and asset duplication. Helps prevent crashes on memory-constrained mobile devices.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
