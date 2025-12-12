@@ -67,21 +67,21 @@
         .slide-content {
             flex: 1;
             display: flex;
-            justify-content: flex-start;
-            align-items: stretch;
-            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
             background: #e5e7eb;
-            padding: 0;
+            padding: 20px;
         }
 
         .slide-frame {
-            width: 100%;
+            width: 75%;
             height: 100%;
-            background: transparent;
-            box-shadow: none;
-            border-radius: 0;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border-radius: 8px;
             overflow: hidden;
-            border: none;
+            border: 2px solid #10B981;
         }
 
         .slide-frame iframe {
@@ -209,15 +209,24 @@
 
         /* Responsive */
         @media (max-width: 1400px) {
+            .slide-frame {
+                transform: scale(0.9);
+            }
         }
 
         @media (max-width: 1200px) {
+            .slide-frame {
+                transform: scale(0.8);
+            }
             .lms-title {
                 font-size: 16px;
             }
         }
 
         @media (max-width: 768px) {
+            .slide-frame {
+                transform: scale(0.6);
+            }
             .progress-container {
                 margin: 0 20px;
             }
@@ -384,19 +393,19 @@
         function updateSlide() {
             // Update iframe source
             document.getElementById('slideFrame').src = slides[currentSlideIndex];
-            
+
             // Update counter
             document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
-            
+
             // Update progress bar
             const progress = ((currentSlideIndex + 1) / totalSlides) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
             document.getElementById('progressText').textContent = Math.round(progress) + '% Complete';
-            
+
             // Update button states
             document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
             document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
-            
+
             // Save progress
             saveProgress();
         }
@@ -459,7 +468,7 @@
 
         // Auto-save progress
         window.addEventListener('beforeunload', saveProgress);
-        
+
         // Load saved progress on start
         loadProgress();
 
